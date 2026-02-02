@@ -12,17 +12,9 @@ namespace ProyectoFinalG1.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult InicioSesion()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Pagina de Inicio de Sesión";
 
             return View();
         }

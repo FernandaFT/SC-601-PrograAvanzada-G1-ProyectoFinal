@@ -26,5 +26,11 @@ namespace ProyectoFinalG1.Controllers
 
             return View();
         }
+        public ActionResult Registro()
+        {
+            ViewBag.Message = "Pagina de Registro";
+
+            return View();
+        }
     }
 }

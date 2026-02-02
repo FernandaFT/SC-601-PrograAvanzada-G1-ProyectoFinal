@@ -163,7 +163,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Template\css\bootstrap.min.css" />
+    <Content Include="Template\css\fontawesome-all.min.css" />
     <Content Include="Template\css\style.css" />
+    <Content Include="Template\css\styles.css" />
+    <Content Include="Template\css\swiper.css" />
     <Content Include="Template\css\vendor.css" />
     <Content Include="Template\images\background-img.png" />
     <Content Include="Template\images\banner-img.png" />
@@ -210,10 +214,15 @@
     <Content Include="Template\images\reviewer-1.jpg" />
     <Content Include="Template\images\reviewer-2.jpg" />
     <Content Include="Template\images\reviewer-3.jpg" />
+    <Content Include="Template\js\bootstrap.min.js" />
     <Content Include="Template\js\jquery-1.11.0.min.js" />
     <Content Include="Template\js\modernizr.js" />
     <Content Include="Template\js\plugins.js" />
+    <Content Include="Template\js\purecounter.min.js" />
+    <Content Include="Template\js\replaceme.min.js" />
     <Content Include="Template\js\script.js" />
+    <Content Include="Template\js\scripts.js" />
+    <Content Include="Template\js\swiper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -228,6 +237,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

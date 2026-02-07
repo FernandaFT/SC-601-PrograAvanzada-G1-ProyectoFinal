@@ -155,7 +155,6 @@ body {
   --bs-warning-rgb: 255, 249, 235;
   --bs-info-rgb: 230, 243, 250;
 }
-
 .btn-primary {
   padding: 1.2rem 3rem;
   --bs-btn-color: #fff;
@@ -450,7 +449,6 @@ iconify-icon.quote-icon {
   color: #F7EEE4;
   font-size: 14rem;
 }
-
 
 /* register form  */
 .form-control {

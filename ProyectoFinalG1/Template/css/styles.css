@@ -140,6 +140,17 @@ a:hover {
 	background-color: #f9f8f8;
 }
 
+.btn.btn-primary {
+	background-color: #DEAD6F !important;
+	border-color: transparent !important;
+	color: #fff !important;
+}
+
+	.btn.btn-primary:hover {
+		background-color: #e9b775 !important;
+		border-color: transparent !important;
+	}
+
 .btn-solid-reg {
 	display: inline-block;
 	padding: 1.375rem 2.25rem 1.375rem 2.25rem;

@@ -1,0 +1,1220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WaggyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="bigint" Nullable="false" />
+          <Property Name="NUM_IDENTIFIC_CLIENTE" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO_CLIENTE" Type="varchar" MaxLength="15" />
+          <Property Name="DIRECCION_CLIENTE" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="COMPRAS_PROVEEDORES_DET">
+          <Key>
+            <PropertyRef Name="ID_COMPRA_DET" />
+          </Key>
+          <Property Name="ID_COMPRA_DET" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_COMPRA" Type="bigint" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="bigint" Nullable="false" />
+          <Property Name="ID_UNIDAD_MEDIDA" Type="bigint" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="MONTO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="MONTO_NETO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPRAS_PROVEEDORES_ENC">
+          <Key>
+            <PropertyRef Name="ID_COMPRA" />
+          </Key>
+          <Property Name="ID_COMPRA" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROVEEDOR" Type="bigint" Nullable="false" />
+          <Property Name="FEC_COMPRA" Type="date" Nullable="false" />
+          <Property Name="MONTO_COMPRA_BRUT" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_COMPRA_TOT" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="MONTO_COMPRA_NET" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVALUA_PROV">
+          <Key>
+            <PropertyRef Name="ID_EVALUA_PROV" />
+          </Key>
+          <Property Name="ID_EVALUA_PROV" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_VENTA_DET" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_DET">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO_DET" />
+          </Key>
+          <Property Name="ID_INVENTARIO_DET" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="bigint" Nullable="false" />
+          <Property Name="ID_UNI_MEDIDA" Type="bigint" Nullable="false" />
+          <Property Name="ID_INVENTARIO" Type="bigint" Nullable="false" />
+          <Property Name="CANTIDAD_INVENTARIO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_ENC">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO" />
+          </Key>
+          <Property Name="ID_INVENTARIO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FEC_INVENTARIO" Type="date" Nullable="false" />
+          <Property Name="OBSERVACIONES" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="MASCOTAS">
+          <Key>
+            <PropertyRef Name="ID_MASCOTA" />
+          </Key>
+          <Property Name="ID_MASCOTA" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_RAZA" Type="bigint" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="bigint" Nullable="false" />
+          <Property Name="NOMBRE_MASCOTA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FEC_NACIMIENTO" Type="date" />
+          <Property Name="COLOR_PELAJE" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_PROVEED">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO_PROVEED" />
+          </Key>
+          <Property Name="ID_PRODUCTO_PROVEED" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROVEED" Type="bigint" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="bigint" Nullable="false" />
+          <Property Name="ID_UNI_MEDIDA" Type="bigint" Nullable="false" />
+          <Property Name="PRECIO_UNITARIO" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_PRODUCTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EXISTENCIA" Type="int" />
+          <Property Name="POR_IMPUESTO" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="PROVEEDORES">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="bigint" Nullable="false" />
+          <Property Name="NUM_IDENTIFIC_PROVEED" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="NOMBRE_PROVEED" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO_PROVEED" Type="varchar" MaxLength="15" />
+          <Property Name="DIRECCION_PROVEED" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="RAZAS">
+          <Key>
+            <PropertyRef Name="ID_RAZA" />
+          </Key>
+          <Property Name="ID_RAZA" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_TIPO" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="NOMBRE_RAZA" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNIDAD_MEDIDA">
+          <Key>
+            <PropertyRef Name="ID_UNI_MEDIDA" />
+          </Key>
+          <Property Name="ID_UNI_MEDIDA" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_UNI_MED" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDENTIFICACION" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ROL" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTAS_CLIENTES_DET">
+          <Key>
+            <PropertyRef Name="ID_VENTA_DET" />
+          </Key>
+          <Property Name="ID_VENTA_DET" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_VENTA" Type="bigint" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="bigint" Nullable="false" />
+          <Property Name="ID_UNIDAD_MEDIDA" Type="bigint" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="MONTO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="MONTO_NETO_LINEA" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTAS_CLIENTES_ENC">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="bigint" Nullable="false" />
+          <Property Name="FEC_VENTA" Type="date" Nullable="false" />
+          <Property Name="MONTO_VENTA_BRUT" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_VENTA_TOT" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="MONTO_VENTA_NET" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLIENTES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_ENC_PROVEED">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_ENC" Type="Self.COMPRAS_PROVEEDORES_ENC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_ENC">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_COMPRA">
+          <End Role="COMPRAS_PROVEEDORES_ENC" Type="Self.COMPRAS_PROVEEDORES_ENC" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRAS_PROVEEDORES_ENC">
+              <PropertyRef Name="ID_COMPRA" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_UNIDAD">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_UNIDAD_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVALUA_VENTA_DET">
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="1" />
+          <End Role="EVALUA_PROV" Type="Self.EVALUA_PROV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_VENTA_DET" />
+            </Principal>
+            <Dependent Role="EVALUA_PROV">
+              <PropertyRef Name="ID_VENTA_DET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_INVENTARIO">
+          <End Role="INVENTARIO_ENC" Type="Self.INVENTARIO_ENC" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTARIO_ENC">
+              <PropertyRef Name="ID_INVENTARIO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_INVENTARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_UNIMED">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASCOTAS_CLIENTES">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="MASCOTAS" Type="Self.MASCOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="MASCOTAS">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASCOTAS_RAZAS">
+          <End Role="RAZAS" Type="Self.RAZAS" Multiplicity="1" />
+          <End Role="MASCOTAS" Type="Self.MASCOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RAZAS">
+              <PropertyRef Name="ID_RAZA" />
+            </Principal>
+            <Dependent Role="MASCOTAS">
+              <PropertyRef Name="ID_RAZA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_PROVEED">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_PROVEED" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_UNIMED">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDORES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PROVEEDORES">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_ENC_CLIENTE">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_ENC" Type="Self.VENTAS_CLIENTES_ENC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_ENC">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_UNIDAD">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_UNIDAD_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_VENTA">
+          <End Role="VENTAS_CLIENTES_ENC" Type="Self.VENTAS_CLIENTES_ENC" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS_CLIENTES_ENC">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_RegistroUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="WaggyModelStoreContainer">
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPRAS_PROVEEDORES_DET" EntityType="Self.COMPRAS_PROVEEDORES_DET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPRAS_PROVEEDORES_ENC" EntityType="Self.COMPRAS_PROVEEDORES_ENC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVALUA_PROV" EntityType="Self.EVALUA_PROV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTARIO_DET" EntityType="Self.INVENTARIO_DET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTARIO_ENC" EntityType="Self.INVENTARIO_ENC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MASCOTAS" EntityType="Self.MASCOTAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_PROVEED" EntityType="Self.PRODUCTO_PROVEED" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RAZAS" EntityType="Self.RAZAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTAS_CLIENTES_DET" EntityType="Self.VENTAS_CLIENTES_DET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTAS_CLIENTES_ENC" EntityType="Self.VENTAS_CLIENTES_ENC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLIENTES_USUARIOS" Association="Self.FK_CLIENTES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_ENC_PROVEED" Association="Self.FK_COMPRA_ENC_PROVEED">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="COMPRAS_PROVEEDORES_ENC" EntitySet="COMPRAS_PROVEEDORES_ENC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_COMPRA" Association="Self.FK_COMPRADET_COMPRA">
+            <End Role="COMPRAS_PROVEEDORES_ENC" EntitySet="COMPRAS_PROVEEDORES_ENC" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_PRODUCTO" Association="Self.FK_COMPRADET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_UNIDAD" Association="Self.FK_COMPRADET_UNIDAD">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVALUA_VENTA_DET" Association="Self.FK_EVALUA_VENTA_DET">
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+            <End Role="EVALUA_PROV" EntitySet="EVALUA_PROV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_INVENTARIO" Association="Self.FK_INVDET_INVENTARIO">
+            <End Role="INVENTARIO_ENC" EntitySet="INVENTARIO_ENC" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_PRODUCTO" Association="Self.FK_INVDET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_UNIMED" Association="Self.FK_INVDET_UNIMED">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASCOTAS_CLIENTES" Association="Self.FK_MASCOTAS_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="MASCOTAS" EntitySet="MASCOTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASCOTAS_RAZAS" Association="Self.FK_MASCOTAS_RAZAS">
+            <End Role="RAZAS" EntitySet="RAZAS" />
+            <End Role="MASCOTAS" EntitySet="MASCOTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_PRODUCTO" Association="Self.FK_PRODPROV_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_PROVEED" Association="Self.FK_PRODPROV_PROVEED">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_UNIMED" Association="Self.FK_PRODPROV_UNIMED">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDORES_USUARIOS" Association="Self.FK_PROVEEDORES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_ENC_CLIENTE" Association="Self.FK_VENTAS_ENC_CLIENTE">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VENTAS_CLIENTES_ENC" EntitySet="VENTAS_CLIENTES_ENC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_PRODUCTO" Association="Self.FK_VENTASDET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_UNIDAD" Association="Self.FK_VENTASDET_UNIDAD">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_VENTA" Association="Self.FK_VENTASDET_VENTA">
+            <End Role="VENTAS_CLIENTES_ENC" EntitySet="VENTAS_CLIENTES_ENC" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WaggyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" />
+          <Property Name="NUM_IDENTIFIC_CLIENTE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO_CLIENTE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_CLIENTE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_CLIENTES_USUARIOS" FromRole="CLIENTES" ToRole="USUARIOS" />
+          <NavigationProperty Name="MASCOTAS" Relationship="Self.FK_MASCOTAS_CLIENTES" FromRole="CLIENTES" ToRole="MASCOTAS" />
+          <NavigationProperty Name="VENTAS_CLIENTES_ENC" Relationship="Self.FK_VENTAS_ENC_CLIENTE" FromRole="CLIENTES" ToRole="VENTAS_CLIENTES_ENC" />
+        </EntityType>
+        <EntityType Name="COMPRAS_PROVEEDORES_DET">
+          <Key>
+            <PropertyRef Name="ID_COMPRA_DET" />
+          </Key>
+          <Property Name="ID_COMPRA_DET" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_COMPRA" Type="Int64" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_UNIDAD_MEDIDA" Type="Int64" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="MONTO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="MONTO_NETO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <NavigationProperty Name="COMPRAS_PROVEEDORES_ENC" Relationship="Self.FK_COMPRADET_COMPRA" FromRole="COMPRAS_PROVEEDORES_DET" ToRole="COMPRAS_PROVEEDORES_ENC" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_COMPRADET_PRODUCTO" FromRole="COMPRAS_PROVEEDORES_DET" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Self.FK_COMPRADET_UNIDAD" FromRole="COMPRAS_PROVEEDORES_DET" ToRole="UNIDAD_MEDIDA" />
+        </EntityType>
+        <EntityType Name="COMPRAS_PROVEEDORES_ENC">
+          <Key>
+            <PropertyRef Name="ID_COMPRA" />
+          </Key>
+          <Property Name="ID_COMPRA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROVEEDOR" Type="Int64" Nullable="false" />
+          <Property Name="FEC_COMPRA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MONTO_COMPRA_BRUT" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_COMPRA_TOT" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="MONTO_COMPRA_NET" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <NavigationProperty Name="COMPRAS_PROVEEDORES_DET" Relationship="Self.FK_COMPRADET_COMPRA" FromRole="COMPRAS_PROVEEDORES_ENC" ToRole="COMPRAS_PROVEEDORES_DET" />
+          <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_COMPRA_ENC_PROVEED" FromRole="COMPRAS_PROVEEDORES_ENC" ToRole="PROVEEDORES" />
+        </EntityType>
+        <EntityType Name="EVALUA_PROV">
+          <Key>
+            <PropertyRef Name="ID_EVALUA_PROV" />
+          </Key>
+          <Property Name="ID_EVALUA_PROV" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_VENTA_DET" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="VENTAS_CLIENTES_DET" Relationship="Self.FK_EVALUA_VENTA_DET" FromRole="EVALUA_PROV" ToRole="VENTAS_CLIENTES_DET" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_DET">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO_DET" />
+          </Key>
+          <Property Name="ID_INVENTARIO_DET" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_UNI_MEDIDA" Type="Int64" Nullable="false" />
+          <Property Name="ID_INVENTARIO" Type="Int64" Nullable="false" />
+          <Property Name="CANTIDAD_INVENTARIO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="INVENTARIO_ENC" Relationship="Self.FK_INVDET_INVENTARIO" FromRole="INVENTARIO_DET" ToRole="INVENTARIO_ENC" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_INVDET_PRODUCTO" FromRole="INVENTARIO_DET" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Self.FK_INVDET_UNIMED" FromRole="INVENTARIO_DET" ToRole="UNIDAD_MEDIDA" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_ENC">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO" />
+          </Key>
+          <Property Name="ID_INVENTARIO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FEC_INVENTARIO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INVENTARIO_DET" Relationship="Self.FK_INVDET_INVENTARIO" FromRole="INVENTARIO_ENC" ToRole="INVENTARIO_DET" />
+        </EntityType>
+        <EntityType Name="MASCOTAS">
+          <Key>
+            <PropertyRef Name="ID_MASCOTA" />
+          </Key>
+          <Property Name="ID_MASCOTA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RAZA" Type="Int64" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" />
+          <Property Name="NOMBRE_MASCOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FEC_NACIMIENTO" Type="DateTime" Precision="0" />
+          <Property Name="COLOR_PELAJE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.FK_MASCOTAS_CLIENTES" FromRole="MASCOTAS" ToRole="CLIENTES" />
+          <NavigationProperty Name="RAZAS" Relationship="Self.FK_MASCOTAS_RAZAS" FromRole="MASCOTAS" ToRole="RAZAS" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_PROVEED">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO_PROVEED" />
+          </Key>
+          <Property Name="ID_PRODUCTO_PROVEED" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROVEED" Type="Int64" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_UNI_MEDIDA" Type="Int64" Nullable="false" />
+          <Property Name="PRECIO_UNITARIO" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PRODPROV_PRODUCTO" FromRole="PRODUCTO_PROVEED" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_PRODPROV_PROVEED" FromRole="PRODUCTO_PROVEED" ToRole="PROVEEDORES" />
+          <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Self.FK_PRODPROV_UNIMED" FromRole="PRODUCTO_PROVEED" ToRole="UNIDAD_MEDIDA" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EXISTENCIA" Type="Int32" />
+          <Property Name="POR_IMPUESTO" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="COMPRAS_PROVEEDORES_DET" Relationship="Self.FK_COMPRADET_PRODUCTO" FromRole="PRODUCTOS" ToRole="COMPRAS_PROVEEDORES_DET" />
+          <NavigationProperty Name="INVENTARIO_DET" Relationship="Self.FK_INVDET_PRODUCTO" FromRole="PRODUCTOS" ToRole="INVENTARIO_DET" />
+          <NavigationProperty Name="PRODUCTO_PROVEED" Relationship="Self.FK_PRODPROV_PRODUCTO" FromRole="PRODUCTOS" ToRole="PRODUCTO_PROVEED" />
+          <NavigationProperty Name="VENTAS_CLIENTES_DET" Relationship="Self.FK_VENTASDET_PRODUCTO" FromRole="PRODUCTOS" ToRole="VENTAS_CLIENTES_DET" />
+        </EntityType>
+        <EntityType Name="PROVEEDORES">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" />
+          <Property Name="NUM_IDENTIFIC_PROVEED" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_PROVEED" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO_PROVEED" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_PROVEED" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMPRAS_PROVEEDORES_ENC" Relationship="Self.FK_COMPRA_ENC_PROVEED" FromRole="PROVEEDORES" ToRole="COMPRAS_PROVEEDORES_ENC" />
+          <NavigationProperty Name="PRODUCTO_PROVEED" Relationship="Self.FK_PRODPROV_PROVEED" FromRole="PROVEEDORES" ToRole="PRODUCTO_PROVEED" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_PROVEEDORES_USUARIOS" FromRole="PROVEEDORES" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="RAZAS">
+          <Key>
+            <PropertyRef Name="ID_RAZA" />
+          </Key>
+          <Property Name="ID_RAZA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_TIPO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_RAZA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MASCOTAS" Relationship="Self.FK_MASCOTAS_RAZAS" FromRole="RAZAS" ToRole="MASCOTAS" />
+        </EntityType>
+        <EntityType Name="UNIDAD_MEDIDA">
+          <Key>
+            <PropertyRef Name="ID_UNI_MEDIDA" />
+          </Key>
+          <Property Name="ID_UNI_MEDIDA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_UNI_MED" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COMPRAS_PROVEEDORES_DET" Relationship="Self.FK_COMPRADET_UNIDAD" FromRole="UNIDAD_MEDIDA" ToRole="COMPRAS_PROVEEDORES_DET" />
+          <NavigationProperty Name="INVENTARIO_DET" Relationship="Self.FK_INVDET_UNIMED" FromRole="UNIDAD_MEDIDA" ToRole="INVENTARIO_DET" />
+          <NavigationProperty Name="PRODUCTO_PROVEED" Relationship="Self.FK_PRODPROV_UNIMED" FromRole="UNIDAD_MEDIDA" ToRole="PRODUCTO_PROVEED" />
+          <NavigationProperty Name="VENTAS_CLIENTES_DET" Relationship="Self.FK_VENTASDET_UNIDAD" FromRole="UNIDAD_MEDIDA" ToRole="VENTAS_CLIENTES_DET" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDENTIFICACION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.FK_CLIENTES_USUARIOS" FromRole="USUARIOS" ToRole="CLIENTES" />
+          <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_PROVEEDORES_USUARIOS" FromRole="USUARIOS" ToRole="PROVEEDORES" />
+        </EntityType>
+        <EntityType Name="VENTAS_CLIENTES_DET">
+          <Key>
+            <PropertyRef Name="ID_VENTA_DET" />
+          </Key>
+          <Property Name="ID_VENTA_DET" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_VENTA" Type="Int64" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_UNIDAD_MEDIDA" Type="Int64" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="MONTO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="MONTO_NETO_LINEA" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <NavigationProperty Name="EVALUA_PROV" Relationship="Self.FK_EVALUA_VENTA_DET" FromRole="VENTAS_CLIENTES_DET" ToRole="EVALUA_PROV" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_VENTASDET_PRODUCTO" FromRole="VENTAS_CLIENTES_DET" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Self.FK_VENTASDET_UNIDAD" FromRole="VENTAS_CLIENTES_DET" ToRole="UNIDAD_MEDIDA" />
+          <NavigationProperty Name="VENTAS_CLIENTES_ENC" Relationship="Self.FK_VENTASDET_VENTA" FromRole="VENTAS_CLIENTES_DET" ToRole="VENTAS_CLIENTES_ENC" />
+        </EntityType>
+        <EntityType Name="VENTAS_CLIENTES_ENC">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" />
+          <Property Name="FEC_VENTA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MONTO_VENTA_BRUT" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="IMPUESTO_VENTA_TOT" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="MONTO_VENTA_NET" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.FK_VENTAS_ENC_CLIENTE" FromRole="VENTAS_CLIENTES_ENC" ToRole="CLIENTES" />
+          <NavigationProperty Name="VENTAS_CLIENTES_DET" Relationship="Self.FK_VENTASDET_VENTA" FromRole="VENTAS_CLIENTES_ENC" ToRole="VENTAS_CLIENTES_DET" />
+        </EntityType>
+        <Association Name="FK_CLIENTES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASCOTAS_CLIENTES">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="MASCOTAS" Type="Self.MASCOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="MASCOTAS">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_ENC_CLIENTE">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_ENC" Type="Self.VENTAS_CLIENTES_ENC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_ENC">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_COMPRA">
+          <End Role="COMPRAS_PROVEEDORES_ENC" Type="Self.COMPRAS_PROVEEDORES_ENC" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRAS_PROVEEDORES_ENC">
+              <PropertyRef Name="ID_COMPRA" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRADET_UNIDAD">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_DET" Type="Self.COMPRAS_PROVEEDORES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_DET">
+              <PropertyRef Name="ID_UNIDAD_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMPRA_ENC_PROVEED">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+          <End Role="COMPRAS_PROVEEDORES_ENC" Type="Self.COMPRAS_PROVEEDORES_ENC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="COMPRAS_PROVEEDORES_ENC">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVALUA_VENTA_DET">
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="1" />
+          <End Role="EVALUA_PROV" Type="Self.EVALUA_PROV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_VENTA_DET" />
+            </Principal>
+            <Dependent Role="EVALUA_PROV">
+              <PropertyRef Name="ID_VENTA_DET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_INVENTARIO">
+          <End Role="INVENTARIO_ENC" Type="Self.INVENTARIO_ENC" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTARIO_ENC">
+              <PropertyRef Name="ID_INVENTARIO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_INVENTARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVDET_UNIMED">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="INVENTARIO_DET" Type="Self.INVENTARIO_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="INVENTARIO_DET">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASCOTAS_RAZAS">
+          <End Role="RAZAS" Type="Self.RAZAS" Multiplicity="1" />
+          <End Role="MASCOTAS" Type="Self.MASCOTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RAZAS">
+              <PropertyRef Name="ID_RAZA" />
+            </Principal>
+            <Dependent Role="MASCOTAS">
+              <PropertyRef Name="ID_RAZA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_PROVEED">
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDORES">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_PROVEED" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODPROV_UNIMED">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="PRODUCTO_PROVEED" Type="Self.PRODUCTO_PROVEED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="PRODUCTO_PROVEED">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_PRODUCTO">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDORES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PROVEEDORES">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_UNIDAD">
+          <End Role="UNIDAD_MEDIDA" Type="Self.UNIDAD_MEDIDA" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDAD_MEDIDA">
+              <PropertyRef Name="ID_UNI_MEDIDA" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_UNIDAD_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTASDET_VENTA">
+          <End Role="VENTAS_CLIENTES_ENC" Type="Self.VENTAS_CLIENTES_ENC" Multiplicity="1" />
+          <End Role="VENTAS_CLIENTES_DET" Type="Self.VENTAS_CLIENTES_DET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS_CLIENTES_ENC">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="VENTAS_CLIENTES_DET">
+              <PropertyRef Name="ID_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WaggyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" />
+          <EntitySet Name="COMPRAS_PROVEEDORES_DET" EntityType="Self.COMPRAS_PROVEEDORES_DET" />
+          <EntitySet Name="COMPRAS_PROVEEDORES_ENC" EntityType="Self.COMPRAS_PROVEEDORES_ENC" />
+          <EntitySet Name="EVALUA_PROV" EntityType="Self.EVALUA_PROV" />
+          <EntitySet Name="INVENTARIO_DET" EntityType="Self.INVENTARIO_DET" />
+          <EntitySet Name="INVENTARIO_ENC" EntityType="Self.INVENTARIO_ENC" />
+          <EntitySet Name="MASCOTAS" EntityType="Self.MASCOTAS" />
+          <EntitySet Name="PRODUCTO_PROVEED" EntityType="Self.PRODUCTO_PROVEED" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+          <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" />
+          <EntitySet Name="RAZAS" EntityType="Self.RAZAS" />
+          <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <EntitySet Name="VENTAS_CLIENTES_DET" EntityType="Self.VENTAS_CLIENTES_DET" />
+          <EntitySet Name="VENTAS_CLIENTES_ENC" EntityType="Self.VENTAS_CLIENTES_ENC" />
+          <AssociationSet Name="FK_CLIENTES_USUARIOS" Association="Self.FK_CLIENTES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASCOTAS_CLIENTES" Association="Self.FK_MASCOTAS_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="MASCOTAS" EntitySet="MASCOTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_ENC_CLIENTE" Association="Self.FK_VENTAS_ENC_CLIENTE">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VENTAS_CLIENTES_ENC" EntitySet="VENTAS_CLIENTES_ENC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_COMPRA" Association="Self.FK_COMPRADET_COMPRA">
+            <End Role="COMPRAS_PROVEEDORES_ENC" EntitySet="COMPRAS_PROVEEDORES_ENC" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_PRODUCTO" Association="Self.FK_COMPRADET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRADET_UNIDAD" Association="Self.FK_COMPRADET_UNIDAD">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="COMPRAS_PROVEEDORES_DET" EntitySet="COMPRAS_PROVEEDORES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMPRA_ENC_PROVEED" Association="Self.FK_COMPRA_ENC_PROVEED">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="COMPRAS_PROVEEDORES_ENC" EntitySet="COMPRAS_PROVEEDORES_ENC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVALUA_VENTA_DET" Association="Self.FK_EVALUA_VENTA_DET">
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+            <End Role="EVALUA_PROV" EntitySet="EVALUA_PROV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_INVENTARIO" Association="Self.FK_INVDET_INVENTARIO">
+            <End Role="INVENTARIO_ENC" EntitySet="INVENTARIO_ENC" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_PRODUCTO" Association="Self.FK_INVDET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVDET_UNIMED" Association="Self.FK_INVDET_UNIMED">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="INVENTARIO_DET" EntitySet="INVENTARIO_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASCOTAS_RAZAS" Association="Self.FK_MASCOTAS_RAZAS">
+            <End Role="RAZAS" EntitySet="RAZAS" />
+            <End Role="MASCOTAS" EntitySet="MASCOTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_PRODUCTO" Association="Self.FK_PRODPROV_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_PROVEED" Association="Self.FK_PRODPROV_PROVEED">
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODPROV_UNIMED" Association="Self.FK_PRODPROV_UNIMED">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="PRODUCTO_PROVEED" EntitySet="PRODUCTO_PROVEED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_PRODUCTO" Association="Self.FK_VENTASDET_PRODUCTO">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDORES_USUARIOS" Association="Self.FK_PROVEEDORES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_UNIDAD" Association="Self.FK_VENTASDET_UNIDAD">
+            <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTASDET_VENTA" Association="Self.FK_VENTASDET_VENTA">
+            <End Role="VENTAS_CLIENTES_ENC" EntitySet="VENTAS_CLIENTES_ENC" />
+            <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
+          </AssociationSet>
+          <FunctionImport Name="RegistrarUsuario">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistrarUsuario">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistroUsuario">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WaggyModelStoreContainer" CdmEntityContainer="WaggyEntities">
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="WaggyModel.CLIENTES">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NUM_IDENTIFIC_CLIENTE" ColumnName="NUM_IDENTIFIC_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="TELEFONO_CLIENTE" ColumnName="TELEFONO_CLIENTE" />
+                <ScalarProperty Name="DIRECCION_CLIENTE" ColumnName="DIRECCION_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPRAS_PROVEEDORES_DET">
+            <EntityTypeMapping TypeName="WaggyModel.COMPRAS_PROVEEDORES_DET">
+              <MappingFragment StoreEntitySet="COMPRAS_PROVEEDORES_DET">
+                <ScalarProperty Name="ID_COMPRA_DET" ColumnName="ID_COMPRA_DET" />
+                <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="ID_UNIDAD_MEDIDA" ColumnName="ID_UNIDAD_MEDIDA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="MONTO_LINEA" ColumnName="MONTO_LINEA" />
+                <ScalarProperty Name="IMPUESTO_LINEA" ColumnName="IMPUESTO_LINEA" />
+                <ScalarProperty Name="MONTO_NETO_LINEA" ColumnName="MONTO_NETO_LINEA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPRAS_PROVEEDORES_ENC">
+            <EntityTypeMapping TypeName="WaggyModel.COMPRAS_PROVEEDORES_ENC">
+              <MappingFragment StoreEntitySet="COMPRAS_PROVEEDORES_ENC">
+                <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+                <ScalarProperty Name="FEC_COMPRA" ColumnName="FEC_COMPRA" />
+                <ScalarProperty Name="MONTO_COMPRA_BRUT" ColumnName="MONTO_COMPRA_BRUT" />
+                <ScalarProperty Name="IMPUESTO_COMPRA_TOT" ColumnName="IMPUESTO_COMPRA_TOT" />
+                <ScalarProperty Name="MONTO_COMPRA_NET" ColumnName="MONTO_COMPRA_NET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVALUA_PROV">
+            <EntityTypeMapping TypeName="WaggyModel.EVALUA_PROV">
+              <MappingFragment StoreEntitySet="EVALUA_PROV">
+                <ScalarProperty Name="ID_EVALUA_PROV" ColumnName="ID_EVALUA_PROV" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_VENTA_DET" ColumnName="ID_VENTA_DET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTARIO_DET">
+            <EntityTypeMapping TypeName="WaggyModel.INVENTARIO_DET">
+              <MappingFragment StoreEntitySet="INVENTARIO_DET">
+                <ScalarProperty Name="ID_INVENTARIO_DET" ColumnName="ID_INVENTARIO_DET" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="ID_UNI_MEDIDA" ColumnName="ID_UNI_MEDIDA" />
+                <ScalarProperty Name="ID_INVENTARIO" ColumnName="ID_INVENTARIO" />
+                <ScalarProperty Name="CANTIDAD_INVENTARIO" ColumnName="CANTIDAD_INVENTARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTARIO_ENC">
+            <EntityTypeMapping TypeName="WaggyModel.INVENTARIO_ENC">
+              <MappingFragment StoreEntitySet="INVENTARIO_ENC">
+                <ScalarProperty Name="ID_INVENTARIO" ColumnName="ID_INVENTARIO" />
+                <ScalarProperty Name="FEC_INVENTARIO" ColumnName="FEC_INVENTARIO" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MASCOTAS">
+            <EntityTypeMapping TypeName="WaggyModel.MASCOTAS">
+              <MappingFragment StoreEntitySet="MASCOTAS">
+                <ScalarProperty Name="ID_MASCOTA" ColumnName="ID_MASCOTA" />
+                <ScalarProperty Name="ID_RAZA" ColumnName="ID_RAZA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_MASCOTA" ColumnName="NOMBRE_MASCOTA" />
+                <ScalarProperty Name="FEC_NACIMIENTO" ColumnName="FEC_NACIMIENTO" />
+                <ScalarProperty Name="COLOR_PELAJE" ColumnName="COLOR_PELAJE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_PROVEED">
+            <EntityTypeMapping TypeName="WaggyModel.PRODUCTO_PROVEED">
+              <MappingFragment StoreEntitySet="PRODUCTO_PROVEED">
+                <ScalarProperty Name="ID_PRODUCTO_PROVEED" ColumnName="ID_PRODUCTO_PROVEED" />
+                <ScalarProperty Name="ID_PROVEED" ColumnName="ID_PROVEED" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="ID_UNI_MEDIDA" ColumnName="ID_UNI_MEDIDA" />
+                <ScalarProperty Name="PRECIO_UNITARIO" ColumnName="PRECIO_UNITARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="WaggyModel.PRODUCTOS">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
+                <ScalarProperty Name="EXISTENCIA" ColumnName="EXISTENCIA" />
+                <ScalarProperty Name="POR_IMPUESTO" ColumnName="POR_IMPUESTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDORES">
+            <EntityTypeMapping TypeName="WaggyModel.PROVEEDORES">
+              <MappingFragment StoreEntitySet="PROVEEDORES">
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NUM_IDENTIFIC_PROVEED" ColumnName="NUM_IDENTIFIC_PROVEED" />
+                <ScalarProperty Name="NOMBRE_PROVEED" ColumnName="NOMBRE_PROVEED" />
+                <ScalarProperty Name="TELEFONO_PROVEED" ColumnName="TELEFONO_PROVEED" />
+                <ScalarProperty Name="DIRECCION_PROVEED" ColumnName="DIRECCION_PROVEED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RAZAS">
+            <EntityTypeMapping TypeName="WaggyModel.RAZAS">
+              <MappingFragment StoreEntitySet="RAZAS">
+                <ScalarProperty Name="ID_RAZA" ColumnName="ID_RAZA" />
+                <ScalarProperty Name="COD_TIPO" ColumnName="COD_TIPO" />
+                <ScalarProperty Name="NOMBRE_RAZA" ColumnName="NOMBRE_RAZA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNIDAD_MEDIDA">
+            <EntityTypeMapping TypeName="WaggyModel.UNIDAD_MEDIDA">
+              <MappingFragment StoreEntitySet="UNIDAD_MEDIDA">
+                <ScalarProperty Name="ID_UNI_MEDIDA" ColumnName="ID_UNI_MEDIDA" />
+                <ScalarProperty Name="NOMBRE_UNI_MED" ColumnName="NOMBRE_UNI_MED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="WaggyModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="IDENTIFICACION" ColumnName="IDENTIFICACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAS_CLIENTES_DET">
+            <EntityTypeMapping TypeName="WaggyModel.VENTAS_CLIENTES_DET">
+              <MappingFragment StoreEntitySet="VENTAS_CLIENTES_DET">
+                <ScalarProperty Name="ID_VENTA_DET" ColumnName="ID_VENTA_DET" />
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="ID_UNIDAD_MEDIDA" ColumnName="ID_UNIDAD_MEDIDA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="MONTO_LINEA" ColumnName="MONTO_LINEA" />
+                <ScalarProperty Name="IMPUESTO_LINEA" ColumnName="IMPUESTO_LINEA" />
+                <ScalarProperty Name="MONTO_NETO_LINEA" ColumnName="MONTO_NETO_LINEA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAS_CLIENTES_ENC">
+            <EntityTypeMapping TypeName="WaggyModel.VENTAS_CLIENTES_ENC">
+              <MappingFragment StoreEntitySet="VENTAS_CLIENTES_ENC">
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="FEC_VENTA" ColumnName="FEC_VENTA" />
+                <ScalarProperty Name="MONTO_VENTA_BRUT" ColumnName="MONTO_VENTA_BRUT" />
+                <ScalarProperty Name="IMPUESTO_VENTA_TOT" ColumnName="IMPUESTO_VENTA_TOT" />
+                <ScalarProperty Name="MONTO_VENTA_NET" ColumnName="MONTO_VENTA_NET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_RegistroUsuario" FunctionName="WaggyModel.Store.sp_RegistroUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

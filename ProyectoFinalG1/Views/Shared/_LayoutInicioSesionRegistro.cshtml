@@ -4,8 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Waggy</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
     <link href="/Template/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Template/css/styles.css" rel="stylesheet">
@@ -16,54 +14,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 </head>
 <body>
-    <style>
-        .register {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-        }
-            /* Fuerza ancho completo REAL de los inputs */
-            .register .form-floating,
-            .register .form-floating .form-control {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            /* Quita cualquier límite heredado del template */
-            .register input {
-                display: block;
-            }
-
-        .btn.btn-primary {
-            background-color: #DEAD6F !important;
-            border-color: transparent !important;
-            color: #fff !important;
-        }
-
-            .btn.btn-primary:hover {
-                background-color: #e9b775 !important;
-                border-color: transparent !important;
-            }
-    </style>
+    <link href="~/Template/css/registro.css" rel="stylesheet" />
+    
     <main class="container-fluid px-0">
         @RenderBody()
     </main>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
     <script src="/Template/js/bootstrap.min.js"></script>
     <script src="/Template/js/swiper.min.js"></script>
     <script src="/Template/js/purecounter.min.js"></script>
     <script src="/Template/js/replaceme.min.js"></script>
-    @*<script src="/Template/js/scripts.js"></script>*@
 
 </body>
 </html>

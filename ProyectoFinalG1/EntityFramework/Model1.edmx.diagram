@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8840277aa4ad429eb95e5d1acae71b5c" Name="Diagram1">
+        <EntityTypeShape EntityType="WaggyModel.CLIENTES" Width="1.5" PointX="1.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.COMPRAS_PROVEEDORES_DET" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.COMPRAS_PROVEEDORES_ENC" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.EVALUA_PROV" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.INVENTARIO_DET" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.INVENTARIO_ENC" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.MASCOTAS" Width="1.5" PointX="3.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.PRODUCTO_PROVEED" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.PRODUCTOS" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.PROVEEDORES" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.RAZAS" Width="1.5" PointX="1.5" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.UNIDAD_MEDIDA" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.USUARIOS" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.VENTAS_CLIENTES_DET" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyModel.VENTAS_CLIENTES_ENC" Width="1.5" PointX="0.75" PointY="23.375" IsExpanded="true" />
+        <AssociationConnector Association="WaggyModel.FK_CLIENTES_USUARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_MASCOTAS_CLIENTES" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_VENTAS_ENC_CLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_COMPRADET_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_COMPRADET_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_COMPRADET_UNIDAD" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_COMPRA_ENC_PROVEED" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_EVALUA_VENTA_DET" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_INVDET_INVENTARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_INVDET_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_INVDET_UNIMED" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_MASCOTAS_RAZAS" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_PRODPROV_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_PRODPROV_PROVEED" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_PRODPROV_UNIMED" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_VENTASDET_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_PROVEEDORES_USUARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_VENTASDET_UNIDAD" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyModel.FK_VENTASDET_VENTA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

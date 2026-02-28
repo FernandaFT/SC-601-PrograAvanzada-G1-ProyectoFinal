@@ -1,4 +1,5 @@
-﻿using ProyectoFinalG1.Models;
+﻿using ProyectoFinalG1.EntityFramework;
+using ProyectoFinalG1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,17 @@ namespace ProyectoFinalG1.Controllers
         [HttpPost]
         public ActionResult Registro(UsuarioModel model)
         {
-            return View();
+            using (var context = new WaggyEntities())
+            {
+                var result = context.sp_RegistroUsuario(model.Identificacion, model.Nombre, model.Correo, model.Password);
+
+                if (result == 0)
+                {
+                    ViewBag.Mensaje = "Su información no se registró correctamente.";
+                    return View();
+                }
+                return RedirectToAction("InicioSesion", "Home");
+            }
         }
         #endregion
 

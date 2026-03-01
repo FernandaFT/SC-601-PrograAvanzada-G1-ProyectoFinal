@@ -43,28 +43,20 @@ namespace ProyectoFinalG1.EntityFramework
         public virtual DbSet<VENTAS_CLIENTES_DET> VENTAS_CLIENTES_DET { get; set; }
         public virtual DbSet<VENTAS_CLIENTES_ENC> VENTAS_CLIENTES_ENC { get; set; }
     
-        public virtual int RegistrarUsuario(string identificacion, string password, string nombre, string correo)
+        public virtual ObjectResult<sp_IniciarSesion_Result> sp_IniciarSesion(string correo, string password)
         {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(string));
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
     
             var passwordParameter = password != null ?
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarUsuario", identificacionParameter, passwordParameter, nombreParameter, correoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_IniciarSesion_Result>("sp_IniciarSesion", correoParameter, passwordParameter);
         }
     
-        public virtual int sp_RegistrarUsuario(string identificacion, string nombre, string correo, string password)
+        public virtual ObjectResult<Nullable<int>> sp_RegistroUsuario(string identificacion, string nombre, string correo, string password)
         {
             var identificacionParameter = identificacion != null ?
                 new ObjectParameter("Identificacion", identificacion) :
@@ -82,28 +74,7 @@ namespace ProyectoFinalG1.EntityFramework
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistrarUsuario", identificacionParameter, nombreParameter, correoParameter, passwordParameter);
-        }
-    
-        public virtual int sp_RegistroUsuario(string identificacion, string nombre, string correo, string password)
-        {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(string));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistroUsuario", identificacionParameter, nombreParameter, correoParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_RegistroUsuario", identificacionParameter, nombreParameter, correoParameter, passwordParameter);
         }
     }
 }

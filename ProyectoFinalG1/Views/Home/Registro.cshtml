@@ -18,7 +18,15 @@
                         <br />¿Ya tienes una cuenta?
                         <a class="blue" href="@Url.Action("InicioSesion", "Home")">Inicia sesión</a>
                     </p>
-                    @using (Html.BeginForm("Registro", "Home", FormMethod.Post, new {@id= "FormRegistro" }))
+
+                    @if (ViewBag.Mensaje != null)
+                    {
+                        <div class="alert alert-danger text-center">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("Registro", "Home", FormMethod.Post, new { @id = "FormRegistro" }))
                     {
                         <div class="mb-4 form-floating">
                             @Html.TextBoxFor(m => m.Identificacion, new { @placeholder = "Identificación", @class = "form-control no-transform" })
@@ -45,4 +53,5 @@
         </div>
     </div>
 </section>
+
 <script src="~/Template/js/funciones/registro.js"></script>

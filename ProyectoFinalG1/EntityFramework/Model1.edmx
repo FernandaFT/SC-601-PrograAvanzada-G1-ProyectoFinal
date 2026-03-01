@@ -386,6 +386,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_RegistroUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -1000,25 +1004,24 @@
             <End Role="VENTAS_CLIENTES_ENC" EntitySet="VENTAS_CLIENTES_ENC" />
             <End Role="VENTAS_CLIENTES_DET" EntitySet="VENTAS_CLIENTES_DET" />
           </AssociationSet>
-          <FunctionImport Name="RegistrarUsuario">
-            <Parameter Name="Identificacion" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="Correo" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_RegistrarUsuario">
-            <Parameter Name="Identificacion" Mode="In" Type="String" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <FunctionImport Name="sp_IniciarSesion" ReturnType="Collection(WaggyModel.sp_IniciarSesion_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_RegistroUsuario">
+          <FunctionImport Name="sp_RegistroUsuario" ReturnType="Collection(Int32)">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_IniciarSesion_Result">
+          <Property Type="Int64" Name="ID_USUARIO" Nullable="false" />
+          <Property Type="String" Name="IDENTIFICACION" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CORREO" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="ROL" Nullable="false" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1193,6 +1196,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_IniciarSesion" FunctionName="WaggyModel.Store.sp_IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyModel.sp_IniciarSesion_Result">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="IDENTIFICACION" ColumnName="IDENTIFICACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_RegistroUsuario" FunctionName="WaggyModel.Store.sp_RegistroUsuario" />
         </EntityContainerMapping>
       </Mapping>

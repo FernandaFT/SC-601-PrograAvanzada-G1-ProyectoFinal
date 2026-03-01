@@ -16,17 +16,33 @@ namespace ProyectoFinalG1.Controllers
             return View();
         }
 
-        #region Iniciar Sesión
+        #region InicioSesion
+
         [HttpGet]
         public ActionResult InicioSesion()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult InicioSesion(UsuarioModel modelo)
         {
-            return View();
+            using (var context = new WaggyEntities())
+            {
+                var result = context.sp_IniciarSesion(modelo.Correo, modelo.Password)
+                                    .FirstOrDefault();
+
+                if (result == null)
+                {
+                    ViewBag.Mensaje = "Su información no se autenticó correctamente.";
+                    return View(modelo);
+                }
+
+                // Si autenticó correctamente
+                return RedirectToAction("Index", "Home");
+            }
         }
+
         #endregion
 
         #region Registrar Usuario
@@ -35,18 +51,25 @@ namespace ProyectoFinalG1.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Registro(UsuarioModel model)
         {
             using (var context = new WaggyEntities())
             {
-                var result = context.sp_RegistroUsuario(model.Identificacion, model.Nombre, model.Correo, model.Password);
+                var resultado = context.sp_RegistroUsuario(
+                                    model.Identificacion,
+                                    model.Nombre,
+                                    model.Correo,
+                                    model.Password
+                                ).FirstOrDefault() ?? 0;
 
-                if (result == 0)
+                if (resultado == 0)
                 {
-                    ViewBag.Mensaje = "Su información no se registró correctamente.";
-                    return View();
+                    ViewBag.Mensaje = "La identificación ya está registrada.";
+                    return View(model);
                 }
+
                 return RedirectToAction("InicioSesion", "Home");
             }
         }

@@ -18,18 +18,22 @@
                         <br />¿Ya tienes una cuenta?
                         <a class="blue" href="@Url.Action("InicioSesion", "Home")">Inicia sesión</a>
                     </p>
-                    @using (Html.BeginForm("Registro", "Home"))
+                    @using (Html.BeginForm("Registro", "Home", FormMethod.Post, new {@id= "FormRegistro" }))
                     {
                         <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Identificacion, new { @placeholder = "Identificación", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Identificacion, new { @placeholder = "Identificación", @class = "form-control no-transform" })
                             <label>Identificación</label>
                         </div>
                         <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Nombre, new { @placeholder = "Nombre", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Nombre, new { @placeholder = "Nombre", @class = "form-control no-transform" })
                             <label>Nombre</label>
                         </div>
                         <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Contrasenna, new { @type = "password", @placeholder = "Contraseña", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Correo, new { @placeholder = "Correo", @class = "form-control no-transform" })
+                            <label>Correo Electrónico</label>
+                        </div>
+                        <div class="mb-4 form-floating">
+                            @Html.TextBoxFor(m => m.Password, new { @type = "password", @placeholder = "Contraseña", @class = "form-control no-transform" })
                             <label>Contraseña</label>
                         </div>
                         <button type="submit" class="w-100 btn btn-primary btn-lg rounded-pill">
@@ -41,3 +45,4 @@
         </div>
     </div>
 </section>
+<script src="~/Template/js/funciones/registro.js"></script>

@@ -35,3 +35,9 @@
 .no-transform {
     text-transform: none !important;
 }
+#FormInicioSesion span.text-danger {
+    text-align: left !important;
+    display: block;
+    margin-top: 5px;
+    color: #ff0000 !important
+}

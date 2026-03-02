@@ -11,6 +11,7 @@
     <link href="/Template/css/swiper.css" rel="stylesheet">
     <link href="/Template/css/vendor.css" rel="stylesheet">
     <link href="/Template/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="~/Template/css/registro.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 </head>
 <body>
-    <link href="~/Template/css/registro.css" rel="stylesheet" />
-    
+
     <main class="container-fluid px-0">
         @RenderBody()
     </main>
@@ -31,5 +31,6 @@
     <script src="/Template/js/purecounter.min.js"></script>
     <script src="/Template/js/replaceme.min.js"></script>
 
+    @RenderSection("scripts", required: false)
 </body>
 </html>

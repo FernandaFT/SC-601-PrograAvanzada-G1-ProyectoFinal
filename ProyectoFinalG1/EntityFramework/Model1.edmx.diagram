@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8840277aa4ad429eb95e5d1acae71b5c" Name="Diagram1">
+      <Diagram DiagramId="f6ef6b9e593c4e2e86a6bf51ec62e0d1" Name="Diagram1">
         <EntityTypeShape EntityType="WaggyModel.CLIENTES" Width="1.5" PointX="1.5" PointY="27.25" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyModel.COMPRAS_PROVEEDORES_DET" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyModel.COMPRAS_PROVEEDORES_ENC" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />

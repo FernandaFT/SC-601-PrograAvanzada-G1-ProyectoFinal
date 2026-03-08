@@ -127,9 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\USUARIOSController.cs" />
     <Compile Include="EntityFramework\CLIENTES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -331,9 +334,17 @@
     <Content Include="Views\Home\InicioSesion.cshtml" />
     <Content Include="Views\Shared\_LayoutInicioSesionRegistro.cshtml" />
     <Content Include="Views\Home\RecuperarContrasenna.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\USUARIOS\Create.cshtml" />
+    <Content Include="Views\USUARIOS\Delete.cshtml" />
+    <Content Include="Views\USUARIOS\Details.cshtml" />
+    <Content Include="Views\USUARIOS\Edit.cshtml" />
+    <Content Include="Views\USUARIOS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

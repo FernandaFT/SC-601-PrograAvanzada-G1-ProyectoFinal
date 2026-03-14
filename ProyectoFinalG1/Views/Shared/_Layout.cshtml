@@ -65,36 +65,13 @@
         </div>
     </div>
 
-
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-         aria-labelledby="Search">
-        <div class="offcanvas-header justify-content-center">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-
-            <div class="order-md-last">
-                <h4 class="text-primary text-uppercase mb-3">
-                    Search
-                </h4>
-                <div class="search-bar border rounded-2 border-dark-subtle">
-                    <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-                        <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
-                        <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <header>
-        @*@Html.ActionLink("Waggy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
         <div class="container py-2">
             <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
 
                 <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                     <div class="main-logo">
-                        <a href="index.html">
+                        <a href="@Url.Action("Index","Home")">
                             <img src="~/Template/images/logo.png" alt="logo" class="img-fluid">
                         </a>
                     </div>
@@ -109,40 +86,6 @@
         <div class="container">
             <nav class="main-menu d-flex navbar navbar-expand-lg ">
 
-                <div class="d-flex d-lg-none align-items-end mt-3">
-                    <ul class="d-flex justify-content-end list-unstyled m-0">
-                        <li>
-                            <a href="account.html" class="mx-3">
-                                <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="wishlist.html" class="mx-3">
-                                <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                               aria-controls="offcanvasCart">
-                                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                    03
-                                </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
-                               aria-controls="offcanvasSearch">
-                                <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -155,52 +98,71 @@
                     </div>
 
                     <div class="offcanvas-body justify-content-between">
-                        <select class="filter-categories border-0 mb-0 me-5">
-                            <option>Comprar por categoría</option>
-                            <option>Alimentos</option>
-                            <option>Ropa</option>
-                            <option>Accesorios</option>
-                            <option>Juguetes</option>
-                        </select>
 
-                        <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
+                        <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0 mx-auto">
+
                             <li class="nav-item">
-                                <a href="index.html" class="nav-link active">Inicio</a>
+                                <a href="@Url.Action("Index","Home")" class="nav-link active">Inicio</a>
                             </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                                   aria-expanded="false">Paginas</a>
+                                   aria-expanded="false">Comprar por categoría</a>
                                 <ul class="dropdown-menu" aria-labelledby="pages">
-                                    <li><a href="index.html" class="dropdown-item">About Us</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Shop</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Single Product</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Cart</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Wishlist</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Checkout</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Single Post</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Contact</a></li>
-                                    <li><a href="index.html" class="dropdown-item">FAQs</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Account</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Thankyou</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Error 404</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Styles</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Alimentos</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Ropa</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Accesorios</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Juguetes</a></li>
                                 </ul>
                             </li>
+
                             <li class="nav-item">
-                                <a href="index.html" class="nav-link">Tienda</a>
+                                <a href="index.html" class="nav-link">Sobre Nosotros</a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="index.html" class="nav-link">Contacto</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
+                                   aria-expanded="false">Administración</a>
+                                <ul class="dropdown-menu" aria-labelledby="pages">
+                                    <li><a href="index.html" class="dropdown-item">Gestión de Usuario</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Gestión de Productos</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Control de Inventarios</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Consulta de Ventas</a></li>
+                                    <li><a href="index.html" class="dropdown-item">Existencia de Productos</a></li>
+                                </ul>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-flex align-items-end">
+                            
                             <ul class="d-flex justify-content-end list-unstyled m-0">
-                                <li>
-                                    <a href="index.html" class="mx-3">
+
+                                @*Persona*@
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="profile"
+                                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                                     </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
+                                        <li>
+                                            <a class="dropdown-item" href="#">Perfil</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">Seguridad</a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">Salir</a>
+                                        </li>
+                                    </ul>
                                 </li>
+
+                                @*Carrito*@
                                 <li class="">
                                     <a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                                        aria-controls="offcanvasCart">
@@ -227,15 +189,12 @@
         <hr />
 
         <footer id="footer" class="my-5">
-            <div class="container py-5 my-5">
+            <div class="container py-2 my-2">
                 <div class="row">
 
                     <div class="col-md-3">
                         <div class="footer-menu">
                             <img src="~/Template/images/logo.png" alt="logo">
-                            <p class="blog-paragraph fs-6 mt-3">
-                                Suscríbete a nuestro boletín y recibe novedades sobre nuestras mejores ofertas.
-                            </p>
                             <div class="social-links">
                                 <ul class="d-flex list-unstyled gap-2">
                                     <li class="social">
@@ -273,42 +232,15 @@
                             <h3>Enlaces rápidos</h3>
                             <ul class="menu-list list-unstyled">
                                 <li class="menu-item">
-                                    <a href="#" class="nav-link">Inicio</a>
+                                    <a href="@Url.Action("Index","Home")" class="nav-link">Inicio</a>
                                 </li>
+
                                 <li class="menu-item">
                                     <a href="#" class="nav-link">Sobre nosotros</a>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Ofertas</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Servicios</a>
-                                </li>
+
                                 <li class="menu-item">
                                     <a href="#" class="nav-link">Contáctanos</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="footer-menu">
-                            <h3>Centro de ayuda</h3>
-                            <ul class="menu-list list-unstyled">
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Preguntas frecuentes</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Pagos</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Devoluciones y reembolsos</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Finalizar compra</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Información de envío</a>
                                 </li>
                             </ul>
                         </div>

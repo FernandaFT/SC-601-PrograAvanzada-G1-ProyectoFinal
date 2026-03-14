@@ -31,13 +31,13 @@
                         new { id = "FormInicioSesion", novalidate = "novalidate" }))
                     {
                         <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Correo,
+                            @Html.TextBoxFor(m => m.CorreoElectronico,
                                      new { @class = "form-control no-transform", placeholder = "Correo Electrónico" })
                             <label>Correo Electrónico</label>
                         </div>
 
                         <div class="mb-4 form-floating">
-                            @Html.PasswordFor(m => m.Password,
+                            @Html.PasswordFor(m => m.Contrasenna,
                                      new { @class = "form-control no-transform", placeholder = "Contraseña" })
                             <label>Contraseña</label>
                         </div>

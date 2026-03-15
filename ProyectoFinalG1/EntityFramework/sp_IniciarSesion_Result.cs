@@ -13,10 +13,10 @@ namespace ProyectoFinalG1.EntityFramework
     
     public partial class sp_IniciarSesion_Result
     {
-        public long ID_USUARIO { get; set; }
-        public string IDENTIFICACION { get; set; }
-        public string NOMBRE { get; set; }
-        public string CORREO { get; set; }
-        public string ROL { get; set; }
+        public int consecutivo { get; set; }
+        public string identificacion { get; set; }
+        public string nombre { get; set; }
+        public string correoElectronico { get; set; }
+        public string rol { get; set; }
     }
 }

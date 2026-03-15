@@ -7,10 +7,13 @@ namespace ProyectoFinalG1.Models
 {
     public class UsuarioModel
     {
+        public int Consecutivo { get; set; }
         public string Identificacion { get; set; }
-        public string Password { get; set; }
+        public string Contrasenna { get; set; }
         public string Nombre { get; set; }
-        public string Correo { get; set; }
+        public string CorreoElectronico { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
 
     }
 }

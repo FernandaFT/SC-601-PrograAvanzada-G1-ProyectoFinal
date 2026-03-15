@@ -12,16 +12,18 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUCTO_PROVEED
+    public partial class usuario
     {
-        public long ID_PRODUCTO_PROVEED { get; set; }
-        public long ID_PROVEED { get; set; }
-        public long ID_PRODUCTO { get; set; }
-        public long ID_UNI_MEDIDA { get; set; }
-        public decimal PRECIO_UNITARIO { get; set; }
+        public int consecutivo { get; set; }
+        public string identificacion { get; set; }
+        public string nombre { get; set; }
+        public string correoElectronico { get; set; }
+        public string contrasenna { get; set; }
+        public bool estado { get; set; }
+        public string telefono { get; set; }
+        public string direccion { get; set; }
+        public int consecutivoRol { get; set; }
     
-        public virtual PRODUCTOS PRODUCTOS { get; set; }
-        public virtual PROVEEDORES PROVEEDORES { get; set; }
-        public virtual UNIDAD_MEDIDA UNIDAD_MEDIDA { get; set; }
+        public virtual rol rol { get; set; }
     }
 }

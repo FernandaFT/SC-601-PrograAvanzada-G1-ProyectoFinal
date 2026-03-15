@@ -15,10 +15,10 @@ namespace ProyectoFinalG1.EntityFramework
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class WaggyEntities : DbContext
+    public partial class WaggyDBEntities : DbContext
     {
-        public WaggyEntities()
-            : base("name=WaggyEntities")
+        public WaggyDBEntities()
+            : base("name=WaggyDBEntities")
         {
         }
     
@@ -27,21 +27,8 @@ namespace ProyectoFinalG1.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CLIENTES> CLIENTES { get; set; }
-        public virtual DbSet<COMPRAS_PROVEEDORES_DET> COMPRAS_PROVEEDORES_DET { get; set; }
-        public virtual DbSet<COMPRAS_PROVEEDORES_ENC> COMPRAS_PROVEEDORES_ENC { get; set; }
-        public virtual DbSet<EVALUA_PROV> EVALUA_PROV { get; set; }
-        public virtual DbSet<INVENTARIO_DET> INVENTARIO_DET { get; set; }
-        public virtual DbSet<INVENTARIO_ENC> INVENTARIO_ENC { get; set; }
-        public virtual DbSet<MASCOTAS> MASCOTAS { get; set; }
-        public virtual DbSet<PRODUCTO_PROVEED> PRODUCTO_PROVEED { get; set; }
-        public virtual DbSet<PRODUCTOS> PRODUCTOS { get; set; }
-        public virtual DbSet<PROVEEDORES> PROVEEDORES { get; set; }
-        public virtual DbSet<RAZAS> RAZAS { get; set; }
-        public virtual DbSet<UNIDAD_MEDIDA> UNIDAD_MEDIDA { get; set; }
-        public virtual DbSet<USUARIOS> USUARIOS { get; set; }
-        public virtual DbSet<VENTAS_CLIENTES_DET> VENTAS_CLIENTES_DET { get; set; }
-        public virtual DbSet<VENTAS_CLIENTES_ENC> VENTAS_CLIENTES_ENC { get; set; }
+        public virtual DbSet<rol> rol { get; set; }
+        public virtual DbSet<usuario> usuario { get; set; }
     
         public virtual ObjectResult<sp_IniciarSesion_Result> sp_IniciarSesion(string correo, string password)
         {
@@ -54,27 +41,6 @@ namespace ProyectoFinalG1.EntityFramework
                 new ObjectParameter("Password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_IniciarSesion_Result>("sp_IniciarSesion", correoParameter, passwordParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> sp_RegistroUsuario(string identificacion, string nombre, string correo, string password)
-        {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(string));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_RegistroUsuario", identificacionParameter, nombreParameter, correoParameter, passwordParameter);
         }
     }
 }

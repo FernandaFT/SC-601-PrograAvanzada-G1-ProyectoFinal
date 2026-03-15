@@ -12,19 +12,18 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class INVENTARIO_ENC
+    public partial class rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public INVENTARIO_ENC()
+        public rol()
         {
-            this.INVENTARIO_DET = new HashSet<INVENTARIO_DET>();
+            this.usuario = new HashSet<usuario>();
         }
     
-        public long ID_INVENTARIO { get; set; }
-        public System.DateTime FEC_INVENTARIO { get; set; }
-        public string OBSERVACIONES { get; set; }
+        public int consecutivo { get; set; }
+        public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INVENTARIO_DET> INVENTARIO_DET { get; set; }
+        public virtual ICollection<usuario> usuario { get; set; }
     }
 }

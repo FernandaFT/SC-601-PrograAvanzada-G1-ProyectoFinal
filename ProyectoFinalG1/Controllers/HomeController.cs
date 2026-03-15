@@ -1,4 +1,5 @@
 ﻿using ProyectoFinalG1.EntityFramework;
+using ProyectoFinalG1.Filters;
 using ProyectoFinalG1.Models;
 using System;
 using System.Collections.Generic;
@@ -27,16 +28,32 @@ namespace ProyectoFinalG1.Controllers
         [HttpPost]
         public ActionResult InicioSesion(UsuarioModel modelo)
         {
-            using (var context = new WaggyEntities())
+            using (var context = new WaggyDBEntities())
             {
-                var result = context.sp_IniciarSesion(modelo.Correo, modelo.Password)
+                var result = context.sp_IniciarSesion(modelo.CorreoElectronico, modelo.Contrasenna)
                                     .FirstOrDefault();
 
                 if (result == null)
                 {
-                    ViewBag.Mensaje = "Su información no se autenticó correctamente.";
+                    // Verificar si el usuario existe pero está inactivo
+                    var usuario = context.usuario
+                                         .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
+
+                    if (usuario != null && usuario.estado == false)
+                    {
+                        ViewBag.Mensaje = "Su usuario está inactivo. Comuníquese con el administrador.";
+                    }
+                    else
+                    {
+                        ViewBag.Mensaje = "Su información no se autenticó correctamente.";
+                    }
+
                     return View(modelo);
                 }
+
+
+                Session["Nombre"] = result.nombre;
+                Session["Rol"] = result.rol;
 
                 // Si autenticó correctamente
                 return RedirectToAction("Index", "Home");
@@ -55,23 +72,7 @@ namespace ProyectoFinalG1.Controllers
         [HttpPost]
         public ActionResult Registro(UsuarioModel model)
         {
-            using (var context = new WaggyEntities())
-            {
-                var resultado = context.sp_RegistroUsuario(
-                                    model.Identificacion,
-                                    model.Nombre,
-                                    model.Correo,
-                                    model.Password
-                                ).FirstOrDefault() ?? 0;
-
-                if (resultado == 0)
-                {
-                    ViewBag.Mensaje = "La identificación ya está registrada.";
-                    return View(model);
-                }
-
-                return RedirectToAction("InicioSesion", "Home");
-            }
+            return View();
         }
         #endregion
 
@@ -85,6 +86,16 @@ namespace ProyectoFinalG1.Controllers
         public ActionResult RecuperarContrasenna(UsuarioModel modelo)
         {
             return View();
+        }
+        #endregion
+
+        #region Cerrar Sesión
+        [SesionActiva]
+        [HttpGet]
+        public ActionResult CerrarSesion()
+        {
+            Session.Clear();
+            return RedirectToAction("InicioSesion", "Home");
         }
         #endregion
     }

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+@{ 
+    var nombre = Session["Nombre"] ?? String.Empty;
+    var rol = Session["Rol"] ?? String.Empty;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -124,17 +130,21 @@
                                 <a href="index.html" class="nav-link">Contacto</a>
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                                   aria-expanded="false">Administración</a>
-                                <ul class="dropdown-menu" aria-labelledby="pages">
-                                    <li><a href="index.html" class="dropdown-item">Gestión de Usuario</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Gestión de Productos</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Control de Inventarios</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Consulta de Ventas</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Existencia de Productos</a></li>
-                                </ul>
-                            </li>
+                            @if (rol.ToString() == "Administrador")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" id="adminMenu" data-bs-toggle="dropdown"
+                                       aria-expanded="false">Administración</a>
+                                    <ul class="dropdown-menu" aria-labelledby="adminMenu">
+                                        <li><a href="index.html" class="dropdown-item">Gestión de Usuario</a></li>
+                                        <li><a href="index.html" class="dropdown-item">Gestión de Productos</a></li>
+                                        <li><a href="index.html" class="dropdown-item">Control de Inventarios</a></li>
+                                        <li><a href="index.html" class="dropdown-item">Consulta de Ventas</a></li>
+                                        <li><a href="index.html" class="dropdown-item">Existencia de Productos</a></li>
+                                    </ul>
+                                </li>
+                            }
+
                         </ul>
 
                         <div class="d-none d-lg-flex align-items-end">
@@ -142,8 +152,11 @@
                             <ul class="d-flex justify-content-end list-unstyled m-0">
 
                                 @*Persona*@
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="profile"
+                                <li class="nav-item dropdown d-flex align-items-center gap-2">
+
+                                    <small class="text-muted">@nombre</small>
+
+                                    <a class="nav-link dropdown-toggle p-0" href="#" id="profile"
                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                                     </a>
@@ -157,9 +170,10 @@
                                         </li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
-                                            <a class="dropdown-item" href="#">Salir</a>
+                                            <a class="dropdown-item" href="@Url.Action("CerrarSesion", "Home")">Salir</a>
                                         </li>
                                     </ul>
+
                                 </li>
 
                                 @*Carrito*@

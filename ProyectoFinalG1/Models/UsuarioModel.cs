@@ -14,6 +14,8 @@ namespace ProyectoFinalG1.Models
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }
-
+        public int ConsecutivoRol { get; set; }
+        public string Descripcion { get; set; }
+        public bool Estado { get; set; }
     }
 }

@@ -1,0 +1,77 @@
+﻿@model ProyectoFinalG1.Models.UsuarioModel
+
+@{
+    ViewBag.Title = "Crear Usuario";
+}
+
+<div class="container mt-4">
+
+    <h2>Crear Usuario</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @using (Html.BeginForm("Crear", "Usuario", FormMethod.Post, new {@id = "#FormRegistro" }))
+    {
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label>Identificación</label>
+                @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control no-transform", required = "required"})
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Nombre Completo</label>
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control no-transform", required = "required" })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 form-group">
+                <label>Correo Electrónico</label>
+                @Html.TextBoxFor(m => m.CorreoElectronico, new { @class = "form-control no-transform", type = "email", required = "required" })
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Contraseña</label>
+                @Html.PasswordFor(m => m.Contrasenna, new { @class = "form-control no-transform", required = "required" })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 form-group">
+                <label>Teléfono</label>
+                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control no-transform", required = "required" })
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Rol de Usuario</label>
+                @Html.DropDownListFor(m => m.ConsecutivoRol, 
+                    (IEnumerable<SelectListItem>)ViewBag.Roles, 
+                    "-- Seleccione un Rol --", 
+                    new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label>Dirección Física</label>
+            @Html.TextAreaFor(m => m.Direccion, new { @class = "form-control no-transform", rows = "2", required = "required" })
+        </div>
+
+        <br />
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Guardar Usuario
+            </button>
+
+            <a href="@Url.Action("Index", "Usuario")" class="btn btn-secondary">
+                Volver
+            </a>
+        </div>
+    }
+
+</div>

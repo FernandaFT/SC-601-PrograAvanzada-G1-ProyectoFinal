@@ -1,0 +1,58 @@
+﻿@model List<ProyectoFinalG1.Models.UsuarioModel>
+
+@{
+    ViewBag.Title = "Gestión de Usuarios";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Gestión de Usuarios</h2>
+        <a href="@Url.Action("Crear", "Usuario")" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Crear Nuevo Usuario
+        </a>
+    </div>
+
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Consecutivo</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.Consecutivo</td>
+                    <td>@u.Identificacion</td>
+                    <td>@u.Nombre</td>
+                    <td>@u.CorreoElectronico</td>
+                    <td>@u.Telefono</td>
+                    <td>@u.Descripcion</td>
+                    <td>@(u.Estado ? "Activo" : "Inactivo")</td>
+
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <a href="@Url.Action("Editar", "Usuario", new { id = u.Consecutivo })"
+                               class="btn btn-warning btn-sm">Editar</a>
+
+                            <a href="@Url.Action("CambiarEstado", "Usuario", new { id = u.Consecutivo })"
+                               class="btn @(u.Estado ? "btn-danger" : "btn-success") btn-sm"
+                               title="@(u.Estado ? "Inactivar" : "Activar")">
+                                <i class="fa @(u.Estado ? "fa-times" : "fa-check")"></i>
+                                @(u.Estado ? "Inactivar" : "Activar")
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

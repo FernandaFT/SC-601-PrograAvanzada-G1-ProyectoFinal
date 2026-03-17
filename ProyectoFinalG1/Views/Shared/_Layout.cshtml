@@ -140,9 +140,9 @@
                                     <a class="nav-link dropdown-toggle" role="button" id="adminMenu" data-bs-toggle="dropdown"
                                        aria-expanded="false">Administración</a>
                                     <ul class="dropdown-menu" aria-labelledby="adminMenu">
-                                        <li><a href="@Url.Action("Index","Usuario")" class="dropdown-item">Gestión de Usuario</a></li>
+                                        <li>@Html.ActionLink("Control de Inventarios", "Index", "Inventario", null, new { @class = "dropdown-item" })</li>
                                         <li><a href="index.html" class="dropdown-item">Gestión de Productos</a></li>
-                                        <li><a href="index.html" class="dropdown-item">Control de Inventarios</a></li>
+                                      
                                         <li><a href="index.html" class="dropdown-item">Consulta de Ventas</a></li>
                                         <li><a href="index.html" class="dropdown-item">Existencia de Productos</a></li>
                                     </ul>

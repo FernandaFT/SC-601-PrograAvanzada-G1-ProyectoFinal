@@ -4,10 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1ef0e6c41c6d4d07b68d82741afc5d56" Name="Diagram1">
+      <Diagram DiagramId="368847ff54e54ede92b094f818dd09d8" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="WaggyDBModel.inventario_det" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyDBModel.inventario_enc" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyDBModel.productos" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyDBModel.rol" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyDBModel.usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyDBModel.ventas_clientes_det" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WaggyDBModel.ventas_clientes_enc" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="WaggyDBModel.fk_invdet_inventario" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyDBModel.fk_invdet_producto" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyDBModel.fk_ventasdet_producto" ManuallyRouted="false" />
         <AssociationConnector Association="WaggyDBModel.FK_USUARIO_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyDBModel.fk_ventas_enc_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="WaggyDBModel.fk_ventasdet_venta" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,26 +12,23 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class usuario
+    public partial class ventas_clientes_enc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public usuario()
+        public ventas_clientes_enc()
         {
-            this.ventas_clientes_enc = new HashSet<ventas_clientes_enc>();
+            this.ventas_clientes_det = new HashSet<ventas_clientes_det>();
         }
     
+        public int cons_venta { get; set; }
         public int consecutivo { get; set; }
-        public string identificacion { get; set; }
-        public string nombre { get; set; }
-        public string correoElectronico { get; set; }
-        public string contrasenna { get; set; }
-        public bool estado { get; set; }
-        public string telefono { get; set; }
-        public string direccion { get; set; }
-        public int consecutivoRol { get; set; }
+        public System.DateTime fec_venta { get; set; }
+        public decimal monto_venta_brut { get; set; }
+        public decimal impuesto_venta_tot { get; set; }
+        public decimal monto_venta_net { get; set; }
     
-        public virtual rol rol { get; set; }
+        public virtual usuario usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ventas_clientes_enc> ventas_clientes_enc { get; set; }
+        public virtual ICollection<ventas_clientes_det> ventas_clientes_det { get; set; }
     }
 }

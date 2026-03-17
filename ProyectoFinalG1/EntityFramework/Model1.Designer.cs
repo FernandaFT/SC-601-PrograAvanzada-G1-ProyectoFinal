@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'F:\Primer Cuatri 2026\Progra Avanzada\PROYECTO\SC-601-PrograAvanzada-G1-ProyectoFinal\ProyectoFinalG1\EntityFramework\Model1.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\XPC\Desktop\SC-601-PrograAvanzada-G1-ProyectoFinal\ProyectoFinalG1\EntityFramework\Model1.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

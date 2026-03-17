@@ -28,7 +28,7 @@ namespace ProyectoFinalG1.Controllers
         [HttpPost]
         public ActionResult InicioSesion(UsuarioModel modelo)
         {
-            using (var context = new WaggyDBEntities())
+            using (var context = new WaggyDBEntities2())
             {
                 var result = context.sp_IniciarSesion(modelo.CorreoElectronico, modelo.Contrasenna)
                                     .FirstOrDefault();

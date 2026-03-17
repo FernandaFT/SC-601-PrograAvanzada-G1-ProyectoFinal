@@ -13,7 +13,7 @@ namespace ProyectoFinalG1.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            using (var context = new WaggyDBEntities())
+            using (var context = new WaggyDBEntities2())
             {
                 var datos = (from u in context.usuario
                              join r in context.rol on u.consecutivoRol equals r.consecutivo
@@ -46,7 +46,7 @@ namespace ProyectoFinalG1.Controllers
         {
             try
             {
-                using (var context = new WaggyDBEntities())
+                using (var context = new WaggyDBEntities2())
                 {
                     var result = context.sp_CrearUsuario(
                         modelo.Identificacion,
@@ -71,7 +71,7 @@ namespace ProyectoFinalG1.Controllers
 
         private void CargarRoles()
         {
-            using (var context = new WaggyDBEntities())
+            using (var context = new WaggyDBEntities2())
             {
                 var roles = context.rol.Select(r => new SelectListItem
                 {
@@ -89,7 +89,7 @@ namespace ProyectoFinalG1.Controllers
         [HttpGet]
         public ActionResult Editar(int id)
         {
-            using (var context = new WaggyDBEntities())
+            using (var context = new WaggyDBEntities2())
             {
                 var resultado = context.sp_ObtenerUsuarioPorId(id).FirstOrDefault();
 
@@ -116,7 +116,7 @@ namespace ProyectoFinalG1.Controllers
         {
             try
             {
-                using (var context = new WaggyDBEntities())
+                using (var context = new WaggyDBEntities2())
                 {
                     context.sp_EditarUsuario(
                         modelo.Consecutivo,
@@ -143,7 +143,7 @@ namespace ProyectoFinalG1.Controllers
         [HttpGet]
         public ActionResult CambiarEstado(int id)
         {
-            using (var context = new WaggyDBEntities())
+            using (var context = new WaggyDBEntities2())
             {
                 context.sp_AlternarEstadoUsuario(id);
 

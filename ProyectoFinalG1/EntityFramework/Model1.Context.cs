@@ -15,10 +15,10 @@ namespace ProyectoFinalG1.EntityFramework
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class WaggyDBEntities : DbContext
+    public partial class WaggyDBEntities2 : DbContext
     {
-        public WaggyDBEntities()
-            : base("name=WaggyDBEntities")
+        public WaggyDBEntities2()
+            : base("name=WaggyDBEntities2")
         {
         }
     
@@ -27,20 +27,26 @@ namespace ProyectoFinalG1.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<inventario_det> inventario_det { get; set; }
+        public virtual DbSet<inventario_enc> inventario_enc { get; set; }
+        public virtual DbSet<productos> productos { get; set; }
         public virtual DbSet<rol> rol { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<ventas_clientes_det> ventas_clientes_det { get; set; }
+        public virtual DbSet<ventas_clientes_enc> ventas_clientes_enc { get; set; }
     
-        public virtual ObjectResult<sp_IniciarSesion_Result> sp_IniciarSesion(string correo, string password)
+        public virtual int sp_AlternarEstadoUsuario(Nullable<int> consecutivo)
         {
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
+            var consecutivoParameter = consecutivo.HasValue ?
+                new ObjectParameter("Consecutivo", consecutivo) :
+                new ObjectParameter("Consecutivo", typeof(int));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AlternarEstadoUsuario", consecutivoParameter);
+        }
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_IniciarSesion_Result>("sp_IniciarSesion", correoParameter, passwordParameter);
+        public virtual ObjectResult<SP_ConsultarStock_Result> SP_ConsultarStock()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarStock_Result>("SP_ConsultarStock");
         }
     
         public virtual int sp_CrearUsuario(string iDENTIFICACION, string nOMBRE, string cORREO, string pASSWORD, string tELEFONO, string dIRECCION, Nullable<int> cONSECUTIVO_ROL)
@@ -101,6 +107,32 @@ namespace ProyectoFinalG1.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EditarUsuario", consecutivoParameter, nombreParameter, telefonoParameter, direccionParameter, consecutivoRolParameter);
         }
     
+        public virtual int SP_EntradaInventario(Nullable<int> consec_producto, Nullable<int> cantidad)
+        {
+            var consec_productoParameter = consec_producto.HasValue ?
+                new ObjectParameter("consec_producto", consec_producto) :
+                new ObjectParameter("consec_producto", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_EntradaInventario", consec_productoParameter, cantidadParameter);
+        }
+    
+        public virtual ObjectResult<sp_IniciarSesion_Result> sp_IniciarSesion(string correo, string password)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_IniciarSesion_Result>("sp_IniciarSesion", correoParameter, passwordParameter);
+        }
+    
         public virtual ObjectResult<sp_ObtenerUsuarioPorId_Result> sp_ObtenerUsuarioPorId(Nullable<int> consecutivo)
         {
             var consecutivoParameter = consecutivo.HasValue ?
@@ -110,22 +142,30 @@ namespace ProyectoFinalG1.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerUsuarioPorId_Result>("sp_ObtenerUsuarioPorId", consecutivoParameter);
         }
     
-        public virtual int sp_InactivarUsuario(Nullable<int> consecutivo)
+        public virtual int SP_SalidaInventario(Nullable<int> consec_producto, Nullable<int> cantidad)
         {
-            var consecutivoParameter = consecutivo.HasValue ?
-                new ObjectParameter("Consecutivo", consecutivo) :
-                new ObjectParameter("Consecutivo", typeof(int));
+            var consec_productoParameter = consec_producto.HasValue ?
+                new ObjectParameter("consec_producto", consec_producto) :
+                new ObjectParameter("consec_producto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InactivarUsuario", consecutivoParameter);
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SalidaInventario", consec_productoParameter, cantidadParameter);
         }
     
-        public virtual int sp_AlternarEstadoUsuario(Nullable<int> consecutivo)
+        public virtual int SP_RegistrarVenta(Nullable<int> cons_producto, Nullable<int> cantidad)
         {
-            var consecutivoParameter = consecutivo.HasValue ?
-                new ObjectParameter("Consecutivo", consecutivo) :
-                new ObjectParameter("Consecutivo", typeof(int));
+            var cons_productoParameter = cons_producto.HasValue ?
+                new ObjectParameter("cons_producto", cons_producto) :
+                new ObjectParameter("cons_producto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AlternarEstadoUsuario", consecutivoParameter);
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RegistrarVenta", cons_productoParameter, cantidadParameter);
         }
     }
 }

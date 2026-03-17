@@ -1,0 +1,104 @@
+﻿@model List<ProyectoFinalG1.EntityFramework.SP_ConsultarStock_Result>
+
+<div class="container mt-5 mb-5">
+
+    <h2 class="text-center mb-4 fw-semibold text-dark">
+          Sistema de Inventario
+    </h2>
+
+    <!-- MENSAJES -->
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger text-center shadow-sm">
+            ⚠️ @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success text-center shadow-sm">
+            ✅ @TempData["Mensaje"]
+        </div>
+    }
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle text-center">
+
+                <thead class="table-light">
+                    <tr>
+                        <th class="text-start">Producto</th>
+                        <th>Stock</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-start fw-medium">
+                                    @item.nombre_producto
+                                </td>
+
+                                
+                                <td>
+                                    @if (item.existencia <= 5)
+                                    {
+                                        <span class="badge bg-danger-subtle text-danger px-3 py-2">
+                                            @item.existencia
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary-subtle text-dark px-3 py-2">
+                                            @item.existencia
+                                        </span>
+                                    }
+                                </td>
+
+                                
+                                <td>
+                                    @if (item.existencia <= 0)
+                                    {
+                                        <button class="btn btn-sm btn-outline-secondary" disabled>
+                                            Sin stock
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" action="@Url.Action("RegistrarVenta", "Inventario")" class="d-inline">
+                                            <input type="hidden" name="productoId" value="@item.cons_producto" />
+                                            <input type="hidden" name="cantidad" value="1" />
+
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">
+                                                Vender
+                                            </button>
+                                        </form>
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-muted">
+                                No hay datos de inventario
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

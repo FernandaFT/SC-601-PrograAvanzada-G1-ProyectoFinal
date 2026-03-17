@@ -5,6 +5,40 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WaggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="inventario_det">
+          <Key>
+            <PropertyRef Name="cons_inventario_det" />
+          </Key>
+          <Property Name="cons_inventario_det" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consec_producto" Type="int" Nullable="false" />
+          <Property Name="cons_inventario" Type="int" Nullable="false" />
+          <Property Name="cantidad_inventario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inventario_enc">
+          <Key>
+            <PropertyRef Name="cons_inventario" />
+          </Key>
+          <Property Name="cons_inventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fec_inventario" Type="date" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="150" />
+          <Property Name="estado_inv" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="cons_producto" />
+          </Key>
+          <Property Name="cons_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_producto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion_producto" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="imagen" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="unidad_medida" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="existencia" Type="int" Nullable="false" />
+          <Property Name="existenciamin" Type="int" Nullable="false" />
+          <Property Name="existenciamax" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="registro_prod" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="rol">
           <Key>
             <PropertyRef Name="consecutivo" />
@@ -26,6 +60,53 @@
           <Property Name="direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="consecutivoRol" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ventas_clientes_det">
+          <Key>
+            <PropertyRef Name="cons_venta_det" />
+          </Key>
+          <Property Name="cons_venta_det" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cons_venta" Type="int" Nullable="false" />
+          <Property Name="cons_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="monto_linea" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="impuesto_linea" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="monto_neto_linea" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ventas_clientes_enc">
+          <Key>
+            <PropertyRef Name="cons_venta" />
+          </Key>
+          <Property Name="cons_venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consecutivo" Type="int" Nullable="false" />
+          <Property Name="fec_venta" Type="date" Nullable="false" />
+          <Property Name="monto_venta_brut" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="impuesto_venta_tot" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="monto_venta_net" Type="decimal" Precision="17" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_invdet_inventario">
+          <End Role="inventario_enc" Type="Self.inventario_enc" Multiplicity="1" />
+          <End Role="inventario_det" Type="Self.inventario_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inventario_enc">
+              <PropertyRef Name="cons_inventario" />
+            </Principal>
+            <Dependent Role="inventario_det">
+              <PropertyRef Name="cons_inventario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invdet_producto">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="inventario_det" Type="Self.inventario_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="inventario_det">
+              <PropertyRef Name="consec_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USUARIO_ROL">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
@@ -38,9 +119,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_ventas_enc_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ventas_clientes_enc" Type="Self.ventas_clientes_enc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="consecutivo" />
+            </Principal>
+            <Dependent Role="ventas_clientes_enc">
+              <PropertyRef Name="consecutivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ventasdet_producto">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="ventas_clientes_det" Type="Self.ventas_clientes_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="ventas_clientes_det">
+              <PropertyRef Name="cons_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ventasdet_venta">
+          <End Role="ventas_clientes_enc" Type="Self.ventas_clientes_enc" Multiplicity="1" />
+          <End Role="ventas_clientes_det" Type="Self.ventas_clientes_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventas_clientes_enc">
+              <PropertyRef Name="cons_venta" />
+            </Principal>
+            <Dependent Role="ventas_clientes_det">
+              <PropertyRef Name="cons_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="sp_AlternarEstadoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_ConsultarStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_CrearUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDENTIFICACION" Type="varchar" Mode="In" />
           <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -57,6 +175,10 @@
           <Parameter Name="Direccion" Type="varchar" Mode="In" />
           <Parameter Name="ConsecutivoRol" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_EntradaInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="consec_producto" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -64,18 +186,90 @@
         <Function Name="sp_ObtenerUsuarioPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_RegistrarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cons_producto" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SalidaInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="consec_producto" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="WaggyDBModelStoreContainer">
+          <EntitySet Name="inventario_det" EntityType="Self.inventario_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventario_enc" EntityType="Self.inventario_enc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ventas_clientes_det" EntityType="Self.ventas_clientes_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ventas_clientes_enc" EntityType="Self.ventas_clientes_enc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_invdet_inventario" Association="Self.fk_invdet_inventario">
+            <End Role="inventario_enc" EntitySet="inventario_enc" />
+            <End Role="inventario_det" EntitySet="inventario_det" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invdet_producto" Association="Self.fk_invdet_producto">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="inventario_det" EntitySet="inventario_det" />
+          </AssociationSet>
           <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
             <End Role="rol" EntitySet="rol" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ventas_enc_usuario" Association="Self.fk_ventas_enc_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ventas_clientes_enc" EntitySet="ventas_clientes_enc" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ventasdet_producto" Association="Self.fk_ventasdet_producto">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ventasdet_venta" Association="Self.fk_ventasdet_venta">
+            <End Role="ventas_clientes_enc" EntitySet="ventas_clientes_enc" />
+            <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WaggyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="inventario_det">
+          <Key>
+            <PropertyRef Name="cons_inventario_det" />
+          </Key>
+          <Property Name="cons_inventario_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consec_producto" Type="Int32" Nullable="false" />
+          <Property Name="cons_inventario" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_inventario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="inventario_enc" Relationship="Self.fk_invdet_inventario" FromRole="inventario_det" ToRole="inventario_enc" />
+          <NavigationProperty Name="productos" Relationship="Self.fk_invdet_producto" FromRole="inventario_det" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="inventario_enc">
+          <Key>
+            <PropertyRef Name="cons_inventario" />
+          </Key>
+          <Property Name="cons_inventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fec_inventario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="estado_inv" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="inventario_det" Relationship="Self.fk_invdet_inventario" FromRole="inventario_enc" ToRole="inventario_det" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="cons_producto" />
+          </Key>
+          <Property Name="cons_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion_producto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imagen" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="unidad_medida" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="existencia" Type="Int32" Nullable="false" />
+          <Property Name="existenciamin" Type="Int32" Nullable="false" />
+          <Property Name="existenciamax" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="registro_prod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="inventario_det" Relationship="Self.fk_invdet_producto" FromRole="productos" ToRole="inventario_det" />
+          <NavigationProperty Name="ventas_clientes_det" Relationship="Self.fk_ventasdet_producto" FromRole="productos" ToRole="ventas_clientes_det" />
+        </EntityType>
         <EntityType Name="rol">
           <Key>
             <PropertyRef Name="consecutivo" />
@@ -98,7 +292,71 @@
           <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="consecutivoRol" Type="Int32" Nullable="false" />
           <NavigationProperty Name="rol" Relationship="Self.FK_USUARIO_ROL" FromRole="usuario" ToRole="rol" />
+          <NavigationProperty Name="ventas_clientes_enc" Relationship="Self.fk_ventas_enc_usuario" FromRole="usuario" ToRole="ventas_clientes_enc" />
         </EntityType>
+        <EntityType Name="ventas_clientes_det">
+          <Key>
+            <PropertyRef Name="cons_venta_det" />
+          </Key>
+          <Property Name="cons_venta_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cons_venta" Type="Int32" Nullable="false" />
+          <Property Name="cons_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="monto_linea" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="impuesto_linea" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="monto_neto_linea" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <NavigationProperty Name="productos" Relationship="Self.fk_ventasdet_producto" FromRole="ventas_clientes_det" ToRole="productos" />
+          <NavigationProperty Name="ventas_clientes_enc" Relationship="Self.fk_ventasdet_venta" FromRole="ventas_clientes_det" ToRole="ventas_clientes_enc" />
+        </EntityType>
+        <EntityType Name="ventas_clientes_enc">
+          <Key>
+            <PropertyRef Name="cons_venta" />
+          </Key>
+          <Property Name="cons_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consecutivo" Type="Int32" Nullable="false" />
+          <Property Name="fec_venta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="monto_venta_brut" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="impuesto_venta_tot" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <Property Name="monto_venta_net" Type="Decimal" Precision="17" Scale="2" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_ventas_enc_usuario" FromRole="ventas_clientes_enc" ToRole="usuario" />
+          <NavigationProperty Name="ventas_clientes_det" Relationship="Self.fk_ventasdet_venta" FromRole="ventas_clientes_enc" ToRole="ventas_clientes_det" />
+        </EntityType>
+        <Association Name="fk_invdet_inventario">
+          <End Role="inventario_enc" Type="Self.inventario_enc" Multiplicity="1" />
+          <End Role="inventario_det" Type="Self.inventario_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inventario_enc">
+              <PropertyRef Name="cons_inventario" />
+            </Principal>
+            <Dependent Role="inventario_det">
+              <PropertyRef Name="cons_inventario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invdet_producto">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="inventario_det" Type="Self.inventario_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="inventario_det">
+              <PropertyRef Name="consec_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ventasdet_producto">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="ventas_clientes_det" Type="Self.ventas_clientes_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="ventas_clientes_det">
+              <PropertyRef Name="cons_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USUARIO_ROL">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
@@ -111,17 +369,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WaggyDBEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="fk_ventas_enc_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ventas_clientes_enc" Type="Self.ventas_clientes_enc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="consecutivo" />
+            </Principal>
+            <Dependent Role="ventas_clientes_enc">
+              <PropertyRef Name="consecutivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ventasdet_venta">
+          <End Role="ventas_clientes_enc" Type="Self.ventas_clientes_enc" Multiplicity="1" />
+          <End Role="ventas_clientes_det" Type="Self.ventas_clientes_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventas_clientes_enc">
+              <PropertyRef Name="cons_venta" />
+            </Principal>
+            <Dependent Role="ventas_clientes_det">
+              <PropertyRef Name="cons_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WaggyDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="inventario_det" EntityType="Self.inventario_det" />
+          <EntitySet Name="inventario_enc" EntityType="Self.inventario_enc" />
+          <EntitySet Name="productos" EntityType="Self.productos" />
           <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="ventas_clientes_det" EntityType="Self.ventas_clientes_det" />
+          <EntitySet Name="ventas_clientes_enc" EntityType="Self.ventas_clientes_enc" />
+          <AssociationSet Name="fk_invdet_inventario" Association="Self.fk_invdet_inventario">
+            <End Role="inventario_enc" EntitySet="inventario_enc" />
+            <End Role="inventario_det" EntitySet="inventario_det" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invdet_producto" Association="Self.fk_invdet_producto">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="inventario_det" EntitySet="inventario_det" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ventasdet_producto" Association="Self.fk_ventasdet_producto">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
+          </AssociationSet>
           <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
             <End Role="rol" EntitySet="rol" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <FunctionImport Name="sp_IniciarSesion" ReturnType="Collection(WaggyDBModel.sp_IniciarSesion_Result)">
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
+          <AssociationSet Name="fk_ventas_enc_usuario" Association="Self.fk_ventas_enc_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ventas_clientes_enc" EntitySet="ventas_clientes_enc" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ventasdet_venta" Association="Self.fk_ventasdet_venta">
+            <End Role="ventas_clientes_enc" EntitySet="ventas_clientes_enc" />
+            <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
+          </AssociationSet>
+          <FunctionImport Name="sp_AlternarEstadoUsuario">
+          <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_ConsultarStock" ReturnType="Collection(WaggyDBModel.SP_ConsultarStock_Result)" />
           <FunctionImport Name="sp_CrearUsuario">
             <Parameter Name="IDENTIFICACION" Mode="In" Type="String" />
             <Parameter Name="NOMBRE" Mode="In" Type="String" />
@@ -138,16 +445,31 @@
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="ConsecutivoRol" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_EntradaInventario">
+            <Parameter Name="consec_producto" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_IniciarSesion" ReturnType="Collection(WaggyDBModel.sp_IniciarSesion_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_ObtenerUsuarioPorId" ReturnType="Collection(WaggyDBModel.sp_ObtenerUsuarioPorId_Result)">
           <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_InactivarUsuario">
-            <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          <FunctionImport Name="SP_SalidaInventario">
+            <Parameter Name="consec_producto" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_AlternarEstadoUsuario">
-            <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          <FunctionImport Name="SP_RegistrarVenta">
+            <Parameter Name="cons_producto" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_ConsultarStock_Result">
+          <Property Type="Int32" Name="cons_producto" Nullable="false" />
+          <Property Type="String" Name="nombre_producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="existencia" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_IniciarSesion_Result">
           <Property Type="Int32" Name="consecutivo" Nullable="false" />
           <Property Type="String" Name="identificacion" Nullable="false" MaxLength="20" />
@@ -169,7 +491,44 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WaggyDBModelStoreContainer" CdmEntityContainer="WaggyDBEntities">
+        <EntityContainerMapping StorageEntityContainer="WaggyDBModelStoreContainer" CdmEntityContainer="WaggyDBEntities2">
+          <EntitySetMapping Name="inventario_det">
+            <EntityTypeMapping TypeName="WaggyDBModel.inventario_det">
+              <MappingFragment StoreEntitySet="inventario_det">
+                <ScalarProperty Name="cons_inventario_det" ColumnName="cons_inventario_det" />
+                <ScalarProperty Name="consec_producto" ColumnName="consec_producto" />
+                <ScalarProperty Name="cons_inventario" ColumnName="cons_inventario" />
+                <ScalarProperty Name="cantidad_inventario" ColumnName="cantidad_inventario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventario_enc">
+            <EntityTypeMapping TypeName="WaggyDBModel.inventario_enc">
+              <MappingFragment StoreEntitySet="inventario_enc">
+                <ScalarProperty Name="cons_inventario" ColumnName="cons_inventario" />
+                <ScalarProperty Name="fec_inventario" ColumnName="fec_inventario" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="estado_inv" ColumnName="estado_inv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="WaggyDBModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="descripcion_producto" ColumnName="descripcion_producto" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="existenciamin" ColumnName="existenciamin" />
+                <ScalarProperty Name="existenciamax" ColumnName="existenciamax" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="registro_prod" ColumnName="registro_prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="rol">
             <EntityTypeMapping TypeName="WaggyDBModel.rol">
               <MappingFragment StoreEntitySet="rol">
@@ -193,6 +552,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ventas_clientes_det">
+            <EntityTypeMapping TypeName="WaggyDBModel.ventas_clientes_det">
+              <MappingFragment StoreEntitySet="ventas_clientes_det">
+                <ScalarProperty Name="cons_venta_det" ColumnName="cons_venta_det" />
+                <ScalarProperty Name="cons_venta" ColumnName="cons_venta" />
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="monto_linea" ColumnName="monto_linea" />
+                <ScalarProperty Name="impuesto_linea" ColumnName="impuesto_linea" />
+                <ScalarProperty Name="monto_neto_linea" ColumnName="monto_neto_linea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventas_clientes_enc">
+            <EntityTypeMapping TypeName="WaggyDBModel.ventas_clientes_enc">
+              <MappingFragment StoreEntitySet="ventas_clientes_enc">
+                <ScalarProperty Name="cons_venta" ColumnName="cons_venta" />
+                <ScalarProperty Name="consecutivo" ColumnName="consecutivo" />
+                <ScalarProperty Name="fec_venta" ColumnName="fec_venta" />
+                <ScalarProperty Name="monto_venta_brut" ColumnName="monto_venta_brut" />
+                <ScalarProperty Name="impuesto_venta_tot" ColumnName="impuesto_venta_tot" />
+                <ScalarProperty Name="monto_venta_net" ColumnName="monto_venta_net" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AlternarEstadoUsuario" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoUsuario" />
+          <FunctionImportMapping FunctionImportName="SP_ConsultarStock" FunctionName="WaggyDBModel.Store.SP_ConsultarStock">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.SP_ConsultarStock_Result">
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CrearUsuario" FunctionName="WaggyDBModel.Store.sp_CrearUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_EditarUsuario" FunctionName="WaggyDBModel.Store.sp_EditarUsuario" />
+          <FunctionImportMapping FunctionImportName="SP_EntradaInventario" FunctionName="WaggyDBModel.Store.SP_EntradaInventario" />
           <FunctionImportMapping FunctionImportName="sp_IniciarSesion" FunctionName="WaggyDBModel.Store.sp_IniciarSesion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_IniciarSesion_Result">
@@ -204,8 +601,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_CrearUsuario" FunctionName="WaggyDBModel.Store.sp_CrearUsuario" />
-          <FunctionImportMapping FunctionImportName="sp_EditarUsuario" FunctionName="WaggyDBModel.Store.sp_EditarUsuario" />
           <FunctionImportMapping FunctionImportName="sp_ObtenerUsuarioPorId" FunctionName="WaggyDBModel.Store.sp_ObtenerUsuarioPorId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_ObtenerUsuarioPorId_Result">
@@ -219,7 +614,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_AlternarEstadoUsuario" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoUsuario" />
+          <FunctionImportMapping FunctionImportName="SP_SalidaInventario" FunctionName="WaggyDBModel.Store.SP_SalidaInventario" />
+          <FunctionImportMapping FunctionImportName="SP_RegistrarVenta" FunctionName="WaggyDBModel.Store.SP_RegistrarVenta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

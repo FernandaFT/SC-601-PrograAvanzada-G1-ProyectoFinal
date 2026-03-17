@@ -1,0 +1,105 @@
+﻿@model ProyectoFinalG1.Models.ProductoModel
+
+@{
+    ViewBag.Title = "Crear Producto";
+}
+
+<div class="container mt-4">
+
+    <h2>Crear Producto</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @using (Html.BeginForm("Crear", "Producto", FormMethod.Post, new { id = "FormProducto" }))
+    {
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label>Nombre del Producto</label>
+                @Html.TextBoxFor(m => m.NombreProducto, new { @class = "form-control no-transform", required = "required" })
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Precio</label>
+                @Html.TextBoxFor(m => m.Precio, new { @class = "form-control", type = "number", step = "0.01", min = "0.01", required = "required" })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 form-group">
+                <label>Categoría</label>
+                @Html.DropDownListFor(m => m.ConsCategoria,
+                    (IEnumerable<SelectListItem>)ViewBag.Categorias,
+                    "-- Seleccione una Categoría --",
+                    new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Tipo Mascota</label>
+                @Html.DropDownListFor(m => m.TipoMascota,
+                    (IEnumerable<SelectListItem>)ViewBag.TiposMascota,
+                    "-- Seleccione un Tipo --",
+                    new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4 form-group">
+                <label>Unidad de Medida</label>
+                @Html.DropDownListFor(m => m.UnidadMedida,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Litros (L)", Value = "l" },
+                        new SelectListItem { Text = "Kilos (K)", Value = "k" },
+                        new SelectListItem { Text = "Gramos (G)", Value = "g" },
+                        new SelectListItem { Text = "Unidad (U)", Value = "u" }
+                    },
+                    "-- Seleccione --",
+                    new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Existencia</label>
+                @Html.TextBoxFor(m => m.Existencia, new { @class = "form-control", type = "number", min = "0", required = "required" })
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Imagen (ruta o URL)</label>
+                @Html.TextBoxFor(m => m.Imagen, new { @class = "form-control no-transform", required = "required" })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 form-group">
+                <label>Existencia Mínima</label>
+                @Html.TextBoxFor(m => m.ExistenciaMin, new { @class = "form-control", type = "number", min = "0", required = "required" })
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Existencia Máxima</label>
+                @Html.TextBoxFor(m => m.ExistenciaMax, new { @class = "form-control", type = "number", min = "0", required = "required" })
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label>Descripción</label>
+            @Html.TextAreaFor(m => m.DescripcionProducto, new { @class = "form-control no-transform", rows = "3", required = "required" })
+        </div>
+
+        <br />
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Guardar Producto
+            </button>
+
+            <a href="@Url.Action("Index", "Producto")" class="btn btn-secondary">
+                Volver
+            </a>
+        </div>
+    }
+</div>

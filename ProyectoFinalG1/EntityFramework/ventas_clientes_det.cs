@@ -12,18 +12,17 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class rol
+    public partial class ventas_clientes_det
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public rol()
-        {
-            this.usuario = new HashSet<usuario>();
-        }
+        public int cons_venta_det { get; set; }
+        public int cons_venta { get; set; }
+        public int cons_producto { get; set; }
+        public int cantidad { get; set; }
+        public decimal monto_linea { get; set; }
+        public decimal impuesto_linea { get; set; }
+        public decimal monto_neto_linea { get; set; }
     
-        public int consecutivo { get; set; }
-        public string descripcion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usuario> usuario { get; set; }
+        public virtual productos productos { get; set; }
+        public virtual ventas_clientes_enc ventas_clientes_enc { get; set; }
     }
 }

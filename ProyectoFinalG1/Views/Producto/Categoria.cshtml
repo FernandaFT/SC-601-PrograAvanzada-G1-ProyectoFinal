@@ -1,0 +1,98 @@
+﻿@model List<ProyectoFinalG1.Models.ProductoModel>
+
+@{
+    ViewBag.Title = ViewBag.NombreCategoria;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int paginaActual = ViewBag.PaginaActual ?? 1;
+    int totalPaginas = ViewBag.TotalPaginas ?? 1;
+    int categoriaId = ViewBag.CategoriaId ?? 0;
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-normal">@ViewBag.NombreCategoria</h2>
+            <p class="text-muted">Explora todos los productos disponibles en esta categoría.</p>
+        </div>
+
+        <div class="row">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var p in Model)
+                {
+                    <div class="col-md-4 col-lg-3 mb-4" >
+                        <div class="card h-100 border-0 shadow-sm rounded-4">
+                            <img src="@p.Imagen" class="card-img-top rounded-top-4"
+                                 alt="@p.NombreProducto"
+                                 style="height: 250px; object-fit: cover;" />
+
+                            <div class="card-body d-flex flex-column" >
+                                <h5 class="card-title">@p.NombreProducto</h5>
+
+                                <p class="card-text text-muted" style="min-height: 72px;">
+                                    @(p.DescripcionProducto != null && p.DescripcionProducto.Length > 90
+                                        ? p.DescripcionProducto.Substring(0, 90) + "..."
+                                        : p.DescripcionProducto)
+                                </p>
+
+                                <p class="mb-1">
+                                    <strong>Tipo mascota:</strong> @p.TipoMascota
+                                </p>
+
+                                <h4 class="text-primary mt-2">₡ @p.Precio.ToString("N2")</h4>
+
+                                <div class="mt-auto pt-3">
+                                    <a href="#" class="btn btn-outline-dark w-100 rounded-3">
+                                        Agregar al carrito
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <div class="alert alert-warning">
+                        No hay productos disponibles en esta categoría.
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (totalPaginas > 1)
+        {
+            <nav aria-label="Paginación de productos por categoría" class="mt-4">
+                <ul class="pagination justify-content-center">
+
+                    <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Categoria", "Producto", new { id = categoriaId, pagina = paginaActual - 1 })">
+                            Anterior
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= totalPaginas; i++)
+                    {
+                        <li class="page-item @(i == paginaActual ? "active" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Categoria", "Producto", new { id = categoriaId, pagina = i })">
+                                @i
+                            </a>
+                        </li>
+                    }
+
+                    <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Categoria", "Producto", new { id = categoriaId, pagina = paginaActual + 1 })">
+                            Siguiente
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        }
+    </div>
+</section>

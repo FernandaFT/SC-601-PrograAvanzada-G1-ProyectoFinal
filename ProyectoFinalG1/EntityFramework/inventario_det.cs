@@ -10,13 +10,16 @@
 namespace ProyectoFinalG1.EntityFramework
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_IniciarSesion_Result
+    public partial class inventario_det
     {
-        public int consecutivo { get; set; }
-        public string identificacion { get; set; }
-        public string nombre { get; set; }
-        public string correoElectronico { get; set; }
-        public string rol { get; set; }
+        public int cons_inventario_det { get; set; }
+        public int consec_producto { get; set; }
+        public int cons_inventario { get; set; }
+        public int cantidad_inventario { get; set; }
+    
+        public virtual inventario_enc inventario_enc { get; set; }
+        public virtual productos productos { get; set; }
     }
 }

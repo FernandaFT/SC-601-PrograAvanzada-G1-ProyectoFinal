@@ -119,10 +119,9 @@
                                 <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
                                    aria-expanded="false">Comprar por categoría</a>
                                 <ul class="dropdown-menu" aria-labelledby="pages">
-                                    <li><a href="index.html" class="dropdown-item">Alimentos</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Ropa</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Accesorios</a></li>
-                                    <li><a href="index.html" class="dropdown-item">Juguetes</a></li>
+                                    <li><a href="@Url.Action("Categoria", "Producto", new { id = 1 })" class="dropdown-item">Alimentos</a></li>
+                                    <li><a href="@Url.Action("Categoria", "Producto", new { id = 2 })" class="dropdown-item">Ropa</a></li>
+                                    <li><a href="@Url.Action("Categoria", "Producto", new { id = 3 })" class="dropdown-item">Accesorios</a></li>
                                 </ul>
                             </li>
 
@@ -141,7 +140,7 @@
                                        aria-expanded="false">Administración</a>
                                     <ul class="dropdown-menu" aria-labelledby="adminMenu">
                                         <li><a href="@Url.Action("Index","Usuario")" class="dropdown-item">Gestión de Usuario</a></li>
-                                        <li><a href="index.html" class="dropdown-item">Gestión de Productos</a></li>
+                                        <li><a href="@Url.Action("Index","Producto")" class="dropdown-item">Gestión de Productos</a></li>
                                         <li><a href="index.html" class="dropdown-item">Control de Inventarios</a></li>
                                         <li><a href="index.html" class="dropdown-item">Consulta de Ventas</a></li>
                                         <li><a href="index.html" class="dropdown-item">Existencia de Productos</a></li>

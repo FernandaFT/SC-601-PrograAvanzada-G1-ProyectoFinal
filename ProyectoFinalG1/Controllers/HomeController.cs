@@ -14,7 +14,39 @@ namespace ProyectoFinalG1.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var modelo = new HomeModel
+            {
+                ProductosAlimentos = ObtenerProductosPorCategoria(1, 4),
+                ProductosRopa = ObtenerProductosPorCategoria(2, 4),
+                ProductosAccesorios = ObtenerProductosPorCategoria(3, 4)
+            };
+
+            return View(modelo);
+        }
+
+        private List<ProductoModel> ObtenerProductosPorCategoria(int categoriaId, int cantidad)
+        {
+            using (var context = new WaggyDBEntities())
+            {
+                return context.sp_ObtenerProductosHomePorCategoria(categoriaId, cantidad)
+                    .ToList()
+                    .Select(p => new ProductoModel
+                    {
+                        ConsecutivoProducto = p.cons_producto,
+                        NombreProducto = p.nombre_producto,
+                        DescripcionProducto = p.descripcion_producto,
+                        Imagen = p.imagen,
+                        Precio = p.precio ?? 0,
+                        UnidadMedida = p.unidad_medida,
+                        Existencia = p.existencia,
+                        ExistenciaMin = p.existenciamin,
+                        ExistenciaMax = p.existenciamax,
+                        Estado = p.estado,
+                        RegistroProd = p.registro_prod,
+                        ConsCategoria = p.cons_categoria,
+                        TipoMascota = p.tipo_mascota
+                    }).ToList();
+            }
         }
 
         #region InicioSesion

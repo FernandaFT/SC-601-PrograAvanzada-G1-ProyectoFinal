@@ -130,5 +130,10 @@ namespace ProyectoFinalG1.Controllers
             return RedirectToAction("InicioSesion", "Home");
         }
         #endregion
+
+        public ActionResult SobreNosotros()
+        {
+            return View();
+        }
     }
 }

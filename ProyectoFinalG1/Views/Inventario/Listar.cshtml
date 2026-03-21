@@ -1,0 +1,39 @@
+﻿@model List<ProyectoFinalG1.Models.InventarioEncViewModel>
+
+@{
+    ViewBag.Title = "Inventarios";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Inventarios</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead >
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Observaciones</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ConsInventario</td>
+                    <td>@item.FecInventario.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Observaciones</td>
+                    <td>@item.EstadoInv</td>
+                    <td>
+                        <a href="@Url.Action("Detalle", "Inventario", new { id = item.ConsInventario })"
+                           class="btn btn-primary btn-sm">
+                            Modificar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

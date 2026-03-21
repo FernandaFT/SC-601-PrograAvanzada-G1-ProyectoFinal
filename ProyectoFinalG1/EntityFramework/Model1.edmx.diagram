@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7bd464fc18714433aeaf15d3b0fa6b54" Name="Diagram1">
+      <Diagram DiagramId="763c4a3d3a6540ce8b7d7cc89a369387" Name="Diagram1">
         <EntityTypeShape EntityType="WaggyDBModel.categoria" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyDBModel.inventario_det" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WaggyDBModel.inventario_enc" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />

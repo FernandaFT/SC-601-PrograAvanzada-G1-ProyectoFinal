@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WaggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WaggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="categoria">
           <Key>
             <PropertyRef Name="cons_categoria" />
@@ -183,6 +183,13 @@
         <Function Name="sp_AlternarEstadoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_AplicarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsInventario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CrearInventarioEnc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FecInventario" Type="date" Mode="In" />
+          <Parameter Name="Observaciones" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_CrearProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NOMBRE_PRODUCTO" Type="varchar" Mode="In" />
           <Parameter Name="DESCRIPCION_PRODUCTO" Type="varchar" Mode="In" />
@@ -224,11 +231,23 @@
           <Parameter Name="Direccion" Type="varchar" Mode="In" />
           <Parameter Name="ConsecutivoRol" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_EliminarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsInventario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GuardarInventarioDet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsInventario" Type="int" Mode="In" />
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+          <Parameter Name="CantidadInventario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_ListarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ObtenerInventarioDet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsInventario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ObtenerInventarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ObtenerProductoPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CONS_PRODUCTO" Type="int" Mode="In" />
         </Function>
@@ -277,8 +296,7 @@
             <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WaggyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -506,10 +524,17 @@
             <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
           </AssociationSet>
           <FunctionImport Name="sp_AlternarEstadoProducto">
-            <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
+          <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_AlternarEstadoUsuario">
-            <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AplicarInventario">
+          <Parameter Name="ConsInventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CrearInventarioEnc" ReturnType="Collection(Decimal)">
+            <Parameter Name="FecInventario" Mode="In" Type="DateTime" />
+            <Parameter Name="Observaciones" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CrearProducto">
             <Parameter Name="NOMBRE_PRODUCTO" Mode="In" Type="String" />
@@ -552,20 +577,32 @@
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="ConsecutivoRol" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_EliminarInventario">
+          <Parameter Name="ConsInventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GuardarInventarioDet">
+            <Parameter Name="ConsInventario" Mode="In" Type="Int32" />
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadInventario" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_IniciarSesion" ReturnType="Collection(WaggyDBModel.sp_IniciarSesion_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ListarProductos" ReturnType="Collection(WaggyDBModel.sp_ListarProductos_Result)" />
+          <FunctionImport Name="sp_ObtenerInventarioDet" ReturnType="Collection(WaggyDBModel.sp_ObtenerInventarioDet_Result)">
+          <Parameter Name="ConsInventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ObtenerInventarios" ReturnType="Collection(WaggyDBModel.sp_ObtenerInventarios_Result)" />
           <FunctionImport Name="sp_ObtenerProductoPorId" ReturnType="Collection(WaggyDBModel.sp_ObtenerProductoPorId_Result)">
-            <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
+          <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ObtenerProductosHomePorCategoria" ReturnType="Collection(WaggyDBModel.sp_ObtenerProductosHomePorCategoria_Result)">
             <Parameter Name="CONS_CATEGORIA" Mode="In" Type="Int32" />
             <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ObtenerUsuarioPorId" ReturnType="Collection(WaggyDBModel.sp_ObtenerUsuarioPorId_Result)">
-            <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_IniciarSesion_Result">
@@ -590,6 +627,21 @@
           <Property Type="Int32" Name="cons_categoria" Nullable="false" />
           <Property Type="String" Name="nombre_categoria" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="tipo_mascota" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_ObtenerInventarioDet_Result">
+          <Property Type="Int32" Name="cons_inventario_det" Nullable="false" />
+          <Property Type="Int32" Name="cons_inventario" Nullable="true" />
+          <Property Type="Int32" Name="cons_producto" Nullable="false" />
+          <Property Type="String" Name="nombre_producto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="imagen" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="cantidad_inventario" Nullable="false" />
+          <Property Type="Int32" Name="stock_actual" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_ObtenerInventarios_Result">
+          <Property Type="Int32" Name="cons_inventario" Nullable="false" />
+          <Property Type="DateTime" Name="fec_inventario" Nullable="false" />
+          <Property Type="String" Name="observaciones" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="estado_inv" Nullable="false" MaxLength="1" />
         </ComplexType>
         <ComplexType Name="sp_ObtenerProductoPorId_Result">
           <Property Type="Int32" Name="cons_producto" Nullable="false" />
@@ -734,10 +786,14 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_AlternarEstadoProducto" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoProducto" />
           <FunctionImportMapping FunctionImportName="sp_AlternarEstadoUsuario" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_AplicarInventario" FunctionName="WaggyDBModel.Store.sp_AplicarInventario" />
+          <FunctionImportMapping FunctionImportName="sp_CrearInventarioEnc" FunctionName="WaggyDBModel.Store.sp_CrearInventarioEnc" />
           <FunctionImportMapping FunctionImportName="sp_CrearProducto" FunctionName="WaggyDBModel.Store.sp_CrearProducto" />
           <FunctionImportMapping FunctionImportName="sp_CrearUsuario" FunctionName="WaggyDBModel.Store.sp_CrearUsuario" />
           <FunctionImportMapping FunctionImportName="sp_EditarProducto" FunctionName="WaggyDBModel.Store.sp_EditarProducto" />
           <FunctionImportMapping FunctionImportName="sp_EditarUsuario" FunctionName="WaggyDBModel.Store.sp_EditarUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_EliminarInventario" FunctionName="WaggyDBModel.Store.sp_EliminarInventario" />
+          <FunctionImportMapping FunctionImportName="sp_GuardarInventarioDet" FunctionName="WaggyDBModel.Store.sp_GuardarInventarioDet" />
           <FunctionImportMapping FunctionImportName="sp_IniciarSesion" FunctionName="WaggyDBModel.Store.sp_IniciarSesion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_IniciarSesion_Result">
@@ -766,6 +822,29 @@
                 <ScalarProperty Name="cons_categoria" ColumnName="cons_categoria" />
                 <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
                 <ScalarProperty Name="tipo_mascota" ColumnName="tipo_mascota" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ObtenerInventarioDet" FunctionName="WaggyDBModel.Store.sp_ObtenerInventarioDet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.sp_ObtenerInventarioDet_Result">
+                <ScalarProperty Name="cons_inventario_det" ColumnName="cons_inventario_det" />
+                <ScalarProperty Name="cons_inventario" ColumnName="cons_inventario" />
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="cantidad_inventario" ColumnName="cantidad_inventario" />
+                <ScalarProperty Name="stock_actual" ColumnName="stock_actual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ObtenerInventarios" FunctionName="WaggyDBModel.Store.sp_ObtenerInventarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.sp_ObtenerInventarios_Result">
+                <ScalarProperty Name="cons_inventario" ColumnName="cons_inventario" />
+                <ScalarProperty Name="fec_inventario" ColumnName="fec_inventario" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="estado_inv" ColumnName="estado_inv" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

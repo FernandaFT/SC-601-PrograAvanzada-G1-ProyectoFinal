@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Crear Inventario";
+}
+
+<div class="container d-flex justify-content-center mt-5 mb-5">
+    <div class="card shadow p-4">
+
+        <h2 style="text-align:center; margin-bottom:20px;">
+            Crear Inventario
+        </h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post" id="FormInventario">
+
+            <div style="margin-bottom: 15px;">
+                <label>Fecha</label><br />
+                <input type="date" name="fecha" id="fecha" class="form-control" required />
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label>Observaciones</label><br />
+                <input type="text" name="observaciones" id="observaciones" class="form-control no-transform" />
+            </div>
+
+            <div style="text-align:center;">
+                <button type="submit" class="btn btn-primary">
+                    Crear Inventario
+                </button>
+            </div>
+
+        </form>
+
+        <div style="text-align:center; margin-top:15px;">
+            <a href="/Inventario/Listar" class="btn btn-secondary">
+                Modificar Inventario
+            </a>
+        </div>
+        </div>
+    </div>
+    @*<script src="~/Template/js/funciones/crearInventario.js"></script>*@

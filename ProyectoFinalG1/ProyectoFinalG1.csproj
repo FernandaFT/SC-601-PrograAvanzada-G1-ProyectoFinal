@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="EntityFramework\categoria.cs">
@@ -168,6 +169,12 @@
     <Compile Include="EntityFramework\sp_ListarProductos_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\sp_ObtenerInventarioDet_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\sp_ObtenerInventarios_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\sp_ObtenerProductoPorId_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -191,6 +198,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\InventarioDetViewModel.cs" />
+    <Compile Include="Models\InventarioEncViewModel.cs" />
     <Compile Include="Models\ProductoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,13 +270,13 @@
     <Content Include="Template\images\reviewer-2.jpg" />
     <Content Include="Template\images\reviewer-3.jpg" />
     <Content Include="Template\js\bootstrap.min.js" />
+    <Content Include="Template\js\funciones\crearInventario.js" />
     <Content Include="Template\js\funciones\inicioSesion.js" />
     <Content Include="Template\js\funciones\registro.js" />
     <Content Include="Template\js\jquery-1.11.0.min.js" />
     <Content Include="Template\js\modernizr.js" />
     <Content Include="Template\js\plugins.js" />
     <Content Include="Template\js\purecounter.min.js" />
-    <Content Include="Template\js\registro.js" />
     <Content Include="Template\js\replaceme.min.js" />
     <Content Include="Template\js\swiper.min.js" />
     <Content Include="Web.config" />
@@ -307,6 +316,9 @@
     <Content Include="Views\Producto\Categoria.cshtml" />
     <Content Include="Views\Home\SobreNosotros.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Inventario\Crear.cshtml" />
+    <Content Include="Views\Inventario\Detalle.cshtml" />
+    <Content Include="Views\Inventario\Listar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

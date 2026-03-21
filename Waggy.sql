@@ -2,11 +2,10 @@ USE [master]
 GO
 
 CREATE DATABASE [WaggyDB]
-
-GO
-
+ 
 USE [WaggyDB]
 GO
+
 CREATE TABLE [dbo].[categoria](
 	[cons_categoria] [int] IDENTITY(1,1) NOT NULL,
 	[nombre_categoria] [varchar](50) NOT NULL,
@@ -128,6 +127,52 @@ INSERT [dbo].[categoria] ([cons_categoria], [nombre_categoria], [estado]) VALUES
 GO
 SET IDENTITY_INSERT [dbo].[categoria] OFF
 GO
+SET IDENTITY_INSERT [dbo].[inventario_det] ON 
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (37, 18, 11, 13)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (38, 2, 11, 15)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (39, 10, 11, 20)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (40, 11, 11, 10)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (41, 12, 11, 14)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (42, 9, 11, 8)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (43, 7, 11, 6)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (44, 17, 11, 4)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (45, 14, 11, 10)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (46, 13, 11, 9)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (47, 5, 11, 8)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (48, 4, 11, 7)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (49, 1, 11, 10)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (50, 6, 11, 25)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (51, 15, 11, 3)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (52, 3, 11, 20)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (53, 16, 11, 5)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (54, 8, 11, 5)
+GO
+SET IDENTITY_INSERT [dbo].[inventario_det] OFF
+GO
+SET IDENTITY_INSERT [dbo].[inventario_enc] ON 
+GO
+INSERT [dbo].[inventario_enc] ([cons_inventario], [fec_inventario], [observaciones], [estado_inv]) VALUES (11, CAST(N'2026-03-31' AS Date), N'Inventario Marzo', N'a')
+GO
+SET IDENTITY_INSERT [dbo].[inventario_enc] OFF
+GO
 SET IDENTITY_INSERT [dbo].[productos] ON 
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (1, N'ONC Care Alimento Húmedo para Perros', N'Hill''s Prescription Diet, Nutrición clínica diseñada para nutrir y ayudar a los perros diagnosticados con cáncer.
@@ -147,7 +192,7 @@ Esta fórmula ofrece, a través de ', N'https://purina.co.cr/sites/default/files
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (7, N'Cama Darth Vader', N'Esta cama para mascota inspirada en STAR WARS© es especial para los amantes de la saga galáctica mide 50 cm de largo por 35 de ancho es ideal para gat', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/875499_1.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(10450.00 AS Decimal(10, 2)), N'u', 6, 2, 15, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (8, N'Transportadora Zoonee Eco 5', N'La transportadora ZOONEE es perfecta para transportar mascotas mide 60 cm ancho x 61.5 cm alto x 81 cm fondo. Con su diseño cómodo y seguro, tu mascot', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889468.jpg?version=17/03/2026', CAST(114000.00 AS Decimal(10, 2)), N'u', 3, 2, 17, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (8, N'Transportadora Zoonee Eco 5', N'La transportadora ZOONEE es perfecta para transportar mascotas mide 60 cm ancho x 61.5 cm alto x 81 cm fondo. Con su diseño cómodo y seguro, tu mascot', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889468.jpg?version=17/03/2026', CAST(114000.00 AS Decimal(10, 2)), N'u', 5, 2, 17, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (9, N'Bebedero Automático 108 Oz Para Gato Petmate', N'El bebedero automático de 108 oz para gato Petmate es la solución perfecta para mantener a tu gato hidratado. Este bebedero cuenta con un diseño innov', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889741.jpg?version=17/03/2026', CAST(49000.00 AS Decimal(10, 2)), N'u', 8, 2, 20, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
 GO
@@ -193,7 +238,7 @@ SET IDENTITY_INSERT [dbo].[usuario] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_CORREO]    Script Date: 17/3/2026 04:26:11 ******/
+/****** Object:  Index [UQ_CORREO]    Script Date: 20/3/2026 10:29:42 ******/
 ALTER TABLE [dbo].[usuario] ADD  CONSTRAINT [UQ_CORREO] UNIQUE NONCLUSTERED 
 (
 	[correoElectronico] ASC
@@ -290,6 +335,40 @@ BEGIN
     UPDATE usuario
     SET estado = CASE WHEN estado = 1 THEN 0 ELSE 1 END
     WHERE consecutivo = @Consecutivo;
+END
+
+GO
+CREATE PROCEDURE [dbo].[sp_AplicarInventario]
+    @ConsInventario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE p
+    SET p.existencia = id.cantidad_inventario
+    FROM productos p
+    INNER JOIN inventario_det id
+        ON p.cons_producto = id.consec_producto
+    WHERE id.cons_inventario = @ConsInventario;
+
+    UPDATE inventario_enc
+    SET estado_inv = 'a'
+    WHERE cons_inventario = @ConsInventario;
+END
+GO
+
+GO
+CREATE PROCEDURE [dbo].[sp_CrearInventarioEnc]
+    @FecInventario DATE,
+    @Observaciones VARCHAR(150)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO inventario_enc (fec_inventario, observaciones, estado_inv)
+    VALUES (@FecInventario, @Observaciones, 'r');
+
+    SELECT SCOPE_IDENTITY() AS ConsInventario;
 END
 
 GO
@@ -466,7 +545,6 @@ BEGIN
     WHERE cons_producto = @CONS_PRODUCTO
 END
 
-SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [dbo].[sp_EditarUsuario]
@@ -488,6 +566,58 @@ BEGIN
         direccion = @Direccion,
         consecutivoRol = @ConsecutivoRol
     WHERE consecutivo = @Consecutivo;
+END
+
+GO
+CREATE PROCEDURE [dbo].[sp_EliminarInventario]
+    @ConsInventario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM inventario_det
+    WHERE cons_inventario = @ConsInventario;
+
+    DELETE FROM inventario_enc
+    WHERE cons_inventario = @ConsInventario;
+END
+
+GO
+CREATE PROCEDURE [dbo].[sp_GuardarInventarioDet]
+    @ConsInventario INT,
+    @ConsProducto INT,
+    @CantidadInventario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF EXISTS (
+        SELECT 1
+        FROM inventario_det
+        WHERE cons_inventario = @ConsInventario
+          AND consec_producto = @ConsProducto
+    )
+    BEGIN
+        UPDATE inventario_det
+        SET cantidad_inventario = @CantidadInventario
+        WHERE cons_inventario = @ConsInventario
+          AND consec_producto = @ConsProducto;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO inventario_det
+        (
+            consec_producto,
+            cons_inventario,
+            cantidad_inventario
+        )
+        VALUES
+        (
+            @ConsProducto,
+            @ConsInventario,
+            @CantidadInventario
+        );
+    END
 END
 
 GO
@@ -537,6 +667,44 @@ BEGIN
     INNER JOIN categoria c
         ON p.cons_categoria = c.cons_categoria
     ORDER BY p.cons_producto DESC
+END
+
+GO
+CREATE PROCEDURE [dbo].[sp_ObtenerInventarioDet]
+    @ConsInventario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        CAST(ISNULL(id.cons_inventario_det, 0) AS INT) AS cons_inventario_det,
+        CAST(@ConsInventario AS INT) AS cons_inventario,
+        CAST(p.cons_producto AS INT) AS cons_producto,
+        p.nombre_producto,
+        p.imagen,
+        CAST(ISNULL(id.cantidad_inventario, 0) AS INT) AS cantidad_inventario,
+        CAST(p.existencia AS INT) AS stock_actual
+    FROM productos p
+    LEFT JOIN inventario_det id
+        ON p.cons_producto = id.consec_producto
+       AND id.cons_inventario = @ConsInventario
+    WHERE p.estado = 1
+    ORDER BY p.nombre_producto;
+END
+
+GO
+CREATE PROCEDURE [dbo].[sp_ObtenerInventarios]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        cons_inventario,
+        fec_inventario,
+        observaciones,
+        estado_inv
+    FROM inventario_enc
+    ORDER BY cons_inventario DESC;
 END
 
 GO

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ProyectoFinalG1.Controllers
 {
+    #region ConsultaVentas
     public class VentasController : Controller
     {
         [HttpGet]
@@ -121,3 +122,4 @@ namespace ProyectoFinalG1.Controllers
         }
     }
 }
+    #endregion

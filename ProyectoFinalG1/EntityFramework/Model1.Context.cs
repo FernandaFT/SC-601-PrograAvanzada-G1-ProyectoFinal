@@ -54,6 +54,28 @@ namespace ProyectoFinalG1.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AlternarEstadoUsuario", consecutivoParameter);
         }
     
+        public virtual int sp_AplicarInventario(Nullable<int> consInventario)
+        {
+            var consInventarioParameter = consInventario.HasValue ?
+                new ObjectParameter("ConsInventario", consInventario) :
+                new ObjectParameter("ConsInventario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AplicarInventario", consInventarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_CrearInventarioEnc(Nullable<System.DateTime> fecInventario, string observaciones)
+        {
+            var fecInventarioParameter = fecInventario.HasValue ?
+                new ObjectParameter("FecInventario", fecInventario) :
+                new ObjectParameter("FecInventario", typeof(System.DateTime));
+    
+            var observacionesParameter = observaciones != null ?
+                new ObjectParameter("Observaciones", observaciones) :
+                new ObjectParameter("Observaciones", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_CrearInventarioEnc", fecInventarioParameter, observacionesParameter);
+        }
+    
         public virtual int sp_CrearProducto(string nOMBRE_PRODUCTO, string dESCRIPCION_PRODUCTO, string iMAGEN, Nullable<decimal> pRECIO, string uNIDAD_MEDIDA, Nullable<int> eXISTENCIA, Nullable<int> eXISTENCIAMIN, Nullable<int> eXISTENCIAMAX, Nullable<int> cONS_CATEGORIA, string tIPO_MASCOTA)
         {
             var nOMBRE_PRODUCTOParameter = nOMBRE_PRODUCTO != null ?
@@ -206,6 +228,32 @@ namespace ProyectoFinalG1.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EditarUsuario", consecutivoParameter, nombreParameter, telefonoParameter, direccionParameter, consecutivoRolParameter);
         }
     
+        public virtual int sp_EliminarInventario(Nullable<int> consInventario)
+        {
+            var consInventarioParameter = consInventario.HasValue ?
+                new ObjectParameter("ConsInventario", consInventario) :
+                new ObjectParameter("ConsInventario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EliminarInventario", consInventarioParameter);
+        }
+    
+        public virtual int sp_GuardarInventarioDet(Nullable<int> consInventario, Nullable<int> consProducto, Nullable<int> cantidadInventario)
+        {
+            var consInventarioParameter = consInventario.HasValue ?
+                new ObjectParameter("ConsInventario", consInventario) :
+                new ObjectParameter("ConsInventario", typeof(int));
+    
+            var consProductoParameter = consProducto.HasValue ?
+                new ObjectParameter("ConsProducto", consProducto) :
+                new ObjectParameter("ConsProducto", typeof(int));
+    
+            var cantidadInventarioParameter = cantidadInventario.HasValue ?
+                new ObjectParameter("CantidadInventario", cantidadInventario) :
+                new ObjectParameter("CantidadInventario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GuardarInventarioDet", consInventarioParameter, consProductoParameter, cantidadInventarioParameter);
+        }
+    
         public virtual ObjectResult<sp_IniciarSesion_Result> sp_IniciarSesion(string correo, string password)
         {
             var correoParameter = correo != null ?
@@ -222,6 +270,20 @@ namespace ProyectoFinalG1.EntityFramework
         public virtual ObjectResult<sp_ListarProductos_Result> sp_ListarProductos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListarProductos_Result>("sp_ListarProductos");
+        }
+    
+        public virtual ObjectResult<sp_ObtenerInventarioDet_Result> sp_ObtenerInventarioDet(Nullable<int> consInventario)
+        {
+            var consInventarioParameter = consInventario.HasValue ?
+                new ObjectParameter("ConsInventario", consInventario) :
+                new ObjectParameter("ConsInventario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerInventarioDet_Result>("sp_ObtenerInventarioDet", consInventarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_ObtenerInventarios_Result> sp_ObtenerInventarios()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerInventarios_Result>("sp_ObtenerInventarios");
         }
     
         public virtual ObjectResult<sp_ObtenerProductoPorId_Result> sp_ObtenerProductoPorId(Nullable<int> cONS_PRODUCTO)

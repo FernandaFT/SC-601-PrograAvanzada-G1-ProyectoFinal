@@ -10,22 +10,12 @@
 namespace ProyectoFinalG1.EntityFramework
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class inventario_enc
+    public partial class sp_ObtenerInventarios_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public inventario_enc()
-        {
-            this.inventario_det = new HashSet<inventario_det>();
-        }
-    
         public int cons_inventario { get; set; }
         public System.DateTime fec_inventario { get; set; }
         public string observaciones { get; set; }
         public string estado_inv { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inventario_det> inventario_det { get; set; }
     }
 }

@@ -11,22 +11,39 @@ namespace ProyectoFinalG1.Controllers
     public class UsuarioController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
+            int registrosPorPagina = 5;
+
             using (var context = new WaggyDBEntities())
             {
-                var datos = (from u in context.usuario
-                             join r in context.rol on u.consecutivoRol equals r.consecutivo
-                             select new UsuarioModel
-                             {
-                                 Consecutivo = u.consecutivo,
-                                 Identificacion = u.identificacion,
-                                 Nombre = u.nombre,
-                                 CorreoElectronico = u.correoElectronico,
-                                 Telefono = u.telefono,
-                                 Descripcion = r.descripcion,
-                                 Estado = u.estado
-                             }).ToList();
+                var consulta = from u in context.usuario
+                               join r in context.rol on u.consecutivoRol equals r.consecutivo
+                               select new UsuarioModel
+                               {
+                                   Consecutivo = u.consecutivo,
+                                   Identificacion = u.identificacion,
+                                   Nombre = u.nombre,
+                                   CorreoElectronico = u.correoElectronico,
+                                   Telefono = u.telefono,
+                                   Descripcion = r.descripcion,
+                                   Estado = u.estado
+                               };
+
+                var totalRegistros = consulta.Count();
+                var totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
+
+                // Validar que la página esté en el rango correcto
+                pagina = Math.Max(1, Math.Min(pagina, totalPaginas == 0 ? 1 : totalPaginas));
+
+                var datos = consulta
+                    .OrderBy(u => u.Consecutivo)
+                    .Skip((pagina - 1) * registrosPorPagina)
+                    .Take(registrosPorPagina)
+                    .ToList();
+
+                ViewBag.PaginaActual = pagina;
+                ViewBag.TotalPaginas = totalPaginas;
 
                 return View(datos);
             }

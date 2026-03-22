@@ -1,0 +1,88 @@
+﻿@model List<ProyectoFinalG1.Models.CarritoItemModel>
+
+@{
+    ViewBag.Title = "Carrito de Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Carrito de Compras</h2>
+
+    @if (TempData["MensajeCarrito"] != null)
+    {
+        <div class="alert alert-success text-center fw-bold">
+            @TempData["MensajeCarrito"]
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning">
+            El carrito está vacío.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Imagen</th>
+                        <th>Precio</th>
+                        <th style="width: 180px;">Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NombreProducto</td>
+                            <td>
+                                <img src="@item.Imagen" width="80" height="80" style="object-fit:cover;" />
+                            </td>
+                            <td>₡ @item.Precio.ToString("N2")</td>
+                            <td>
+                                @using (Html.BeginForm("Actualizar", "Carrito", FormMethod.Post, new { @class = "m-0 d-flex justify-content-center" }))
+                                {
+                                    <input type="hidden" name="idProducto" value="@item.ConsecutivoProducto" />
+                                    <input type="number"
+                                           name="cantidad"
+                                           value="@item.Cantidad"
+                                           min="0"
+                                           class="form-control text-center"
+                                           style="width: 90px;"
+                                           onchange="this.form.submit();" />
+                                }
+                            </td>
+                            <td>₡ @item.Subtotal.ToString("N2")</td>
+                            <td>
+                                <a href="@Url.Action("Eliminar", "Carrito", new { idProducto = item.ConsecutivoProducto })"
+                                   class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <h5>Subtotal: ₡ @(((decimal)ViewBag.Subtotal).ToString("N2"))</h5>
+            <h5>Impuesto (13%): ₡ @(((decimal)ViewBag.Impuesto).ToString("N2"))</h5>
+            <h4>Total: ₡ @(((decimal)ViewBag.Total).ToString("N2"))</h4>
+        </div>
+
+        <div class="mt-4">
+            @using (Html.BeginForm("ConfirmarCompra", "Carrito", FormMethod.Post))
+            {
+                <button type="submit" class="btn btn-success btn-lg">
+                    Confirmar Compra
+                </button>
+            }
+        </div>
+    }
+</div>

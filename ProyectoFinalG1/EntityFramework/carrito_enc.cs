@@ -12,19 +12,21 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class categoria
+    public partial class carrito_enc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public categoria()
+        public carrito_enc()
         {
-            this.productos = new HashSet<productos>();
+            this.carrito_det = new HashSet<carrito_det>();
         }
     
-        public int cons_categoria { get; set; }
-        public string nombre_categoria { get; set; }
+        public int cons_carrito { get; set; }
+        public int consecutivo { get; set; }
+        public System.DateTime fec_registro { get; set; }
         public bool estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<productos> productos { get; set; }
+        public virtual ICollection<carrito_det> carrito_det { get; set; }
+        public virtual usuario usuario { get; set; }
     }
 }

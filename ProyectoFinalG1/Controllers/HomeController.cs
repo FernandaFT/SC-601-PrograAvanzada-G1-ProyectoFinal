@@ -3,7 +3,12 @@ using ProyectoFinalG1.Filters;
 using ProyectoFinalG1.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -67,11 +72,10 @@ namespace ProyectoFinalG1.Controllers
 
                 if (result == null)
                 {
-                    // Verificar si el usuario existe pero está inactivo
-                    var usuario = context.usuario
-                                         .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
+                    var usuarioInactivo = context.usuario
+                                                 .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
 
-                    if (usuario != null && usuario.estado == false)
+                    if (usuarioInactivo != null && usuarioInactivo.estado == false)
                     {
                         ViewBag.Mensaje = "Su usuario está inactivo. Comuníquese con el administrador.";
                     }
@@ -83,29 +87,50 @@ namespace ProyectoFinalG1.Controllers
                     return View(modelo);
                 }
 
+                var usuario = context.usuario
+                                     .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
+
+                if (usuario != null)
+                {
+                    Session["Consecutivo"] = usuario.consecutivo;
+
+                    var datos = context.sp_ConsultarCarritoUsuario(usuario.consecutivo).ToList();
+
+                    var carrito = new List<CarritoItemModel>();
+
+                    foreach (var p in datos)
+                    {
+                        var item = new CarritoItemModel();
+
+                        item.ConsecutivoProducto = p.cons_producto;
+                        item.NombreProducto = p.nombre_producto;
+                        item.Imagen = p.imagen;
+
+                        if (p.precio == null)
+                        {
+                            item.Precio = 0;
+                        }
+                        else
+                        {
+                            item.Precio = p.precio.Value;
+                        }
+
+                        item.Cantidad = p.cantidad;
+                        item.Existencia = p.existencia;
+
+                        carrito.Add(item);
+                    }
+
+                    Session["Carrito"] = carrito;
+                }
 
                 Session["Nombre"] = result.nombre;
                 Session["Rol"] = result.rol;
 
-                // Si autenticó correctamente
                 return RedirectToAction("Index", "Home");
             }
         }
 
-        #endregion
-
-        #region Registrar Usuario
-        [HttpGet]
-        public ActionResult Registro()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Registro(UsuarioModel model)
-        {
-            return View();
-        }
         #endregion
 
         #region Recuperar Contraseña
@@ -117,8 +142,31 @@ namespace ProyectoFinalG1.Controllers
         [HttpPost]
         public ActionResult RecuperarContrasenna(UsuarioModel modelo)
         {
-            return View();
+            using (var context = new WaggyDBEntities())
+            {
+                var result = context.sp_ValidarCorreo(modelo.CorreoElectronico).FirstOrDefault();
+                if (result == null)
+                {
+                    ViewBag.Mensaje = "Su información no se validó correctamente.";
+                }
+                //Se generea la nueva contraseña
+                var nuevaContrasenna = GenerarContrasena();
+                //Se actualiza la contraseña en Base de Datos
+                var actualizacion = context.sp_ActualizarContrasenna(nuevaContrasenna, result.consecutivo);
+                if (actualizacion <= 0)
+                {
+                    ViewBag.Mensaje = "Su información no se actualizó correctamente.";
+                    return View();
+                }
+                //Se envía un correo electrónico al usuario con la nueva contraseña
+                EnviarCorreo(modelo.CorreoElectronico, "Recuperación de Contraseña", nuevaContrasenna);
+
+                return RedirectToAction("InicioSesion", "Home");
+
+
+            }
         }
+
         #endregion
 
         #region Cerrar Sesión
@@ -130,6 +178,50 @@ namespace ProyectoFinalG1.Controllers
             return RedirectToAction("InicioSesion", "Home");
         }
         #endregion
+
+
+        private string GenerarContrasena()
+        {
+            int longitud = 8;
+            const string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder resultado = new StringBuilder(longitud);
+
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                byte[] bytes = new byte[1];
+                for (int i = 0; i < longitud; i++)
+                {
+                    rng.GetBytes(bytes);
+                    int index = bytes[0] % letras.Length;
+                    resultado.Append(letras[index]);
+                }
+            }
+
+            return resultado.ToString();
+        }
+
+        private void EnviarCorreo(string destinatario, string asunto, string cuerpo)
+        {
+            var cuentaCorreo = ConfigurationManager.AppSettings["cuentaCorreo"];
+            var contrasennaCorreo = ConfigurationManager.AppSettings["contrasennaCorreo"];
+
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(cuentaCorreo);
+                mail.To.Add(destinatario);
+                mail.Subject = asunto;
+                mail.Body = cuerpo;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient("smtp.office365.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential(cuentaCorreo, contrasennaCorreo);
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
+        }
+
 
         public ActionResult SobreNosotros()
         {

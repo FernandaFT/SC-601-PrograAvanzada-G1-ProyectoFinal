@@ -43,7 +43,7 @@
                                 <h4 class="text-primary mt-2">₡ @p.Precio.ToString("N2")</h4>
 
                                 <div class="mt-auto pt-3">
-                                    <a href="#" class="btn btn-outline-dark w-100 rounded-3">
+                                    <a href="@Url.Action("Agregar", "Carrito", new { idProducto = p.ConsecutivoProducto, cantidad = 1 })" class="btn btn-outline-dark w-100 rounded-3">
                                         Agregar al carrito
                                     </a>
                                 </div>

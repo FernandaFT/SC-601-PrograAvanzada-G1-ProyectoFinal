@@ -19,8 +19,9 @@
                     @using (Html.BeginForm("RecuperarContrasenna", "Home"))
                     {
                         <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Identificacion, new { @placeholder = "Identificación", @class = "form-control" })
-                            <label>Identificación</label>
+                            @Html.TextBoxFor(m => m.CorreoElectronico,
+                                     new { @class = "form-control no-transform", placeholder = "Correo Electrónico" })
+                            <label>Correo Electrónico</label>
                         </div>
                         <button type="submit" class="w-100 btn btn-primary btn-lg rounded-pill">
                             Recuperar Acceso
@@ -35,3 +36,4 @@
         </div>
     </div>
 </section>
+<script src="~/Template/js/funciones/recuperarContrasenna.js"></script>

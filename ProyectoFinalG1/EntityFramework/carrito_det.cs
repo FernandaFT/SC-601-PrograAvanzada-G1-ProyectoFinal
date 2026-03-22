@@ -12,14 +12,14 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class inventario_det
+    public partial class carrito_det
     {
-        public int cons_inventario_det { get; set; }
-        public int consec_producto { get; set; }
-        public int cons_inventario { get; set; }
-        public int cantidad_inventario { get; set; }
+        public int cons_carrito_det { get; set; }
+        public int cons_carrito { get; set; }
+        public int cons_producto { get; set; }
+        public int cantidad { get; set; }
     
-        public virtual inventario_enc inventario_enc { get; set; }
+        public virtual carrito_enc carrito_enc { get; set; }
         public virtual productos productos { get; set; }
     }
 }

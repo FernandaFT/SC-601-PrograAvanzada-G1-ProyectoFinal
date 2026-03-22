@@ -11,20 +11,14 @@ namespace ProyectoFinalG1.EntityFramework
 {
     using System;
     
-    public partial class sp_ObtenerProductosHomePorCategoria_Result
+    public partial class sp_ObtenerInventarioDet_Result
     {
-        public int cons_producto { get; set; }
+        public Nullable<int> cons_inventario_det { get; set; }
+        public Nullable<int> cons_inventario { get; set; }
+        public Nullable<int> cons_producto { get; set; }
         public string nombre_producto { get; set; }
-        public string descripcion_producto { get; set; }
         public string imagen { get; set; }
-        public Nullable<decimal> precio { get; set; }
-        public string unidad_medida { get; set; }
-        public int existencia { get; set; }
-        public int existenciamin { get; set; }
-        public int existenciamax { get; set; }
-        public bool estado { get; set; }
-        public System.DateTime registro_prod { get; set; }
-        public int cons_categoria { get; set; }
-        public string tipo_mascota { get; set; }
+        public Nullable<int> cantidad_inventario { get; set; }
+        public Nullable<int> stock_actual { get; set; }
     }
 }

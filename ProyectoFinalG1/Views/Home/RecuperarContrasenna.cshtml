@@ -11,27 +11,39 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-6">
 
-                <div class="text-box mt-5 mb-5 text-center">
-                    <h1 class="mb-4 banner-title display-1 fw-normal text-primary">Recuperar Acceso</h1>
-                    <p class="mb-4 blog-paragraph fs-6">
-                        Te enviaremos un correo electrónico
-                    </p>
-                    @using (Html.BeginForm("RecuperarContrasenna", "Home"))
-                    {
-                        <div class="mb-4 form-floating">
-                            @Html.TextBoxFor(m => m.Identificacion, new { @placeholder = "Identificación", @class = "form-control" })
-                            <label>Identificación</label>
-                        </div>
-                        <button type="submit" class="w-100 btn btn-primary btn-lg rounded-pill">
-                            Recuperar Acceso
-                        </button>
-                    }
-                    <p class="mb-4 blog-paragraph fs-6">
-                        <br />¿Ya tienes una cuenta?
-                        <a class="blue" href="@Url.Action("InicioSesion", "Home")">Inicia sesión</a>
-                    </p>
-                </div>
+				<div class="text-box mt-5 mb-5 text-center">
+
+					<h1 class="mb-4 banner-title display-1 fw-normal text-primary">
+						Recuperar Acceso
+					</h1>
+					<p class="mb-4 blog-paragraph fs-6">
+						Te enviaremos un correo electrónico
+					</p>
+					@if (ViewBag.Mensaje != null)
+					{
+						<div class="alert alert-danger">
+							@ViewBag.Mensaje
+						</div>
+					}
+					@using (Html.BeginForm("RecuperarContrasenna", "Home", FormMethod.Post, new { @id = "FormRecuperarContrasenna" }))
+					{
+					<div class="mb-4 form-floating">
+						@Html.TextBoxFor(m => m.CorreoElectronico,
+								 new { @class = "form-control no-transform", placeholder = "Correo Electrónico" })
+						<label>Correo Electrónico</label>
+					</div>
+
+					<button type="submit" class="w-100 btn btn-primary btn-lg rounded-pill">
+						Recuperar Acceso
+					</button>
+					}
+					<p class="mb-4 blog-paragraph fs-6">
+						<br />¿Ya tienes una cuenta?
+						<a class="blue" href="@Url.Action("InicioSesion", "Home")">Inicia sesión</a>
+					</p>
+				</div>
             </div>
         </div>
     </div>
 </section>
+<script src="~/Template/js/funciones/recuperarContrasenna.js"></script>

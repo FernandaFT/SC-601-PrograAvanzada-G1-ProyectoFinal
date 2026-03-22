@@ -1,11 +1,17 @@
-﻿using ProyectoFinalG1.EntityFramework;
-using ProyectoFinalG1.Filters;
-using ProyectoFinalG1.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
+using System.Net;
+using System.Net.Mail;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoFinalG1.EntityFramework;
+using ProyectoFinalG1.Filters;
+using ProyectoFinalG1.Models;
 
 namespace ProyectoFinalG1.Controllers
 {
@@ -111,14 +117,36 @@ namespace ProyectoFinalG1.Controllers
         #region Recuperar Contraseña
         [HttpGet]
         public ActionResult RecuperarContrasenna()
-        {
-            return View();
-        }
-        [HttpPost]
+		{
+			return View();
+		}
+		[HttpPost]
         public ActionResult RecuperarContrasenna(UsuarioModel modelo)
         {
-            return View();
-        }
+			using (var context = new WaggyDBEntities())
+			{
+				var result = context.sp_ValidarCorreo(modelo.CorreoElectronico).FirstOrDefault();
+				if (result == null)
+				{
+					ViewBag.Mensaje = "Su información no se validó correctamente.";
+				}
+                //Se generea la nueva contraseña
+                var nuevaContrasenna = GenerarContrasena();
+				//Se actualiza la contraseña en Base de Datos
+				var actualizacion = context.sp_ActualizarContrasenna(nuevaContrasenna, result.consecutivo);
+				if (actualizacion <= 0)
+				{
+					ViewBag.Mensaje = "Su información no se actualizó correctamente.";
+					return View();
+				}
+				//Se envía un correo electrónico al usuario con la nueva contraseña
+				EnviarCorreo(modelo.CorreoElectronico,"Recuperación de Contraseña",nuevaContrasenna);
+
+				return RedirectToAction("InicioSesion", "Home");
+
+
+			}
+		}
         #endregion
 
         #region Cerrar Sesión
@@ -129,6 +157,50 @@ namespace ProyectoFinalG1.Controllers
             Session.Clear();
             return RedirectToAction("InicioSesion", "Home");
         }
-        #endregion
-    }
+		#endregion
+
+		
+		private string GenerarContrasena()
+		{
+            int longitud = 8;
+			const string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+			StringBuilder resultado = new StringBuilder(longitud);
+
+			using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+			{
+				byte[] bytes = new byte[1];
+				for (int i = 0; i < longitud; i++)
+				{
+					rng.GetBytes(bytes);
+					int index = bytes[0] % letras.Length;
+					resultado.Append(letras[index]);
+				}
+			}
+
+			return resultado.ToString();
+		}
+
+		private void EnviarCorreo(string destinatario, string asunto, string cuerpo)
+		{
+			var cuentaCorreo = ConfigurationManager.AppSettings["cuentaCorreo"];
+			var contrasennaCorreo = ConfigurationManager.AppSettings["contrasennaCorreo"];
+
+			using (MailMessage mail = new MailMessage())
+			{
+				mail.From = new MailAddress(cuentaCorreo);
+				mail.To.Add(destinatario);
+				mail.Subject = asunto;
+				mail.Body = cuerpo;
+				mail.IsBodyHtml = true; 
+
+				using (SmtpClient smtp = new SmtpClient("smtp.office365.com", 587))
+				{
+					smtp.Credentials = new NetworkCredential(cuentaCorreo, contrasennaCorreo);
+					smtp.EnableSsl = true; 
+					smtp.Send(mail);
+				}
+			}
+		}
+
+	}
 }

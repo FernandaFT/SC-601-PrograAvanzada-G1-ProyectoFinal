@@ -12,29 +12,21 @@ namespace ProyectoFinalG1.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class usuario
+    public partial class carrito_enc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public usuario()
+        public carrito_enc()
         {
-            this.carrito_enc = new HashSet<carrito_enc>();
-            this.ventas_clientes_enc = new HashSet<ventas_clientes_enc>();
+            this.carrito_det = new HashSet<carrito_det>();
         }
     
+        public int cons_carrito { get; set; }
         public int consecutivo { get; set; }
-        public string identificacion { get; set; }
-        public string nombre { get; set; }
-        public string correoElectronico { get; set; }
-        public string contrasenna { get; set; }
+        public System.DateTime fec_registro { get; set; }
         public bool estado { get; set; }
-        public string telefono { get; set; }
-        public string direccion { get; set; }
-        public int consecutivoRol { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<carrito_enc> carrito_enc { get; set; }
-        public virtual rol rol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ventas_clientes_enc> ventas_clientes_enc { get; set; }
+        public virtual ICollection<carrito_det> carrito_det { get; set; }
+        public virtual usuario usuario { get; set; }
     }
 }

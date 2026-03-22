@@ -17,6 +17,7 @@ namespace ProyectoFinalG1.EntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public productos()
         {
+            this.carrito_det = new HashSet<carrito_det>();
             this.inventario_det = new HashSet<inventario_det>();
             this.ventas_clientes_det = new HashSet<ventas_clientes_det>();
         }
@@ -35,6 +36,8 @@ namespace ProyectoFinalG1.EntityFramework
         public int cons_categoria { get; set; }
         public string tipo_mascota { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<carrito_det> carrito_det { get; set; }
         public virtual categoria categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<inventario_det> inventario_det { get; set; }

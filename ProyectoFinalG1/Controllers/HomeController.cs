@@ -67,11 +67,10 @@ namespace ProyectoFinalG1.Controllers
 
                 if (result == null)
                 {
-                    // Verificar si el usuario existe pero está inactivo
-                    var usuario = context.usuario
-                                         .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
+                    var usuarioInactivo = context.usuario
+                                                 .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
 
-                    if (usuario != null && usuario.estado == false)
+                    if (usuarioInactivo != null && usuarioInactivo.estado == false)
                     {
                         ViewBag.Mensaje = "Su usuario está inactivo. Comuníquese con el administrador.";
                     }
@@ -83,11 +82,46 @@ namespace ProyectoFinalG1.Controllers
                     return View(modelo);
                 }
 
+                var usuario = context.usuario
+                                     .FirstOrDefault(u => u.correoElectronico == modelo.CorreoElectronico);
+
+                if (usuario != null)
+                {
+                    Session["Consecutivo"] = usuario.consecutivo;
+
+                    var datos = context.sp_ConsultarCarritoUsuario(usuario.consecutivo).ToList();
+
+                    var carrito = new List<CarritoItemModel>();
+
+                    foreach (var p in datos)
+                    {
+                        var item = new CarritoItemModel();
+
+                        item.ConsecutivoProducto = p.cons_producto;
+                        item.NombreProducto = p.nombre_producto;
+                        item.Imagen = p.imagen;
+
+                        if (p.precio == null)
+                        {
+                            item.Precio = 0;
+                        }
+                        else
+                        {
+                            item.Precio = p.precio.Value;
+                        }
+
+                        item.Cantidad = p.cantidad;
+                        item.Existencia = p.existencia;
+
+                        carrito.Add(item);
+                    }
+
+                    Session["Carrito"] = carrito;
+                }
 
                 Session["Nombre"] = result.nombre;
                 Session["Rol"] = result.rol;
 
-                // Si autenticó correctamente
                 return RedirectToAction("Index", "Home");
             }
         }

@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="WaggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carrito_det">
+          <Key>
+            <PropertyRef Name="cons_carrito_det" />
+          </Key>
+          <Property Name="cons_carrito_det" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cons_carrito" Type="int" Nullable="false" />
+          <Property Name="cons_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="carrito_enc">
+          <Key>
+            <PropertyRef Name="cons_carrito" />
+          </Key>
+          <Property Name="cons_carrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consecutivo" Type="int" Nullable="false" />
+          <Property Name="fec_registro" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="categoria">
           <Key>
             <PropertyRef Name="cons_categoria" />
@@ -93,6 +111,42 @@
           <Property Name="impuesto_venta_tot" Type="decimal" Precision="17" Scale="2" Nullable="false" />
           <Property Name="monto_venta_net" Type="decimal" Precision="17" Scale="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK_carrito_det_carrito_enc">
+          <End Role="carrito_enc" Type="Self.carrito_enc" Multiplicity="1" />
+          <End Role="carrito_det" Type="Self.carrito_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrito_enc">
+              <PropertyRef Name="cons_carrito" />
+            </Principal>
+            <Dependent Role="carrito_det">
+              <PropertyRef Name="cons_carrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carrito_det_productos">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="carrito_det" Type="Self.carrito_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="carrito_det">
+              <PropertyRef Name="cons_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carrito_enc_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="carrito_enc" Type="Self.carrito_enc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="consecutivo" />
+            </Principal>
+            <Dependent Role="carrito_enc">
+              <PropertyRef Name="consecutivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_invdet_inventario">
           <End Role="inventario_enc" Type="Self.inventario_enc" Multiplicity="1" />
           <End Role="inventario_det" Type="Self.inventario_det" Multiplicity="*" />
@@ -177,11 +231,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_ActualizarCantidadCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ActualizarExistenciaProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+          <Parameter Name="CantidadComprada" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_AgregarProductoCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_AlternarEstadoProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CONS_PRODUCTO" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_AlternarEstadoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultarCarritoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_CrearProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NOMBRE_PRODUCTO" Type="varchar" Mode="In" />
@@ -224,11 +295,21 @@
           <Parameter Name="Direccion" Type="varchar" Mode="In" />
           <Parameter Name="ConsecutivoRol" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_EliminarProductoCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_LimpiarCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_ListarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ObtenerOCrearCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_ObtenerProductoPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CONS_PRODUCTO" Type="int" Mode="In" />
         </Function>
@@ -239,7 +320,23 @@
         <Function Name="sp_ObtenerUsuarioPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_RegistrarVentaDet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsVenta" Type="int" Mode="In" />
+          <Parameter Name="ConsProducto" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="MontoLinea" Type="decimal" Mode="In" />
+          <Parameter Name="ImpuestoLinea" Type="decimal" Mode="In" />
+          <Parameter Name="MontoNetoLinea" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_RegistrarVentaEnc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
+          <Parameter Name="MontoVentaBrut" Type="decimal" Mode="In" />
+          <Parameter Name="ImpuestoVentaTot" Type="decimal" Mode="In" />
+          <Parameter Name="MontoVentaNet" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="WaggyDBModelStoreContainer">
+          <EntitySet Name="carrito_det" EntityType="Self.carrito_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carrito_enc" EntityType="Self.carrito_enc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inventario_det" EntityType="Self.inventario_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inventario_enc" EntityType="Self.inventario_enc" Schema="dbo" store:Type="Tables" />
@@ -248,6 +345,18 @@
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ventas_clientes_det" EntityType="Self.ventas_clientes_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ventas_clientes_enc" EntityType="Self.ventas_clientes_enc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_carrito_det_carrito_enc" Association="Self.FK_carrito_det_carrito_enc">
+            <End Role="carrito_enc" EntitySet="carrito_enc" />
+            <End Role="carrito_det" EntitySet="carrito_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carrito_det_productos" Association="Self.FK_carrito_det_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="carrito_det" EntitySet="carrito_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carrito_enc_usuario" Association="Self.FK_carrito_enc_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="carrito_enc" EntitySet="carrito_enc" />
+          </AssociationSet>
           <AssociationSet Name="fk_invdet_inventario" Association="Self.fk_invdet_inventario">
             <End Role="inventario_enc" EntitySet="inventario_enc" />
             <End Role="inventario_det" EntitySet="inventario_det" />
@@ -282,6 +391,28 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WaggyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="carrito_det">
+          <Key>
+            <PropertyRef Name="cons_carrito_det" />
+          </Key>
+          <Property Name="cons_carrito_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cons_carrito" Type="Int32" Nullable="false" />
+          <Property Name="cons_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="carrito_enc" Relationship="Self.FK_carrito_det_carrito_enc" FromRole="carrito_det" ToRole="carrito_enc" />
+          <NavigationProperty Name="productos" Relationship="Self.FK_carrito_det_productos" FromRole="carrito_det" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="carrito_enc">
+          <Key>
+            <PropertyRef Name="cons_carrito" />
+          </Key>
+          <Property Name="cons_carrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consecutivo" Type="Int32" Nullable="false" />
+          <Property Name="fec_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="carrito_det" Relationship="Self.FK_carrito_det_carrito_enc" FromRole="carrito_enc" ToRole="carrito_det" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_carrito_enc_usuario" FromRole="carrito_enc" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="categoria">
           <Key>
             <PropertyRef Name="cons_categoria" />
@@ -329,6 +460,7 @@
           <Property Name="registro_prod" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cons_categoria" Type="Int32" Nullable="false" />
           <Property Name="tipo_mascota" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carrito_det" Relationship="Self.FK_carrito_det_productos" FromRole="productos" ToRole="carrito_det" />
           <NavigationProperty Name="categoria" Relationship="Self.FK_PRODUCTOS_CATEGORIA" FromRole="productos" ToRole="categoria" />
           <NavigationProperty Name="inventario_det" Relationship="Self.fk_invdet_producto" FromRole="productos" ToRole="inventario_det" />
           <NavigationProperty Name="ventas_clientes_det" Relationship="Self.fk_ventasdet_producto" FromRole="productos" ToRole="ventas_clientes_det" />
@@ -354,6 +486,7 @@
           <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="consecutivoRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="carrito_enc" Relationship="Self.FK_carrito_enc_usuario" FromRole="usuario" ToRole="carrito_enc" />
           <NavigationProperty Name="rol" Relationship="Self.FK_USUARIO_ROL" FromRole="usuario" ToRole="rol" />
           <NavigationProperty Name="ventas_clientes_enc" Relationship="Self.fk_ventas_enc_usuario" FromRole="usuario" ToRole="ventas_clientes_enc" />
         </EntityType>
@@ -384,6 +517,42 @@
           <NavigationProperty Name="usuario" Relationship="Self.fk_ventas_enc_usuario" FromRole="ventas_clientes_enc" ToRole="usuario" />
           <NavigationProperty Name="ventas_clientes_det" Relationship="Self.fk_ventasdet_venta" FromRole="ventas_clientes_enc" ToRole="ventas_clientes_det" />
         </EntityType>
+        <Association Name="FK_carrito_det_carrito_enc">
+          <End Role="carrito_enc" Type="Self.carrito_enc" Multiplicity="1" />
+          <End Role="carrito_det" Type="Self.carrito_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrito_enc">
+              <PropertyRef Name="cons_carrito" />
+            </Principal>
+            <Dependent Role="carrito_det">
+              <PropertyRef Name="cons_carrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carrito_det_productos">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="carrito_det" Type="Self.carrito_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="cons_producto" />
+            </Principal>
+            <Dependent Role="carrito_det">
+              <PropertyRef Name="cons_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carrito_enc_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="carrito_enc" Type="Self.carrito_enc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="consecutivo" />
+            </Principal>
+            <Dependent Role="carrito_enc">
+              <PropertyRef Name="consecutivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PRODUCTOS_CATEGORIA">
           <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
           <End Role="productos" Type="Self.productos" Multiplicity="*" />
@@ -469,6 +638,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WaggyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carrito_det" EntityType="Self.carrito_det" />
+          <EntitySet Name="carrito_enc" EntityType="Self.carrito_enc" />
           <EntitySet Name="categoria" EntityType="Self.categoria" />
           <EntitySet Name="inventario_det" EntityType="Self.inventario_det" />
           <EntitySet Name="inventario_enc" EntityType="Self.inventario_enc" />
@@ -477,6 +648,18 @@
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="ventas_clientes_det" EntityType="Self.ventas_clientes_det" />
           <EntitySet Name="ventas_clientes_enc" EntityType="Self.ventas_clientes_enc" />
+          <AssociationSet Name="FK_carrito_det_carrito_enc" Association="Self.FK_carrito_det_carrito_enc">
+            <End Role="carrito_enc" EntitySet="carrito_enc" />
+            <End Role="carrito_det" EntitySet="carrito_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carrito_det_productos" Association="Self.FK_carrito_det_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="carrito_det" EntitySet="carrito_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carrito_enc_usuario" Association="Self.FK_carrito_enc_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="carrito_enc" EntitySet="carrito_enc" />
+          </AssociationSet>
           <AssociationSet Name="FK_PRODUCTOS_CATEGORIA" Association="Self.FK_PRODUCTOS_CATEGORIA">
             <End Role="categoria" EntitySet="categoria" />
             <End Role="productos" EntitySet="productos" />
@@ -505,11 +688,28 @@
             <End Role="ventas_clientes_enc" EntitySet="ventas_clientes_enc" />
             <End Role="ventas_clientes_det" EntitySet="ventas_clientes_det" />
           </AssociationSet>
+          <FunctionImport Name="sp_ActualizarCantidadCarrito">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ActualizarExistenciaProducto">
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadComprada" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AgregarProductoCarrito">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_AlternarEstadoProducto">
             <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_AlternarEstadoUsuario">
             <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultarCarritoUsuario" ReturnType="Collection(WaggyDBModel.sp_ConsultarCarritoUsuario_Result)">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_CrearProducto">
             <Parameter Name="NOMBRE_PRODUCTO" Mode="In" Type="String" />
@@ -552,11 +752,21 @@
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="ConsecutivoRol" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_EliminarProductoCarrito">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_IniciarSesion" ReturnType="Collection(WaggyDBModel.sp_IniciarSesion_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_LimpiarCarrito">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_ListarProductos" ReturnType="Collection(WaggyDBModel.sp_ListarProductos_Result)" />
+          <FunctionImport Name="sp_ObtenerOCrearCarrito" ReturnType="Collection(Int32)">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_ObtenerProductoPorId" ReturnType="Collection(WaggyDBModel.sp_ObtenerProductoPorId_Result)">
             <Parameter Name="CONS_PRODUCTO" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -567,7 +777,29 @@
           <FunctionImport Name="sp_ObtenerUsuarioPorId" ReturnType="Collection(WaggyDBModel.sp_ObtenerUsuarioPorId_Result)">
             <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_RegistrarVentaDet">
+            <Parameter Name="ConsVenta" Mode="In" Type="Int32" />
+            <Parameter Name="ConsProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="MontoLinea" Mode="In" Type="Decimal" />
+            <Parameter Name="ImpuestoLinea" Mode="In" Type="Decimal" />
+            <Parameter Name="MontoNetoLinea" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistrarVentaEnc" ReturnType="Collection(Decimal)">
+            <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="MontoVentaBrut" Mode="In" Type="Decimal" />
+            <Parameter Name="ImpuestoVentaTot" Mode="In" Type="Decimal" />
+            <Parameter Name="MontoVentaNet" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_ConsultarCarritoUsuario_Result">
+          <Property Type="Int32" Name="cons_producto" Nullable="false" />
+          <Property Type="String" Name="nombre_producto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="imagen" Nullable="false" MaxLength="300" />
+          <Property Type="Decimal" Name="precio" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="existencia" Nullable="false" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_IniciarSesion_Result">
           <Property Type="Int32" Name="consecutivo" Nullable="false" />
           <Property Type="String" Name="identificacion" Nullable="false" MaxLength="20" />
@@ -636,6 +868,26 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WaggyDBModelStoreContainer" CdmEntityContainer="WaggyDBEntities">
+          <EntitySetMapping Name="carrito_det">
+            <EntityTypeMapping TypeName="WaggyDBModel.carrito_det">
+              <MappingFragment StoreEntitySet="carrito_det">
+                <ScalarProperty Name="cons_carrito_det" ColumnName="cons_carrito_det" />
+                <ScalarProperty Name="cons_carrito" ColumnName="cons_carrito" />
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carrito_enc">
+            <EntityTypeMapping TypeName="WaggyDBModel.carrito_enc">
+              <MappingFragment StoreEntitySet="carrito_enc">
+                <ScalarProperty Name="cons_carrito" ColumnName="cons_carrito" />
+                <ScalarProperty Name="consecutivo" ColumnName="consecutivo" />
+                <ScalarProperty Name="fec_registro" ColumnName="fec_registro" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="categoria">
             <EntityTypeMapping TypeName="WaggyDBModel.categoria">
               <MappingFragment StoreEntitySet="categoria">
@@ -732,12 +984,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_ActualizarCantidadCarrito" FunctionName="WaggyDBModel.Store.sp_ActualizarCantidadCarrito" />
+          <FunctionImportMapping FunctionImportName="sp_ActualizarExistenciaProducto" FunctionName="WaggyDBModel.Store.sp_ActualizarExistenciaProducto" />
+          <FunctionImportMapping FunctionImportName="sp_AgregarProductoCarrito" FunctionName="WaggyDBModel.Store.sp_AgregarProductoCarrito" />
           <FunctionImportMapping FunctionImportName="sp_AlternarEstadoProducto" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoProducto" />
           <FunctionImportMapping FunctionImportName="sp_AlternarEstadoUsuario" FunctionName="WaggyDBModel.Store.sp_AlternarEstadoUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_ConsultarCarritoUsuario" FunctionName="WaggyDBModel.Store.sp_ConsultarCarritoUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.sp_ConsultarCarritoUsuario_Result">
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_CrearProducto" FunctionName="WaggyDBModel.Store.sp_CrearProducto" />
           <FunctionImportMapping FunctionImportName="sp_CrearUsuario" FunctionName="WaggyDBModel.Store.sp_CrearUsuario" />
           <FunctionImportMapping FunctionImportName="sp_EditarProducto" FunctionName="WaggyDBModel.Store.sp_EditarProducto" />
           <FunctionImportMapping FunctionImportName="sp_EditarUsuario" FunctionName="WaggyDBModel.Store.sp_EditarUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_EliminarProductoCarrito" FunctionName="WaggyDBModel.Store.sp_EliminarProductoCarrito" />
           <FunctionImportMapping FunctionImportName="sp_IniciarSesion" FunctionName="WaggyDBModel.Store.sp_IniciarSesion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_IniciarSesion_Result">
@@ -749,6 +1017,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LimpiarCarrito" FunctionName="WaggyDBModel.Store.sp_LimpiarCarrito" />
           <FunctionImportMapping FunctionImportName="sp_ListarProductos" FunctionName="WaggyDBModel.Store.sp_ListarProductos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_ListarProductos_Result">
@@ -769,6 +1038,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ObtenerOCrearCarrito" FunctionName="WaggyDBModel.Store.sp_ObtenerOCrearCarrito" />
           <FunctionImportMapping FunctionImportName="sp_ObtenerProductoPorId" FunctionName="WaggyDBModel.Store.sp_ObtenerProductoPorId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WaggyDBModel.sp_ObtenerProductoPorId_Result">
@@ -820,6 +1090,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_RegistrarVentaDet" FunctionName="WaggyDBModel.Store.sp_RegistrarVentaDet" />
+          <FunctionImportMapping FunctionImportName="sp_RegistrarVentaEnc" FunctionName="WaggyDBModel.Store.sp_RegistrarVentaEnc" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

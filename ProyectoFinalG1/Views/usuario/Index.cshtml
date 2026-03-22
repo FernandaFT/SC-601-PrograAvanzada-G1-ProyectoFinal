@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Gestión de Usuarios";
+    int paginaActual = ViewBag.PaginaActual ?? 1;
+    int totalPaginas = ViewBag.TotalPaginas ?? 1;
 }
 
 <div class="container mt-4">
@@ -55,4 +57,34 @@
             }
         </tbody>
     </table>
+
+    @if (totalPaginas > 1)
+    {
+        <nav aria-label="Paginación de usuarios">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Usuario", new { pagina = paginaActual - 1 })">
+                        Anterior
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= totalPaginas; i++)
+                {
+                    <li class="page-item @(i == paginaActual ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Usuario", new { pagina = i })">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Usuario", new { pagina = paginaActual + 1 })">
+                        Siguiente
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    }
 </div>

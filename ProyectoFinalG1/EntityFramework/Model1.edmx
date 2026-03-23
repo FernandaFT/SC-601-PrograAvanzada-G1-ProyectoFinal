@@ -261,6 +261,12 @@
         <Function Name="sp_ConsultarCarritoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_ConsultarVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CrearInventarioEnc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FecInventario" Type="date" Mode="In" />
           <Parameter Name="Observaciones" Type="varchar" Mode="In" />
@@ -744,6 +750,12 @@
           <FunctionImport Name="sp_ConsultarCarritoUsuario" ReturnType="Collection(WaggyDBModel.sp_ConsultarCarritoUsuario_Result)">
             <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_ConsultarVentas" ReturnType="Collection(WaggyDBModel.sp_ConsultarVentas_Result)">
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_CrearInventarioEnc" ReturnType="Collection(Decimal)">
             <Parameter Name="FecInventario" Mode="In" Type="DateTime" />
             <Parameter Name="Observaciones" Mode="In" Type="String" />
@@ -851,6 +863,15 @@
           <Property Type="Decimal" Name="precio" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Int32" Name="existencia" Nullable="false" />
           <Property Type="Int32" Name="cantidad" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultarVentas_Result">
+          <Property Type="Int32" Name="cons_venta" Nullable="true" />
+          <Property Type="DateTime" Name="fec_venta" Nullable="true" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="nombre_producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="monto_neto_linea" Nullable="true" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="monto_venta_net" Nullable="true" Precision="17" Scale="2" />
         </ComplexType>
         <ComplexType Name="sp_IniciarSesion_Result">
           <Property Type="Int32" Name="consecutivo" Nullable="false" />
@@ -1075,6 +1096,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultarVentas" FunctionName="WaggyDBModel.Store.sp_ConsultarVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.sp_ConsultarVentas_Result">
+                <ScalarProperty Name="cons_venta" ColumnName="cons_venta" />
+                <ScalarProperty Name="fec_venta" ColumnName="fec_venta" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="monto_neto_linea" ColumnName="monto_neto_linea" />
+                <ScalarProperty Name="monto_venta_net" ColumnName="monto_venta_net" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_CrearInventarioEnc" FunctionName="WaggyDBModel.Store.sp_CrearInventarioEnc" />
           <FunctionImportMapping FunctionImportName="sp_CrearProducto" FunctionName="WaggyDBModel.Store.sp_CrearProducto" />
           <FunctionImportMapping FunctionImportName="sp_CrearUsuario" FunctionName="WaggyDBModel.Store.sp_CrearUsuario" />
@@ -1218,7 +1252,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

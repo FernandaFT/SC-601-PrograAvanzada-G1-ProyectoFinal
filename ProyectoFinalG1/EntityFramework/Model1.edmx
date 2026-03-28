@@ -261,6 +261,9 @@
         <Function Name="sp_ConsultarCarritoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ConsecutivoUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_ConsultarExistencias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BajoMinimo" Type="bit" Mode="In" />
+        </Function>
         <Function Name="sp_ConsultarVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FechaInicio" Type="date" Mode="In" />
           <Parameter Name="FechaFin" Type="date" Mode="In" />
@@ -750,6 +753,9 @@
           <FunctionImport Name="sp_ConsultarCarritoUsuario" ReturnType="Collection(WaggyDBModel.sp_ConsultarCarritoUsuario_Result)">
             <Parameter Name="ConsecutivoUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_ConsultarExistencias" ReturnType="Collection(WaggyDBModel.sp_ConsultarExistencias_Result)">
+            <Parameter Name="BajoMinimo" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="sp_ConsultarVentas" ReturnType="Collection(WaggyDBModel.sp_ConsultarVentas_Result)">
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
@@ -863,6 +869,13 @@
           <Property Type="Decimal" Name="precio" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Int32" Name="existencia" Nullable="false" />
           <Property Type="Int32" Name="cantidad" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultarExistencias_Result">
+          <Property Type="Int32" Name="cons_producto" Nullable="false" />
+          <Property Type="String" Name="nombre_producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="existencia" Nullable="false" />
+          <Property Type="Int32" Name="existenciamin" Nullable="false" />
+          <Property Type="Int32" Name="existenciamax" Nullable="false" />
         </ComplexType>
         <ComplexType Name="sp_ConsultarVentas_Result">
           <Property Type="Int32" Name="cons_venta" Nullable="true" />
@@ -1093,6 +1106,17 @@
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="existencia" ColumnName="existencia" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultarExistencias" FunctionName="WaggyDBModel.Store.sp_ConsultarExistencias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WaggyDBModel.sp_ConsultarExistencias_Result">
+                <ScalarProperty Name="cons_producto" ColumnName="cons_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="existenciamin" ColumnName="existenciamin" />
+                <ScalarProperty Name="existenciamax" ColumnName="existenciamax" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

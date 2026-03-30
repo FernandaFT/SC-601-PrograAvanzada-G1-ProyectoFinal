@@ -63,6 +63,12 @@ namespace ProyectoFinalG1.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    CargarRoles();
+                    return View(modelo);
+                }
+
                 using (var context = new WaggyDBEntities())
                 {
                     var result = context.sp_CrearUsuario(
@@ -80,7 +86,23 @@ namespace ProyectoFinalG1.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
+                string mensaje = ex.InnerException?.InnerException?.Message
+                         ?? ex.InnerException?.Message
+                         ?? ex.Message;
+
+                if (mensaje.Contains("correo electrónico ya se encuentra registrado"))
+                {
+                    ModelState.AddModelError("CorreoElectronico", "El correo electrónico ya se encuentra registrado.");
+                }
+                else if (mensaje.Contains("identificación ya se encuentra registrada"))
+                {
+                    ModelState.AddModelError("Identificacion", "La identificación ya se encuentra registrada.");
+                }
+                else
+                {
+                    ViewBag.Error = mensaje;
+                }
+
                 CargarRoles();
                 return View(modelo);
             }

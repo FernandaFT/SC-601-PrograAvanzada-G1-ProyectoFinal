@@ -1,4 +1,50 @@
-﻿@{
+﻿@*@{
+        ViewBag.Title = "Crear Inventario";
+    }
+
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+        <div class="card shadow p-4">
+            <h2 class="text-center mb-4">Crear Inventario</h2>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @using (Html.BeginForm("Crear", "Inventario", FormMethod.Post, new { id = "FormInventario" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" name="fecha" id="fecha" class="form-control" required />
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Observaciones</label>
+                    <input type="text" name="observaciones" id="observaciones" class="form-control no-transform" />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        Crear Inventario
+                    </button>
+                </div>
+            }
+
+            <div class="text-center mt-3">
+                <a href="@Url.Action("Listar", "Inventario")" class="btn btn-secondary">
+                    Modificar Inventario
+                </a>
+            </div>
+        </div>
+    </div>*@
+@model ProyectoFinalG1.Models.InventarioEncViewModel
+
+@{
     ViewBag.Title = "Crear Inventario";
 }
 
@@ -13,18 +59,22 @@
             </div>
         }
 
-        @using (Html.BeginForm("Crear", "Inventario", FormMethod.Post, new { id = "FormInventario" }))
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @using (Html.BeginForm("Crear", "Inventario", FormMethod.Post, new { id = "FormInventario", novalidate = "novalidate" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="mb-3">
                 <label class="form-label">Fecha</label>
-                <input type="date" name="fecha" id="fecha" class="form-control" required />
+                @Html.TextBoxFor(m => m.FecInventario, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.FecInventario, "", new { @class = "text-danger-form" })
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Observaciones</label>
-                <input type="text" name="observaciones" id="observaciones" class="form-control no-transform" />
+                @Html.TextBoxFor(m => m.Observaciones, new { @class = "form-control no-transform" })
+                @Html.ValidationMessageFor(m => m.Observaciones, "", new { @class = "text-danger-form" })
             </div>
 
             <div class="text-center">

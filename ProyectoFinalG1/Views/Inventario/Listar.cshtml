@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>@item.ConsInventario</td>
-                    <td>@item.FecInventario.ToString("dd/MM/yyyy")</td>
+                    <td>@(item.FecInventario.HasValue ? item.FecInventario.Value.ToString("dd/MM/yyyy") : "")</td>
                     <td>@item.Observaciones</td>
                     <td>@item.EstadoInv</td>
                     <td>

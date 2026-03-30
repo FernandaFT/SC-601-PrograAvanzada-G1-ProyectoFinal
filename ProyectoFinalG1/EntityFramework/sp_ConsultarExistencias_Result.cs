@@ -11,14 +11,12 @@ namespace ProyectoFinalG1.EntityFramework
 {
     using System;
     
-    public partial class sp_ConsultarVentas_Result
+    public partial class sp_ConsultarExistencias_Result
     {
-        public Nullable<int> cons_venta { get; set; }
-        public Nullable<System.DateTime> fec_venta { get; set; }
-        public string nombre { get; set; }
+        public int cons_producto { get; set; }
         public string nombre_producto { get; set; }
-        public Nullable<int> cantidad { get; set; }
-        public Nullable<decimal> monto_neto_linea { get; set; }
-        public Nullable<decimal> monto_venta_net { get; set; }
+        public int existencia { get; set; }
+        public int existenciamin { get; set; }
+        public int existenciamax { get; set; }
     }
 }

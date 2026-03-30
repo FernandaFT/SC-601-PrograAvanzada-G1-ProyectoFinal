@@ -1,0 +1,106 @@
+﻿@model List<ProyectoFinalG1.Models.ExistenciasModel>
+
+@{
+    ViewBag.Title = "Consulta de Existencias";
+    int paginaActual = ViewBag.PaginaActual ?? 1;
+    int totalPaginas = ViewBag.TotalPaginas ?? 1;
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Consulta de Existencias</h2>
+    </div>
+
+    @using (Html.BeginForm("Index", "Existencias", FormMethod.Post))
+    {
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+                <label>Filtrar</label>
+                <select name="BajoMinimo" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="true">Bajo mínimo</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <button type="submit" class="btn btn-primary">
+                    Buscar
+                </button>
+            </div>
+
+        </div>
+    }
+
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Existencia</th>
+                <th>Mínimo</th>
+                <th>Máximo</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Count > 0)
+            {
+                foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.ConsecutivoProducto</td>
+                        <td>@p.NombreProducto</td>
+                        <td>@p.Existencia</td>
+                        <td>@p.ExistenciaMin</td>
+                        <td>@p.ExistenciaMax</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" style="text-align:center;">
+                        No hay productos con mínimo de existencia
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (totalPaginas > 1)
+    {
+        <nav aria-label="Paginación">
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("Index", "Existencias", new { pagina = paginaActual - 1 })">
+                        Anterior
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= totalPaginas; i++)
+                {
+                    <li class="page-item @(i == paginaActual ? "active" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Index", "Existencias", new { pagina = i })">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("Index", "Existencias", new { pagina = paginaActual + 1 })">
+                        Siguiente
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    }
+
+</div>

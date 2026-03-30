@@ -134,6 +134,15 @@ namespace ProyectoFinalG1.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ConsultarCarritoUsuario_Result>("sp_ConsultarCarritoUsuario", consecutivoUsuarioParameter);
         }
     
+        public virtual ObjectResult<sp_ConsultarExistencias_Result> sp_ConsultarExistencias(Nullable<bool> bajoMinimo)
+        {
+            var bajoMinimoParameter = bajoMinimo.HasValue ?
+                new ObjectParameter("BajoMinimo", bajoMinimo) :
+                new ObjectParameter("BajoMinimo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ConsultarExistencias_Result>("sp_ConsultarExistencias", bajoMinimoParameter);
+        }
+    
         public virtual ObjectResult<sp_ConsultarVentas_Result> sp_ConsultarVentas(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> idUsuario, Nullable<int> idProducto)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?

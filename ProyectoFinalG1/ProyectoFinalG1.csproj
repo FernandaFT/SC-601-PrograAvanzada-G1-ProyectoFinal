@@ -139,6 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
+    <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -183,6 +184,9 @@
     <Compile Include="EntityFramework\sp_ConsultarCarritoUsuario_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\sp_ConsultarExistencias_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\sp_ConsultarVentas_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -224,6 +228,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CarritoItemModel.cs" />
+    <Compile Include="Models\ExistenciaModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\InventarioDetViewModel.cs" />
     <Compile Include="Models\InventarioEncViewModel.cs" />
@@ -350,6 +355,7 @@
     <Content Include="Views\Inventario\Listar.cshtml" />
     <Content Include="Views\Carrito\Index.cshtml" />
     <Content Include="Views\Ventas\Index.cshtml" />
+    <Content Include="Views\Existencias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

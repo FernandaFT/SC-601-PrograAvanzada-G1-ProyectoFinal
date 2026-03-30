@@ -11,14 +11,9 @@ namespace ProyectoFinalG1.EntityFramework
 {
     using System;
     
-    public partial class sp_ConsultarVentas_Result
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public Nullable<int> cons_venta { get; set; }
-        public Nullable<System.DateTime> fec_venta { get; set; }
-        public string nombre { get; set; }
-        public string nombre_producto { get; set; }
-        public Nullable<int> cantidad { get; set; }
-        public Nullable<decimal> monto_neto_linea { get; set; }
-        public Nullable<decimal> monto_venta_net { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -21,13 +21,13 @@
             {
                 foreach (var p in Model)
                 {
-                    <div class="col-md-4 col-lg-3 mb-4" >
+                    <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card h-100 border-0 shadow-sm rounded-4">
                             <img src="@p.Imagen" class="card-img-top rounded-top-4"
                                  alt="@p.NombreProducto"
                                  style="height: 250px; object-fit: cover;" />
 
-                            <div class="card-body d-flex flex-column" >
+                            <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">@p.NombreProducto</h5>
 
                                 <p class="card-text text-muted" style="min-height: 72px;">
@@ -41,6 +41,27 @@
                                 </p>
 
                                 <h4 class="text-primary mt-2">₡ @p.Precio.ToString("N2")</h4>
+                                <p class="mb-2">
+                                    @{
+                                        string clase = "bg-success text-dark";
+                                        string texto = "Disponible";
+
+                                        if (p.Existencia <= p.ExistenciaMin)
+                                        {
+                                            clase = "bg-danger text-dark";
+                                            texto = "Agotándose";
+                                        }
+                                        else if (p.Existencia <= (p.ExistenciaMin + 5))
+                                        {
+                                            clase = "bg-warning text-dark";
+                                            texto = "Pocas unidades";
+                                        }
+                                    }
+
+                                    <span class="badge @clase px-3 py-2">
+                                        Stock: @p.Existencia - @texto
+                                    </span>
+                                </p>
 
                                 <div class="mt-auto pt-3">
                                     <a href="@Url.Action("Agregar", "Carrito", new { idProducto = p.ConsecutivoProducto, cantidad = 1 })" class="btn btn-outline-dark w-100 rounded-3">

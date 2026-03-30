@@ -21,15 +21,19 @@ namespace ProyectoFinalG1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(DateTime fecha, string observaciones)
+        public ActionResult Crear(InventarioEncViewModel modelo)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(modelo);
+                }
+
                 using (var context = new WaggyDBEntities())
                 {
-                    var resultado = context.sp_CrearInventarioEnc(fecha, observaciones).FirstOrDefault();
+                    var resultado = context.sp_CrearInventarioEnc(modelo.FecInventario.Value, modelo.Observaciones).FirstOrDefault();
                     int inventarioId = Convert.ToInt32(resultado.Value);
-
 
                     return RedirectToAction("Detalle", new { id = inventarioId });
                 }
@@ -37,7 +41,7 @@ namespace ProyectoFinalG1.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View();
+                return View(modelo);
             }
         }
         #endregion

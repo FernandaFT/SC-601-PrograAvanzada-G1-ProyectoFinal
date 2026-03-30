@@ -8,7 +8,7 @@
     <h2 class="text-center mb-4">Inventarios</h2>
 
     <table class="table table-bordered table-hover shadow-sm">
-        <thead >
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Fecha</th>
@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>@item.ConsInventario</td>
-                    <td>@item.FecInventario.ToString("dd/MM/yyyy")</td>
+                    <td>@(item.FecInventario.HasValue ? item.FecInventario.Value.ToString("dd/MM/yyyy") : "")</td>
                     <td>@item.Observaciones</td>
                     <td>@item.EstadoInv</td>
                     <td>

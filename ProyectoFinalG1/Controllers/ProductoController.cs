@@ -65,6 +65,13 @@ namespace ProyectoFinalG1.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    CargarCategorias();
+                    CargarTiposMascota();
+                    return View(modelo);
+                }
+
                 using (var context = new WaggyDBEntities())
                 {
                     context.sp_CrearProducto(

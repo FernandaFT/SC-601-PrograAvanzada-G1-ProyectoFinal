@@ -681,3 +681,6 @@ Single Product section style start
 .text-danger-form {
     color: red !important;
 }
+.SoloLectura {
+    cursor: not-allowed !important;
+}

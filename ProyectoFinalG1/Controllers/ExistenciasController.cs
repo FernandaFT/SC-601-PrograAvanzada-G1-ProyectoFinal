@@ -1,4 +1,5 @@
 ﻿using ProyectoFinalG1.EntityFramework;
+using ProyectoFinalG1.Filters;
 using ProyectoFinalG1.Models;
 using System;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace ProyectoFinalG1.Controllers
 {
     public class ExistenciasController : Controller
     {
+        [SesionActiva]
+        [PerfilAdmin]
         [HttpGet]
         public ActionResult Index(int pagina = 1)
         {

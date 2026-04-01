@@ -190,6 +190,28 @@
 
                                         <h4 class="secondary-font text-primary">₡ @p.Precio.ToString("N2")</h4>
 
+                                        <p class="mb-2">
+                                            @{
+                                                string clase = "bg-success text-dark";
+                                                string texto = "Disponible";
+
+                                                if (p.Existencia <= p.ExistenciaMin)
+                                                {
+                                                    clase = "bg-danger text-dark";
+                                                    texto = "Agotándose";
+                                                }
+                                                else if (p.Existencia <= (p.ExistenciaMin + 5))
+                                                {
+                                                    clase = "bg-warning text-dark";
+                                                    texto = "Pocas unidades";
+                                                }
+                                            }
+
+                                            <span class="badge @clase px-3 py-2">
+                                                Stock: @p.Existencia - @texto
+                                            </span>
+                                        </p>
+
                                         <div class="d-flex flex-wrap mt-3">
                                             <a href="@Url.Action("Agregar", "Carrito", new { idProducto = p.ConsecutivoProducto, cantidad = 1 })" class="btn-cart me-3 px-4 pt-3 pb-3">
                                                 <h6 class="text-uppercase m-0">Agregar al carrito</h6>
@@ -270,6 +292,27 @@
                                     <h4 class="secondary-font text-primary mt-2">
                                         ₡ @p.Precio.ToString("N2")
                                     </h4>
+                                    <p class="mb-2">
+                                        @{
+                                            string clase = "bg-success text-dark";
+                                            string texto = "Disponible";
+
+                                            if (p.Existencia <= p.ExistenciaMin)
+                                            {
+                                                clase = "bg-danger text-dark";
+                                                texto = "Agotándose";
+                                            }
+                                            else if (p.Existencia <= (p.ExistenciaMin + 5))
+                                            {
+                                                clase = "bg-warning text-dark";
+                                                texto = "Pocas unidades";
+                                            }
+                                        }
+
+                                        <span class="badge @clase px-3 py-2">
+                                            Stock: @p.Existencia - @texto
+                                        </span>
+                                    </p>
 
                                     <div class="d-flex flex-wrap mt-3">
                                         <a href="@Url.Action("Agregar", "Carrito", new { idProducto = p.ConsecutivoProducto, cantidad = 1 })" class="btn-cart me-3 px-4 pt-3 pb-3">
@@ -350,6 +393,27 @@
                                     <h4 class="secondary-font text-primary mt-2">
                                         ₡ @p.Precio.ToString("N2")
                                     </h4>
+                                    <p class="mb-2">
+                                        @{
+                                            string clase = "bg-success text-dark";
+                                            string texto = "Disponible";
+
+                                            if (p.Existencia <= p.ExistenciaMin)
+                                            {
+                                                clase = "bg-danger text-dark";
+                                                texto = "Agotándose";
+                                            }
+                                            else if (p.Existencia <= (p.ExistenciaMin + 5))
+                                            {
+                                                clase = "bg-warning text-dark";
+                                                texto = "Pocas unidades";
+                                            }
+                                        }
+
+                                        <span class="badge @clase px-3 py-2">
+                                            Stock: @p.Existencia - @texto
+                                        </span>
+                                    </p>
 
                                     <div class="d-flex flex-wrap mt-3">
                                         <a href="@Url.Action("Agregar", "Carrito", new { idProducto = p.ConsecutivoProducto, cantidad = 1 })" class="btn-cart me-3 px-4 pt-3 pb-3">

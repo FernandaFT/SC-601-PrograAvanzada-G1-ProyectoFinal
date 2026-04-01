@@ -678,3 +678,6 @@ Single Product section style start
 #profile::after {
     display: none !important;
 }
+.text-danger-form {
+    color: red !important;
+}

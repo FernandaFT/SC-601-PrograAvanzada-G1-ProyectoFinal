@@ -16,6 +16,7 @@ namespace ProyectoFinalG1.Controllers
 {
     public class HomeController : Controller
     {
+        [SesionActiva]
         [HttpGet]
         public ActionResult Index()
         {
@@ -126,6 +127,7 @@ namespace ProyectoFinalG1.Controllers
 
                 Session["Nombre"] = result.nombre;
                 Session["Rol"] = result.rol;
+                Session["Consecutivo"] = result.consecutivo;
 
                 return RedirectToAction("Index", "Home");
             }

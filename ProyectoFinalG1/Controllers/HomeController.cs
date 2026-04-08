@@ -1,9 +1,11 @@
 ﻿using ProyectoFinalG1.EntityFramework;
 using ProyectoFinalG1.Filters;
 using ProyectoFinalG1.Models;
+using ProyectoFinalG1.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -16,6 +18,8 @@ namespace ProyectoFinalG1.Controllers
 {
     public class HomeController : Controller
     {
+        readonly Generales generales = new Generales();
+
         [SesionActiva]
         [HttpGet]
         public ActionResult Index()
@@ -128,7 +132,7 @@ namespace ProyectoFinalG1.Controllers
                 Session["Nombre"] = result.nombre;
                 Session["Rol"] = result.rol;
                 Session["Consecutivo"] = result.consecutivo;
-
+                Session["CorreoElectronico"] = result.correoElectronico;
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -152,7 +156,9 @@ namespace ProyectoFinalG1.Controllers
                     ViewBag.Mensaje = "Su información no se validó correctamente.";
                 }
                 //Se generea la nueva contraseña
-                var nuevaContrasenna = GenerarContrasena();
+
+                var nuevaContrasenna = generales.GenerarContrasena();
+
                 //Se actualiza la contraseña en Base de Datos
                 var actualizacion = context.sp_ActualizarContrasenna(nuevaContrasenna, result.consecutivo);
                 if (actualizacion <= 0)
@@ -160,8 +166,17 @@ namespace ProyectoFinalG1.Controllers
                     ViewBag.Mensaje = "Su información no se actualizó correctamente.";
                     return View();
                 }
+
                 //Se envía un correo electrónico al usuario con la nueva contraseña
-                EnviarCorreo(modelo.CorreoElectronico, "Recuperación de Contraseña", nuevaContrasenna);
+                string rutaHtml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "RecuperarContrasenna.html");
+                string contenidoHtml = System.IO.File.ReadAllText(rutaHtml);
+
+                // Reemplazar valores
+                string htmlFinal = contenidoHtml
+                    .Replace("{{NOMBRE_USUARIO}}", result.nombre)
+                    .Replace("{{NUEVA_CONTRASENA}}", nuevaContrasenna);
+
+                generales.EnviarCorreo(modelo.CorreoElectronico, "Recuperación de Contraseña", htmlFinal);
 
                 return RedirectToAction("InicioSesion", "Home");
 
@@ -180,49 +195,6 @@ namespace ProyectoFinalG1.Controllers
             return RedirectToAction("InicioSesion", "Home");
         }
         #endregion
-
-
-        private string GenerarContrasena()
-        {
-            int longitud = 8;
-            const string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            StringBuilder resultado = new StringBuilder(longitud);
-
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-            {
-                byte[] bytes = new byte[1];
-                for (int i = 0; i < longitud; i++)
-                {
-                    rng.GetBytes(bytes);
-                    int index = bytes[0] % letras.Length;
-                    resultado.Append(letras[index]);
-                }
-            }
-
-            return resultado.ToString();
-        }
-
-        private void EnviarCorreo(string destinatario, string asunto, string cuerpo)
-        {
-            var cuentaCorreo = ConfigurationManager.AppSettings["cuentaCorreo"];
-            var contrasennaCorreo = ConfigurationManager.AppSettings["contrasennaCorreo"];
-
-            using (MailMessage mail = new MailMessage())
-            {
-                mail.From = new MailAddress(cuentaCorreo);
-                mail.To.Add(destinatario);
-                mail.Subject = asunto;
-                mail.Body = cuerpo;
-                mail.IsBodyHtml = true;
-
-                using (SmtpClient smtp = new SmtpClient("smtp.office365.com", 587))
-                {
-                    smtp.Credentials = new NetworkCredential(cuentaCorreo, contrasennaCorreo);
-                    smtp.EnableSsl = true;
-                    smtp.Send(mail);
-                }
-            }
-        }
 
 
         public ActionResult SobreNosotros()

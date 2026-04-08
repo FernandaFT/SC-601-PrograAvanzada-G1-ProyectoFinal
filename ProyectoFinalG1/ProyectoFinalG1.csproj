@@ -261,6 +261,7 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Template\ComprobanteCompra.html" />
     <Content Include="Template\css\bootstrap.min.css" />
     <Content Include="Template\css\fontawesome-all.min.css" />
     <Content Include="Template\css\registro.css" />

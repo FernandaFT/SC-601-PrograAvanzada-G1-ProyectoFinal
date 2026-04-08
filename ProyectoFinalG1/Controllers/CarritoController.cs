@@ -2,7 +2,11 @@
 using ProyectoFinalG1.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace ProyectoFinalG1.Controllers
@@ -274,7 +278,6 @@ namespace ProyectoFinalG1.Controllers
         #endregion
 
         #region Confirmar Compra
-
         [HttpPost]
         public ActionResult ConfirmarCompra()
         {
@@ -344,15 +347,67 @@ namespace ProyectoFinalG1.Controllers
                     );
                 }
 
+                var usuario = context.usuario.FirstOrDefault(u => u.consecutivo == consecutivoUsuario);
+
+                if (usuario != null)
+                {
+                    string rutaHtml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "ComprobanteCompra.html");
+                    string contenidoHtml = System.IO.File.ReadAllText(rutaHtml);
+
+                    string filas = "";
+
+                    foreach (var item in carrito)
+                    {
+                        filas += "<tr>" +
+                                 "<td>" + item.NombreProducto + "</td>" +
+                                 "<td>" + item.Cantidad + "</td>" +
+                                 "<td>₡ " + item.Precio.ToString("N2") + "</td>" +
+                                 "<td>₡ " + item.Subtotal.ToString("N2") + "</td>" +
+                                 "</tr>";
+                    }
+
+                    string htmlFinal = contenidoHtml
+                        .Replace("{{NOMBRE_USUARIO}}", usuario.nombre)
+                        .Replace("{{NUMERO_COMPRA}}", consVenta.ToString())
+                        .Replace("{{FECHA_COMPRA}}", DateTime.Now.ToString("dd/MM/yyyy HH:mm"))
+                        .Replace("{{FILAS}}", filas)
+                        .Replace("{{SUBTOTAL}}", subtotal.ToString("N2"))
+                        .Replace("{{IMPUESTO}}", impuesto.ToString("N2"))
+                        .Replace("{{TOTAL}}", total.ToString("N2"));
+
+                    EnviarCorreoCarrito(usuario.correoElectronico, "Comprobante de Compra", htmlFinal);
+                }
+
                 context.sp_LimpiarCarrito(consecutivoUsuario);
 
                 Session["Carrito"] = null;
-                TempData["MensajeCarrito"] = "Compra realizada con éxito.";
+                TempData["MensajeCarrito"] = "Compra realizada con éxito. Se envió un comprobante a su correo.";
             }
 
             return RedirectToAction("Index");
         }
 
+        #endregion
+
+        #region Correo Carrito
+        private void EnviarCorreoCarrito(string destino, string asunto, string contenido)
+        {
+            string correo = ConfigurationManager.AppSettings["CuentaCorreo"];
+            string contrasenna = ConfigurationManager.AppSettings["contrasennaCorreo"];
+
+            MailMessage mensaje = new MailMessage();
+            mensaje.From = new MailAddress(correo);
+            mensaje.To.Add(destino);
+            mensaje.Subject = asunto;
+            mensaje.Body = contenido;
+            mensaje.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
+            smtp.Credentials = new NetworkCredential(correo, contrasenna);
+            smtp.EnableSsl = true;
+
+            smtp.Send(mensaje);
+        }
         #endregion
     }
 }

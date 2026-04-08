@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Comprobante de Compra</title>
+</head>
+<body style="font-family: Arial, sans-serif; color: #333;">
+
+    <div style="max-width: 700px; margin: 0 auto; border: 1px solid #ddd; padding: 30px; border-radius: 10px;">
+
+        <h2 style="color: #2c3e50;">Comprobante de Compra</h2>
+
+        <p>Hola <strong>{{NOMBRE_USUARIO}}</strong>,</p>
+
+        <p>Gracias por tu compra en <strong>Waggy</strong>. Aquí tienes el detalle:</p>
+
+        <p><strong>Número de compra:</strong> {{NUMERO_COMPRA}}</p>
+        <p><strong>Fecha:</strong> {{FECHA_COMPRA}}</p>
+
+        <hr style="margin: 20px 0;" />
+
+        <table style="width:100%; border-collapse: collapse;" border="1" cellpadding="8">
+            <thead>
+                <tr style="background:#f2f2f2;">
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{FILAS}}
+            </tbody>
+        </table>
+
+        <hr style="margin: 20px 0;" />
+
+        <p><strong>Subtotal:</strong> ₡ {{SUBTOTAL}}</p>
+        <p><strong>Impuesto (13%):</strong> ₡ {{IMPUESTO}}</p>
+        <p><strong>Total:</strong> ₡ {{TOTAL}}</p>
+
+        <br />
+        <p>Este correo sirve como respaldo de tu compra.</p>
+
+        <p><strong>Waggy</strong></p>
+
+    </div>
+
+</body>
+</html>

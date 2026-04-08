@@ -1,9 +1,7 @@
-﻿using ProyectoFinalG1.EntityFramework;
-using ProyectoFinalG1.Filters;
-using ProyectoFinalG1.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -11,6 +9,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoFinalG1.EntityFramework;
+using ProyectoFinalG1.Filters;
+using ProyectoFinalG1.Models;
 
 namespace ProyectoFinalG1.Controllers
 {
@@ -160,8 +161,18 @@ namespace ProyectoFinalG1.Controllers
                     ViewBag.Mensaje = "Su información no se actualizó correctamente.";
                     return View();
                 }
-                //Se envía un correo electrónico al usuario con la nueva contraseña
-                EnviarCorreo(modelo.CorreoElectronico, "Recuperación de Contraseña", nuevaContrasenna);
+				//Se envía un correo electrónico al usuario con la nueva contraseña
+				string rutaHtml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "RecuperarContrasenna.html");
+				string contenidoHtml = System.IO.File.ReadAllText(rutaHtml);
+
+				// Reemplazar valores
+				string htmlFinal = contenidoHtml
+					.Replace("{{NOMBRE_USUARIO}}", result.nombre)
+					.Replace("{{NUEVA_CONTRASENA}}", nuevaContrasenna);
+
+
+
+				EnviarCorreo(modelo.CorreoElectronico, "Recuperación de Contraseña", htmlFinal);
 
                 return RedirectToAction("InicioSesion", "Home");
 

@@ -105,6 +105,58 @@ namespace ProyectoFinalG1.Controllers
                 return View(modelo);
             }
         }
-        #endregion
-    }
+		#endregion
+
+		#region Cambiar Acceso
+		
+		[HttpGet]
+		public ActionResult CambiarAcceso()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult CambiarAcceso(CambiarAccesoModel modelo)
+		{
+			try
+			{
+				using (var context = new WaggyDBEntities())
+				{
+					int consecutivo = int.Parse(Session["Consecutivo"].ToString());
+                    var result = context.usuario.FirstOrDefault(u => u.consecutivo == consecutivo);
+
+					if (result == null)
+					{
+						ViewBag.Error = "No se encontró el usuario a actualizar.";
+						return View(modelo);
+					}
+
+
+					if (!ModelState.IsValid)
+					{
+						var errores = ModelState.Values
+										.SelectMany(v => v.Errors)
+										.Select(e => e.ErrorMessage)
+										.ToList();
+
+						ViewBag.Error = string.Join(" | ", errores);
+						return View(modelo);
+					}
+
+					result.contrasenna = modelo.ContrasennaNueva;
+					
+					context.SaveChanges();
+
+					return RedirectToAction("Index", "Home");
+				}
+			}
+			catch (Exception ex)
+			{
+				ViewBag.Error = "Ocurrió un error al actualizar la contraseña " + ex.Message;
+				return View(modelo);
+			}
+		}
+	
+		#endregion
+	}
 }

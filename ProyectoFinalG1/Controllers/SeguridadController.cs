@@ -1,8 +1,10 @@
 ﻿using ProyectoFinalG1.EntityFramework;
 using ProyectoFinalG1.Filters;
 using ProyectoFinalG1.Models;
+using ProyectoFinalG1.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -10,8 +12,11 @@ using System.Web.Mvc;
 
 namespace ProyectoFinalG1.Controllers
 {
+    [SesionActiva]
     public class SeguridadController : Controller
     {
+        readonly Generales generales = new Generales();
+
         #region Cambiar Perfil
         [SesionActiva]
         [HttpGet]
@@ -104,6 +109,45 @@ namespace ProyectoFinalG1.Controllers
                 ViewBag.Error = "Ocurrió un error al actualizar el perfil: " + ex.Message;
                 return View(modelo);
             }
+        }
+        #endregion
+
+        #region Cambiar Contraseña
+        [HttpGet]
+        public ActionResult CambiarAcceso()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarAcceso(SeguridadModel modelo)
+        {
+            if (!ModelState.IsValid)
+                return View(modelo);
+
+            using (var context = new WaggyDBEntities())
+            {
+                var consecutivoSesion = int.Parse(Session["Consecutivo"].ToString());
+                var actualizacion = context.sp_ActualizarContrasenna(modelo.ContrasennaNueva, consecutivoSesion);
+
+                if (actualizacion <= 0)
+                {
+                    ViewBag.Mensaje = "Su información no se actualizó correctamente.";
+                    return View();
+                }
+
+                //Se envía un correo electrónico al usuario con la nueva contraseña
+                string rutaHtml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template", "NotificarContrasenna.html");
+                string contenidoHtml = System.IO.File.ReadAllText(rutaHtml);
+
+                string htmlFinal = contenidoHtml
+                    .Replace("{{NOMBRE_USUARIO}}", Session["Nombre"].ToString());
+
+                generales.EnviarCorreo(Session["CorreoElectronico"].ToString(), "Notificación de Acceso", htmlFinal);
+
+                return RedirectToAction("CerrarSesion", "Home");
+            }
+
         }
         #endregion
     }

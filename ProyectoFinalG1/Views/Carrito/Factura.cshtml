@@ -1,0 +1,65 @@
+@model ProyectoFinalG1.Models.FacturaViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Comprobante de Compra</title>
+    <link rel="stylesheet" href="~/Template/css/Factura.css" />
+</head>
+<body>
+    <div class="factura-container">
+        <div class="factura-card">
+            <h2 class="factura-title">Comprobante de Compra</h2>
+
+            <p>Hola <strong>@Model.UsuarioNombre</strong>,</p>
+
+            <p>Gracias por tu compra en <strong>Waggy</strong>. Aquí tienes el detalle:</p>
+
+            <p><strong>Número de compra:</strong> @Model.NumeroCompra</p>
+            <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+
+            <hr />
+
+            <div class="table-wrap">
+                <table class="factura-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td class="product-name">@item.NombreProducto</td>
+                                <td class="text-center">@item.Cantidad</td>
+                                <td class="text-right">₡ @item.Precio.ToString("N2")</td>
+                                <td class="text-right">₡ @item.Subtotal.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <hr />
+
+            <div class="totals">
+                <p><strong>Subtotal:</strong> ₡ @Model.Subtotal.ToString("N2")</p>
+                <p><strong>Impuesto (13%):</strong> ₡ @Model.Impuesto.ToString("N2")</p>
+                <p class="total"><strong>Total:</strong> ₡ @Model.Total.ToString("N2")</p>
+            </div>
+
+            <div class="actions">
+                <button id="btnPrint" class="btn btn-primary">Imprimir</button>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Cerrar</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Template/js/Factura.js"></script>
+</body>
+</html>

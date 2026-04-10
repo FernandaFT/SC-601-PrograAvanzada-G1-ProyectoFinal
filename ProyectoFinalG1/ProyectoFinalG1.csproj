@@ -230,6 +230,7 @@
     </Compile>
     <Compile Include="Models\CarritoItemModel.cs" />
     <Compile Include="Models\ExistenciaModel.cs" />
+    <Compile Include="Models\FacturaViewModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\InventarioDetViewModel.cs" />
     <Compile Include="Models\InventarioEncViewModel.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Global.asax" />
     <Content Include="Template\ComprobanteCompra.html" />
     <Content Include="Template\css\bootstrap.min.css" />
+    <Content Include="Template\css\Factura.css" />
     <Content Include="Template\css\fontawesome-all.min.css" />
     <Content Include="Template\css\registro.css" />
     <Content Include="Template\css\style.css" />
@@ -308,6 +310,7 @@
     <Content Include="Template\images\reviewer-2.jpg" />
     <Content Include="Template\images\reviewer-3.jpg" />
     <Content Include="Template\js\bootstrap.min.js" />
+    <Content Include="Template\js\Factura.js" />
     <Content Include="Template\js\funciones\inicioSesion.js" />
     <Content Include="Template\js\funciones\recuperarContrasenna.js" />
     <Content Include="Template\js\funciones\registro.js" />
@@ -364,6 +367,7 @@
     <Content Include="Views\Existencias\Index.cshtml" />
     <Content Include="Views\Seguridad\CambiarPerfil.cshtml" />
     <Content Include="Views\Seguridad\CambiarAcceso.cshtml" />
+    <Content Include="Views\Carrito\Factura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

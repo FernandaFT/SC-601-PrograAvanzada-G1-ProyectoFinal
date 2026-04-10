@@ -4,28 +4,27 @@
     <meta charset="utf-8" />
     <title>Comprobante de Compra</title>
 </head>
-<body style="font-family: Arial, sans-serif; color: #333;">
+<body style="font-family: Arial, sans-serif; color: #333; margin: 0; padding: 10px;">
 
-    <div style="max-width: 700px; margin: 0 auto; border: 1px solid #ddd; padding: 30px; border-radius: 10px;">
+    <div style="width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #dead6f; padding: 20px; border-radius: 10px; box-sizing: border-box;">
 
-        <h2 style="color: #2c3e50;">Comprobante de Compra</h2>
+        <h2 style="color: #dead6f; margin: 0 0 10px 0;">Comprobante de Compra</h2>
 
-        <p>Hola <strong>{{NOMBRE_USUARIO}}</strong>,</p>
+        <p style="margin: 5px 0;">Hola <strong>{{NOMBRE_USUARIO}}</strong>,</p>
 
-        <p>Gracias por tu compra en <strong>Waggy</strong>. Aquí tienes el detalle:</p>
+        <p style="margin: 5px 0;">Gracias por tu compra en <strong>Waggy</strong>.</p>
 
-        <p><strong>Número de compra:</strong> {{NUMERO_COMPRA}}</p>
-        <p><strong>Fecha:</strong> {{FECHA_COMPRA}}</p>
+        <p style="margin: 5px 0;"><strong>N°:</strong> {{NUMERO_COMPRA}} &nbsp; | &nbsp; <strong>Fecha:</strong> {{FECHA_COMPRA}}</p>
 
-        <hr style="margin: 20px 0;" />
+        <hr style="margin: 15px 0; border: none; border-top: 1px solid #f5cba7;" />
 
-        <table style="width:100%; border-collapse: collapse;" border="1" cellpadding="8">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;" border="1" cellpadding="6">
             <thead>
-                <tr style="background:#f2f2f2;">
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Subtotal</th>
+                <tr style="background: #dead6f; color: #333;">
+                    <th style="text-align: left;">Producto</th>
+                    <th style="text-align: left; width: 70px; ">Cant.</th>
+                    <th style="text-align: left; width: 90px; ">Precio</th>
+                    <th style="text-align: left; width: 100px; ">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,16 +32,17 @@
             </tbody>
         </table>
 
-        <hr style="margin: 20px 0;" />
+        <hr style="margin: 15px 0; border: none; border-top: 1px solid #f5cba7;" />
 
-        <p><strong>Subtotal:</strong> ₡ {{SUBTOTAL}}</p>
-        <p><strong>Impuesto (13%):</strong> ₡ {{IMPUESTO}}</p>
-        <p><strong>Total:</strong> ₡ {{TOTAL}}</p>
+        <div style="font-size: 14px; text-align: left;">
+            <p style="margin: 3px 0;"><strong>Subtotal:</strong> ₡ {{SUBTOTAL}}</p>
+            <p style="margin: 3px 0;"><strong>Impuesto:</strong> ₡ {{IMPUESTO}}</p>
+            <p style="margin: 5px 0; font-size: 16px;"><strong>Total:</strong> ₡ {{TOTAL}}</p>
+        </div>
 
-        <br />
-        <p>Este correo sirve como respaldo de tu compra.</p>
+        <p style="margin-top: 15px; font-size: 12px;">Este correo sirve como respaldo de tu compra.</p>
 
-        <p><strong>Waggy</strong></p>
+        <p style="margin: 5px 0;"><strong>Waggy</strong></p>
 
     </div>
 

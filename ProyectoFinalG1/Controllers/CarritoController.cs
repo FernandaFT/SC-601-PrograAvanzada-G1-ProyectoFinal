@@ -378,13 +378,26 @@ namespace ProyectoFinalG1.Controllers
                     EnviarCorreoCarrito(usuario.correoElectronico, "Comprobante de Compra", htmlFinal);
                 }
 
+                // Limpiar carrito en la base de datos y en sesión
                 context.sp_LimpiarCarrito(consecutivoUsuario);
 
-                Session["Carrito"] = null;
-                TempData["MensajeCarrito"] = "Compra realizada con éxito. Se envió un comprobante a su correo.";
-            }
+                // Construir modelo para la vista de factura (ventana emergente)
+                var facturaModel = new Models.FacturaViewModel()
+                {
+                    NumeroCompra = consVenta,
+                    Fecha = DateTime.Now,
+                    UsuarioNombre = usuario != null ? usuario.nombre : string.Empty,
+                    Items = carrito,
+                    Subtotal = subtotal,
+                    Impuesto = impuesto,
+                    Total = total
+                };
 
-            return RedirectToAction("Index");
+                Session["Carrito"] = null;
+
+                // Mostrar la factura inmediatamente como vista (se puede presentar como ventana emergente en el cliente)
+                return View("Factura", facturaModel);
+            }
         }
 
         #endregion

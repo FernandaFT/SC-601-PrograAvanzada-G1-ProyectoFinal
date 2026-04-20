@@ -1,14 +1,9 @@
 USE [master]
 GO
-/****** Object:  Database [WaggyDB]    Script Date: 22/3/2026 12:47:38 ******/
 CREATE DATABASE [WaggyDB]
 GO
 USE [WaggyDB]
-GO
-/****** Object:  Table [dbo].[carrito_det]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[carrito_det](
 	[cons_carrito_det] [int] IDENTITY(1,1) NOT NULL,
@@ -20,11 +15,7 @@ CREATE TABLE [dbo].[carrito_det](
 	[cons_carrito_det] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[carrito_enc]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[carrito_enc](
 	[cons_carrito] [int] IDENTITY(1,1) NOT NULL,
@@ -36,11 +27,7 @@ CREATE TABLE [dbo].[carrito_enc](
 	[cons_carrito] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[categoria]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[categoria](
 	[cons_categoria] [int] IDENTITY(1,1) NOT NULL,
@@ -51,11 +38,7 @@ CREATE TABLE [dbo].[categoria](
 	[cons_categoria] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[inventario_det]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[inventario_det](
 	[cons_inventario_det] [int] IDENTITY(1,1) NOT NULL,
@@ -67,11 +50,7 @@ CREATE TABLE [dbo].[inventario_det](
 	[cons_inventario_det] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[inventario_enc]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[inventario_enc](
 	[cons_inventario] [int] IDENTITY(1,1) NOT NULL,
@@ -83,11 +62,7 @@ CREATE TABLE [dbo].[inventario_enc](
 	[cons_inventario] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[productos]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[productos](
 	[cons_producto] [int] IDENTITY(1,1) NOT NULL,
@@ -108,11 +83,7 @@ CREATE TABLE [dbo].[productos](
 	[cons_producto] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[rol]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[rol](
 	[consecutivo] [int] IDENTITY(1,1) NOT NULL,
@@ -122,11 +93,7 @@ CREATE TABLE [dbo].[rol](
 	[consecutivo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[usuario](
 	[consecutivo] [int] IDENTITY(1,1) NOT NULL,
@@ -143,11 +110,7 @@ CREATE TABLE [dbo].[usuario](
 	[consecutivo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ventas_clientes_det]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[ventas_clientes_det](
 	[cons_venta_det] [int] IDENTITY(1,1) NOT NULL,
@@ -162,11 +125,7 @@ CREATE TABLE [dbo].[ventas_clientes_det](
 	[cons_venta_det] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ventas_clientes_enc]    Script Date: 22/3/2026 12:47:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[ventas_clientes_enc](
 	[cons_venta] [int] IDENTITY(1,1) NOT NULL,
@@ -185,7 +144,19 @@ SET IDENTITY_INSERT [dbo].[carrito_enc] ON
 GO
 INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (1, 1, CAST(N'2026-03-22T12:38:54.480' AS DateTime), 0)
 GO
-INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (2, 7, CAST(N'2026-03-22T12:45:32.423' AS DateTime), 0)
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (3, 1, CAST(N'2026-03-22T12:53:39.830' AS DateTime), 0)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (5, 1, CAST(N'2026-03-30T11:17:08.880' AS DateTime), 0)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (6, 1, CAST(N'2026-03-30T12:50:33.580' AS DateTime), 0)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (9, 1, CAST(N'2026-04-09T23:06:08.340' AS DateTime), 0)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (12, 1, CAST(N'2026-04-10T10:01:14.840' AS DateTime), 0)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (13, 1, CAST(N'2026-04-19T09:50:27.410' AS DateTime), 1)
+GO
+INSERT [dbo].[carrito_enc] ([cons_carrito], [consecutivo], [fec_registro], [estado]) VALUES (14, 9, CAST(N'2026-04-19T21:16:01.460' AS DateTime), 0)
 GO
 SET IDENTITY_INSERT [dbo].[carrito_enc] OFF
 GO
@@ -237,18 +208,60 @@ INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_i
 GO
 INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (108, 8, 15, 4)
 GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (127, 18, 18, 13)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (128, 2, 18, 18)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (129, 20, 18, 4)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (130, 10, 18, 20)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (131, 11, 18, 21)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (132, 12, 18, 8)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (133, 19, 18, 7)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (134, 9, 18, 3)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (135, 7, 18, 5)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (136, 17, 18, 4)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (137, 14, 18, 16)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (138, 13, 18, 5)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (139, 5, 18, 4)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (140, 4, 18, 7)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (141, 1, 18, 20)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (142, 6, 18, 15)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (143, 15, 18, 3)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (144, 3, 18, 6)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (145, 16, 18, 18)
+GO
+INSERT [dbo].[inventario_det] ([cons_inventario_det], [consec_producto], [cons_inventario], [cantidad_inventario]) VALUES (146, 8, 18, 4)
+GO
 SET IDENTITY_INSERT [dbo].[inventario_det] OFF
 GO
 SET IDENTITY_INSERT [dbo].[inventario_enc] ON 
 GO
 INSERT [dbo].[inventario_enc] ([cons_inventario], [fec_inventario], [observaciones], [estado_inv]) VALUES (15, CAST(N'2026-03-31' AS Date), N'Inventario Marzo', N'a')
 GO
+INSERT [dbo].[inventario_enc] ([cons_inventario], [fec_inventario], [observaciones], [estado_inv]) VALUES (18, CAST(N'2026-03-22' AS Date), N'Mitad de mes Marzo', N'a')
+GO
 SET IDENTITY_INSERT [dbo].[inventario_enc] OFF
 GO
 SET IDENTITY_INSERT [dbo].[productos] ON 
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (1, N'ONC Care Alimento Húmedo para Perros', N'Hill''s Prescription Diet, Nutrición clínica diseñada para nutrir y ayudar a los perros diagnosticados con cáncer.
-', N'https://pxmshare.colgatepalmolive.com/JPEG_1500/DJOqjfjItfTWLNfHgYwLG.jpg', CAST(3600.00 AS Decimal(10, 2)), N'u', 20, 5, 50, 1, CAST(N'2026-03-17' AS Date), 1, N'Perro')
+', N'https://pxmshare.colgatepalmolive.com/JPEG_1500/DJOqjfjItfTWLNfHgYwLG.jpg', CAST(4000.00 AS Decimal(10, 2)), N'u', 4, 5, 50, 1, CAST(N'2026-03-17' AS Date), 1, N'Perro')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (2, N'a/d Alimento Húmedo con Pollo para Gatos', N'Apoyo nutricional que fomenta la alimentación de las mascotas que se recuperan de una cirugía, enfermedad o lesión', N'https://pxmshare.colgatepalmolive.com/JPEG_1500/gMUpelM8a9RavqimuXR4x.jpg', CAST(3500.00 AS Decimal(10, 2)), N'u', 18, 5, 50, 1, CAST(N'2026-03-17' AS Date), 1, N'Gato')
 GO
@@ -256,37 +269,43 @@ INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_produ
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (4, N'Kit Pechera y Correa Ajustable', N'Una de las mejores formas de disfrutar con tu peludo es a través de paseos al aire libre. Para ello, es fundamental contar con una pechera para gatos.', N'https://mascotasgo.com/wp-content/uploads/2022/02/pechera-gato.jpg', CAST(4250.00 AS Decimal(10, 2)), N'u', 7, 2, 15, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (5, N'Cosplay de Abeja', N'Conjunto de Otoño e Invierno para Gatos - Sudadera de Cosplay de Abeja para Razas Pequeñas', N'https://img.kwcdn.com/product/fancy/296da145-36dd-41ad-a1af-f219d9d2db60.jpg?imageView2/2/w/800/q/70/format/avif', CAST(2500.00 AS Decimal(10, 2)), N'u', 4, 2, 15, 1, CAST(N'2026-03-17' AS Date), 2, N'Gato')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (5, N'Cosplay de Abeja', N'Conjunto de Otoño e Invierno para Gatos - Sudadera de Cosplay de Abeja para Razas Pequeñas', N'https://img.kwcdn.com/product/fancy/296da145-36dd-41ad-a1af-f219d9d2db60.jpg?imageView2/2/w/800/q/70/format/avif', CAST(2500.00 AS Decimal(10, 2)), N'u', 3, 2, 15, 1, CAST(N'2026-03-17' AS Date), 2, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (6, N'PURINA® PRO PLAN® ADULTO RAZA MEDIANA', N'Provee nutrición de avanzada que ayuda a los perros de razas medianas a mantenerse fuertes y llenos de vitalidad.
 
 Esta fórmula ofrece, a través de ', N'https://purina.co.cr/sites/default/files/styles/webp/public/2022-10/razas-medianas-1-proplan.png.webp?itok=qBjyvUMv', CAST(37000.00 AS Decimal(10, 2)), N'k', 15, 4, 30, 1, CAST(N'2026-03-17' AS Date), 1, N'Perro')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (7, N'Cama Darth Vader', N'Esta cama para mascota inspirada en STAR WARS© es especial para los amantes de la saga galáctica mide 50 cm de largo por 35 de ancho es ideal para gat', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/875499_1.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(10500.00 AS Decimal(10, 2)), N'u', 5, 2, 15, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (7, N'Cama Darth Vader', N'Esta cama para mascota inspirada en STAR WARS© es especial para los amantes de la saga galáctica mide 50 cm de largo por 35 de ancho es ideal para gat', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/875499_1.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(10500.00 AS Decimal(10, 2)), N'u', 4, 2, 15, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (8, N'Transportadora Zoonee Eco 5', N'La transportadora ZOONEE es perfecta para transportar mascotas mide 60 cm ancho x 61.5 cm alto x 81 cm fondo. Con su diseño cómodo y seguro, tu mascot', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889468.jpg?version=17/03/2026', CAST(114000.00 AS Decimal(10, 2)), N'u', 4, 2, 17, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (8, N'Transportadora Zoonee Eco 5', N'La transportadora ZOONEE es perfecta para transportar mascotas mide 60 cm ancho x 61.5 cm alto x 81 cm fondo. Con su diseño cómodo y seguro, tu mascot', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889468.jpg?version=17/03/2026', CAST(114000.00 AS Decimal(10, 2)), N'u', 1, 2, 17, 1, CAST(N'2026-03-17' AS Date), 3, N'Perro')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (9, N'Bebedero Automático 108 Oz Para Gato Petmate', N'El bebedero automático de 108 oz para gato Petmate es la solución perfecta para mantener a tu gato hidratado. Este bebedero cuenta con un diseño innov', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/889741.jpg?version=17/03/2026', CAST(39000.00 AS Decimal(10, 2)), N'u', 3, 2, 20, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (10, N'Alimento Gato Humedo Adulto Salmon Esterilizados P', N'El alimento húmedo para gatos adultos esterilizados de Purina One con sabor a salmón es una opción deliciosa y nutritiva para tu mascota. Este aliment', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:w-900,f-webp,q-80/876994.jpg?version=17/03/2026', CAST(775.00 AS Decimal(10, 2)), N'g', 20, 2, 40, 1, CAST(N'2026-03-17' AS Date), 1, N'Gato')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (11, N'Alimento Gato Seco Adulto Pescado Purina Cat Chow', N'El alimento para gatos adultos Purina Cat Chow es una excelente fuente de nutrientes para la salud de tu gato. Este alimento está hecho con pescado de', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/884152_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(23800.00 AS Decimal(10, 2)), N'k', 21, 2, 30, 1, CAST(N'2026-03-17' AS Date), 1, N'Gato')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (11, N'Alimento Gato Seco Adulto Pescado Purina Cat Chow', N'El alimento para gatos adultos Purina Cat Chow es una excelente fuente de nutrientes para la salud de tu gato. Este alimento está hecho con pescado de', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/884152_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(23800.00 AS Decimal(10, 2)), N'k', 1, 2, 30, 1, CAST(N'2026-03-17' AS Date), 1, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (12, N'Alimento Gato Seco Adulto Salmón Esterilizado Pro ', N'Pro Plan gatos castrados es un alimento completo y balanceado para gatos adultos esterilizados. La esterilización conduce a cambios que pueden predisp', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/902371_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(18500.00 AS Decimal(10, 2)), N'k', 8, 2, 25, 1, CAST(N'2026-03-17' AS Date), 1, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (13, N'Comedero Doble Transparente Inclinado Para Gato Ph', N'Con este plato de estética única, ergonomía felina y de fácil limpieza, tus gatos disfrutarán aún más a la hora de comer. Es especial para gatos que p', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/893280_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(8000.00 AS Decimal(10, 2)), N'u', 5, 2, 25, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (14, N'Collar Gato Tribal Philozoo', N'Collar incluye broche especial felino abre-fácil. La campanita de adorno es removible. Collar elegante con tematica representativa del refugio naciona', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/893289_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(5500.00 AS Decimal(10, 2)), N'u', 16, 2, 24, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (14, N'Collar Gato Tribal Philozoo', N'Collar incluye broche especial felino abre-fácil. La campanita de adorno es removible. Collar elegante con tematica representativa del refugio naciona', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/893289_2.jpg?version=17/03/tr:w-900,f-webp,q-80/2026?version=17/03/2026', CAST(5500.00 AS Decimal(10, 2)), N'u', 15, 2, 24, 1, CAST(N'2026-03-17' AS Date), 3, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (15, N'Sueta con capucha para perros', N'Mantén a tu peludito abrigado y con estilo con este adorable Suéter para perros talla L. Fabricada en tela ligera y suave, es perfecta para paseos en ', N'https://mascotasgo.com/wp-content/uploads/2025/09/Plantilla-productos-web-700x800-F.pptx-1-5.jpg?x79530', CAST(10000.00 AS Decimal(10, 2)), N'u', 3, 2, 10, 1, CAST(N'2026-03-17' AS Date), 2, N'Perro')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (16, N'Traje de Dinosaurio', N'Atuendo abrigado para gatos, arnés con correa de dinosaurio.', N'https://img.kwcdn.com/product/fancy/721c134d-0823-435c-8bc3-5f33e23948be.jpg?imageView2/2/w/800/q/70/format/avif', CAST(3700.00 AS Decimal(10, 2)), N'u', 18, 2, 10, 1, CAST(N'2026-03-17' AS Date), 2, N'Gato')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (16, N'Traje de Dinosaurio', N'Atuendo abrigado para gatos, arnés con correa de dinosaurio.', N'https://img.kwcdn.com/product/fancy/721c134d-0823-435c-8bc3-5f33e23948be.jpg?imageView2/2/w/800/q/70/format/avif', CAST(3700.00 AS Decimal(10, 2)), N'u', 12, 2, 10, 1, CAST(N'2026-03-17' AS Date), 2, N'Gato')
 GO
 INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (17, N'Chaleco multicolor', N'Chaleco multicolor diseñado para atitos recién nacidos, ropa adecuada para mascotas pequeñas, que ofrece un estilo suave y comodo.', N'https://img.kwcdn.com/product/open/d47d47e01cbe4befa3bbf0f70c4f76e7-goods.jpeg?imageView2/2/w/800/q/70/format/avif', CAST(2300.00 AS Decimal(10, 2)), N'u', 4, 2, 10, 1, CAST(N'2026-03-17' AS Date), 2, N'Gato')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (18, N' Botas para perro', N'Zapatos impermeables para perros, botines para perros con suela antideslizante reflectante resistente y antideslizante, zapatos para perros medianos a', N'https://m.media-amazon.com/images/I/81KeU1U+oHL._AC_SX679_PIbundle-4,TopRight,0,0_SH20_.jpg', CAST(8000.00 AS Decimal(10, 2)), N'u', 13, 2, 20, 1, CAST(N'2026-03-17' AS Date), 2, N'Perro')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (18, N' Botas para perro', N'Zapatos impermeables para perros, botines para perros con suela antideslizante reflectante resistente y antideslizante, zapatos para perros medianos a', N'https://m.media-amazon.com/images/I/81KeU1U+oHL._AC_SX679_PIbundle-4,TopRight,0,0_SH20_.jpg', CAST(8000.00 AS Decimal(10, 2)), N'u', 13, 2, 20, 0, CAST(N'2026-03-17' AS Date), 2, N'Perro')
 GO
-INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (19, N'Alimento Perro Húmedo Toda Edad 6pack Vital Nutrit', N'Descubre el ALIMENTO PERRO VITAL NUTRITION 6PACK de GLEN GRANT, diseñado para satisfacer las necesidades nutricionales de tu mascota. Cada lata de 510', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/901548_3.jpg?version=22/03/tr:w-900,f-webp,q-80/2026?version=22/03/2026', CAST(3220.00 AS Decimal(10, 2)), N'u', 7, 2, 20, 1, CAST(N'2026-03-22' AS Date), 1, N'Perro')
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (19, N'Alimento Perro Húmedo Toda Edad 6pack Vital Nutrit', N'Descubre el ALIMENTO PERRO VITAL NUTRITION 6PACK de GLEN GRANT, diseñado para satisfacer las necesidades nutricionales de tu mascota. Cada lata de 510', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/901548_3.jpg?version=22/03/tr:w-900,f-webp,q-80/2026?version=22/03/2026', CAST(3220.00 AS Decimal(10, 2)), N'u', 5, 2, 20, 1, CAST(N'2026-03-22' AS Date), 1, N'Perro')
+GO
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (20, N'Alimento Gato Bocadillo Salmon Wildly Natural', N'Wildly Natural sabor salmón tiene un exterior crujiente y un interior delicioso que satisface todos sus sentidos de gatito, esta sabrosa receta utiliz', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/898873_2.jpg?version=22/03/tr:w-900,f-webp,q-80/2026?version=22/03/2026', CAST(3500.00 AS Decimal(10, 2)), N'u', 5, 2, 20, 1, CAST(N'2026-03-22' AS Date), 1, N'Gato')
+GO
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (21, N'Sonido Bola Para Gato Nathong Orient Pet', N'¡El juguete perfecto para mantener a tu gato activo y entretenido! La bola con sonido de Nathong Orient Pet es ideal para estimular los sentidos de tu', N'https://ik.imagekit.io/autoenlinea/imgjpg/tr:f-webp/889127_2.jpg?version=30/03/tr:w-900,f-webp,q-80/2026?version=30/03/2026', CAST(3500.00 AS Decimal(10, 2)), N'u', 7, 2, 15, 1, CAST(N'2026-03-30' AS Date), 3, N'Gato')
+GO
+INSERT [dbo].[productos] ([cons_producto], [nombre_producto], [descripcion_producto], [imagen], [precio], [unidad_medida], [existencia], [existenciamin], [existenciamax], [estado], [registro_prod], [cons_categoria], [tipo_mascota]) VALUES (22, N'suéter de punto colorido', N'Sphynx - Ropa de gato, suéter de punto colorido para razas de gatos Sphynx y sin pelo, ropa cálida de invierno para Cornish Rex y Devon Rex', N'https://m.media-amazon.com/images/I/41ReYnSLC6L._AC_SX679_.jpg', CAST(1200.00 AS Decimal(10, 2)), N'u', 9, 2, 25, 1, CAST(N'2026-04-10' AS Date), 2, N'Gato')
 GO
 SET IDENTITY_INSERT [dbo].[productos] OFF
 GO
@@ -300,19 +319,19 @@ SET IDENTITY_INSERT [dbo].[rol] OFF
 GO
 SET IDENTITY_INSERT [dbo].[usuario] ON 
 GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (1, N'116700557', N'Fernanda Fajardo Torres', N'fer@waggy.com', N'ferwaggy', 1, N'88887777', N'San José, Costa Rica', 1)
-GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (2, N'208990456', N'Juan Mora', N'juanm@gmial.com', N'123456', 1, N'88889999', N'Heredia, Costa Rica', 2)
-GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (3, N'209880777', N'Elena Quesada', N'elena@gmail.com', N'123456', 0, N'88885678', N'Alajuela, Costa Rica', 2)
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (1, N'116700557', N'Fernanda Fajardo', N'fer@waggy.com', N'ferwaggy', 1, N'88887775', N'San José, Costa Rica', 1)
 GO
 INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (4, N'112233445', N'Aaron Azofeifa Abarca', N'aaron@waggy.com', N'aaron123', 1, N'22336677', N'Heredia, Santa Cecilia', 1)
 GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (5, N'11111111', N'test', N'test@gmail.com', N'test123', 1, N'12345678', N'San José, Desamparados', 2)
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (9, N'227700447', N'Samuel Quesada', N'nanda199784@gmail.com', N'123456', 1, N'34568915', N'Cartago, de la Basílica 500 mts al norte', 2)
 GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (6, N'23567899', N'test2', N'test2@gmail.com', N'12345', 1, N'2344555', N'San José, Merced Norte', 2)
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (10, N'104520871', N'Carlos Rodríguez', N'carlos.rodriguez@correo.com', N'123456', 1, N'88112233', N'San José, Costa Rica', 2)
 GO
-INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (7, N'112277003', N'Fernanda FT', N'nanda199784@gmail.com', N'WIWUGLTO', 1, N'22557799', N'San José, Desamparados', 2)
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (11, N'203180563', N'Laura Méndez', N'laura.mendez@correo.com', N'123456', 1, N'77224455', N'Heredia, Costa Rica', 2)
+GO
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (12, N'307410294', N'Andrés Pereira', N'andres.pereira@correo.com', N'123456', 1, N'66337788', N'Alajuela, Costa Rica', 2)
+GO
+INSERT [dbo].[usuario] ([consecutivo], [identificacion], [nombre], [correoElectronico], [contrasenna], [estado], [telefono], [direccion], [consecutivoRol]) VALUES (13, N'406290187', N'María Vargas', N'maria.vargas@correo.com', N'123456', 1, N'55449900', N'Cartago, Costa Rica', 2)
 GO
 SET IDENTITY_INSERT [dbo].[usuario] OFF
 GO
@@ -324,13 +343,17 @@ INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_produc
 GO
 INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (3, 1, 16, 1, CAST(3700.00 AS Decimal(15, 2)), CAST(481.00 AS Decimal(15, 2)), CAST(4181.00 AS Decimal(15, 2)))
 GO
-INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (4, 2, 12, 2, CAST(37000.00 AS Decimal(15, 2)), CAST(4810.00 AS Decimal(15, 2)), CAST(41810.00 AS Decimal(15, 2)))
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (11, 4, 20, 1, CAST(3005.00 AS Decimal(15, 2)), CAST(390.65 AS Decimal(15, 2)), CAST(3395.65 AS Decimal(15, 2)))
 GO
-INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (5, 2, 16, 1, CAST(3700.00 AS Decimal(15, 2)), CAST(481.00 AS Decimal(15, 2)), CAST(4181.00 AS Decimal(15, 2)))
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (12, 5, 20, 1, CAST(3005.00 AS Decimal(15, 2)), CAST(390.65 AS Decimal(15, 2)), CAST(3395.65 AS Decimal(15, 2)))
 GO
-INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (6, 2, 5, 1, CAST(2500.00 AS Decimal(15, 2)), CAST(325.00 AS Decimal(15, 2)), CAST(2825.00 AS Decimal(15, 2)))
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (13, 6, 20, 1, CAST(3500.00 AS Decimal(15, 2)), CAST(455.00 AS Decimal(15, 2)), CAST(3955.00 AS Decimal(15, 2)))
 GO
-INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (7, 2, 13, 1, CAST(8000.00 AS Decimal(15, 2)), CAST(1040.00 AS Decimal(15, 2)), CAST(9040.00 AS Decimal(15, 2)))
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (17, 9, 11, 1, CAST(23800.00 AS Decimal(15, 2)), CAST(3094.00 AS Decimal(15, 2)), CAST(26894.00 AS Decimal(15, 2)))
+GO
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (22, 12, 16, 2, CAST(7400.00 AS Decimal(15, 2)), CAST(962.00 AS Decimal(15, 2)), CAST(8362.00 AS Decimal(15, 2)))
+GO
+INSERT [dbo].[ventas_clientes_det] ([cons_venta_det], [cons_venta], [cons_producto], [cantidad], [monto_linea], [impuesto_linea], [monto_neto_linea]) VALUES (23, 13, 16, 3, CAST(11100.00 AS Decimal(15, 2)), CAST(1443.00 AS Decimal(15, 2)), CAST(12543.00 AS Decimal(15, 2)))
 GO
 SET IDENTITY_INSERT [dbo].[ventas_clientes_det] OFF
 GO
@@ -338,11 +361,21 @@ SET IDENTITY_INSERT [dbo].[ventas_clientes_enc] ON
 GO
 INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (1, 1, CAST(N'2026-03-22' AS Date), CAST(14920.00 AS Decimal(17, 2)), CAST(1939.60 AS Decimal(17, 2)), CAST(16859.60 AS Decimal(17, 2)))
 GO
-INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (2, 7, CAST(N'2026-03-22' AS Date), CAST(51200.00 AS Decimal(17, 2)), CAST(6656.00 AS Decimal(17, 2)), CAST(57856.00 AS Decimal(17, 2)))
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (4, 1, CAST(N'2026-03-30' AS Date), CAST(3005.00 AS Decimal(17, 2)), CAST(390.65 AS Decimal(17, 2)), CAST(3395.65 AS Decimal(17, 2)))
+GO
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (5, 1, CAST(N'2026-03-30' AS Date), CAST(3005.00 AS Decimal(17, 2)), CAST(390.65 AS Decimal(17, 2)), CAST(3395.65 AS Decimal(17, 2)))
+GO
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (6, 1, CAST(N'2026-03-30' AS Date), CAST(3500.00 AS Decimal(17, 2)), CAST(455.00 AS Decimal(17, 2)), CAST(3955.00 AS Decimal(17, 2)))
+GO
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (9, 1, CAST(N'2026-04-09' AS Date), CAST(23800.00 AS Decimal(17, 2)), CAST(3094.00 AS Decimal(17, 2)), CAST(26894.00 AS Decimal(17, 2)))
+GO
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (12, 1, CAST(N'2026-04-19' AS Date), CAST(7400.00 AS Decimal(17, 2)), CAST(962.00 AS Decimal(17, 2)), CAST(8362.00 AS Decimal(17, 2)))
+GO
+INSERT [dbo].[ventas_clientes_enc] ([cons_venta], [consecutivo], [fec_venta], [monto_venta_brut], [impuesto_venta_tot], [monto_venta_net]) VALUES (13, 9, CAST(N'2026-04-19' AS Date), CAST(11100.00 AS Decimal(17, 2)), CAST(1443.00 AS Decimal(17, 2)), CAST(12543.00 AS Decimal(17, 2)))
 GO
 SET IDENTITY_INSERT [dbo].[ventas_clientes_enc] OFF
 GO
-/****** Object:  Index [UQ_carrito_det_carrito_producto]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  Index [UQ_carrito_det_carrito_producto]    Script Date: 19/4/2026 09:21:30 ******/
 ALTER TABLE [dbo].[carrito_det] ADD  CONSTRAINT [UQ_carrito_det_carrito_producto] UNIQUE NONCLUSTERED 
 (
 	[cons_carrito] ASC,
@@ -351,7 +384,7 @@ ALTER TABLE [dbo].[carrito_det] ADD  CONSTRAINT [UQ_carrito_det_carrito_producto
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_CORREO]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  Index [UQ_CORREO]    Script Date: 19/4/2026 09:21:30 ******/
 ALTER TABLE [dbo].[usuario] ADD  CONSTRAINT [UQ_CORREO] UNIQUE NONCLUSTERED 
 (
 	[correoElectronico] ASC
@@ -445,7 +478,7 @@ ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [chk_unidad_medida] CH
 GO
 ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [chk_unidad_medida]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ActualizarCantidadCarrito]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ActualizarCantidadCarrito]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -475,7 +508,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ActualizarContrasenna]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ActualizarContrasenna]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -490,7 +523,7 @@ BEGIN
     WHERE consecutivo = @Consecutivo
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ActualizarExistenciaProducto]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ActualizarExistenciaProducto]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -509,7 +542,7 @@ BEGIN
       AND existencia >= @CantidadComprada;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AgregarProductoCarrito]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_AgregarProductoCarrito]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -560,7 +593,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AlternarEstadoProducto]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_AlternarEstadoProducto]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -576,7 +609,7 @@ BEGIN
     WHERE cons_producto = @CONS_PRODUCTO
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AlternarEstadoUsuario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_AlternarEstadoUsuario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -592,7 +625,7 @@ BEGIN
     WHERE consecutivo = @Consecutivo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AplicarInventario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_AplicarInventario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -615,7 +648,7 @@ BEGIN
     WHERE cons_inventario = @ConsInventario;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ConsultarCarritoUsuario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ConsultarCarritoUsuario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -643,7 +676,69 @@ BEGIN
       AND ce.estado = 1;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CrearInventarioEnc]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ConsultarExistencias]    Script Date: 19/4/2026 09:21:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_ConsultarExistencias]
+    @BajoMinimo BIT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        p.cons_producto,
+        p.nombre_producto,
+        p.existencia,
+        p.existenciamin,
+        p.existenciamax
+    FROM productos p
+    WHERE p.estado = 1
+    AND (
+        @BajoMinimo IS NULL
+        OR (@BajoMinimo = 1 AND p.existencia < p.existenciamin)
+    )
+    ORDER BY p.nombre_producto
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ConsultarVentas]    Script Date: 19/4/2026 09:21:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_ConsultarVentas]
+(
+    @FechaInicio DATE = NULL,
+    @FechaFin DATE = NULL,
+    @IdUsuario INT = NULL,
+    @IdProducto INT = NULL
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        CAST(ve.cons_venta AS INT) AS cons_venta,
+        CAST(ve.fec_venta AS DATE) AS fec_venta,
+        u.nombre,
+        p.nombre_producto,
+        CAST(vd.cantidad AS INT) AS cantidad,
+        CAST(vd.monto_neto_linea AS DECIMAL(15,2)) AS monto_neto_linea,
+        CAST(ve.monto_venta_net AS DECIMAL(17,2)) AS monto_venta_net
+    FROM ventas_clientes_enc ve
+    INNER JOIN usuario u ON ve.consecutivo = u.consecutivo
+    INNER JOIN ventas_clientes_det vd ON ve.cons_venta = vd.cons_venta
+    INNER JOIN productos p ON vd.cons_producto = p.cons_producto
+    WHERE
+        (@FechaInicio IS NULL OR ve.fec_venta >= @FechaInicio)
+        AND (@FechaFin IS NULL OR ve.fec_venta <= @FechaFin)
+        AND (@IdUsuario IS NULL OR ve.consecutivo = @IdUsuario)
+        AND (@IdProducto IS NULL OR vd.cons_producto = @IdProducto)
+    ORDER BY ve.cons_venta DESC
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_CrearInventarioEnc]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -661,7 +756,7 @@ BEGIN
     SELECT SCOPE_IDENTITY() AS ConsInventario;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CrearProducto]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_CrearProducto]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -735,7 +830,7 @@ BEGIN
     )
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CrearUsuario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_CrearUsuario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -786,7 +881,7 @@ BEGIN
          @CONSECUTIVO_ROL) 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_EditarProducto]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_EditarProducto]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -847,7 +942,7 @@ BEGIN
     WHERE cons_producto = @CONS_PRODUCTO
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_EditarUsuario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_EditarUsuario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -874,7 +969,7 @@ BEGIN
     WHERE consecutivo = @Consecutivo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_EliminarInventario]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_EliminarInventario]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -892,7 +987,7 @@ BEGIN
     WHERE cons_inventario = @ConsInventario;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_EliminarProductoCarrito]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_EliminarProductoCarrito]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -920,7 +1015,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_GuardarInventarioDet]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GuardarInventarioDet]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -962,7 +1057,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_IniciarSesion]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_IniciarSesion]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -988,7 +1083,7 @@ BEGIN
       AND u.estado = 1;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_LimpiarCarrito]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_LimpiarCarrito]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1018,7 +1113,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ListarProductos]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ListarProductos]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1049,7 +1144,7 @@ BEGIN
     ORDER BY p.cons_producto DESC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerInventarioDet]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerInventarioDet]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1076,7 +1171,7 @@ BEGIN
     ORDER BY p.nombre_producto;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerInventarios]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerInventarios]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1095,7 +1190,7 @@ BEGIN
     ORDER BY cons_inventario DESC;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerOCrearCarrito]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerOCrearCarrito]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1126,7 +1221,7 @@ BEGIN
     SELECT @ConsCarrito AS cons_carrito;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerProductoPorId]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerProductoPorId]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1155,7 +1250,7 @@ BEGIN
     WHERE p.cons_producto = @CONS_PRODUCTO
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerProductosHomePorCategoria]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerProductosHomePorCategoria]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1189,7 +1284,7 @@ BEGIN
     ORDER BY p.cons_producto DESC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ObtenerUsuarioPorId]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ObtenerUsuarioPorId]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1212,7 +1307,7 @@ BEGIN
     WHERE consecutivo = @Consecutivo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_RegistrarVentaDet]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarVentaDet]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1235,7 +1330,7 @@ BEGIN
     (@ConsVenta, @ConsProducto, @Cantidad, @MontoLinea, @ImpuestoLinea, @MontoNetoLinea);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_RegistrarVentaEnc]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarVentaEnc]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1258,7 +1353,7 @@ BEGIN
     SELECT SCOPE_IDENTITY();
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ValidarCorreo]    Script Date: 22/3/2026 12:47:38 ******/
+/****** Object:  StoredProcedure [dbo].[sp_ValidarCorreo]    Script Date: 19/4/2026 09:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
